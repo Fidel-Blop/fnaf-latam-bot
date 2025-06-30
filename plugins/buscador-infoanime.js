@@ -1,34 +1,70 @@
 import fetch from 'node-fetch'
 
 var handler = async (m, { conn, usedPrefix, command, text }) => {
+  if (!text) {
+    return conn.reply(m.chat, `👁 *Petición incompleta.*\n📎 Ingrese el nombre de un anime.\n\n📌 Ejemplo: ${usedPrefix + command} Roshidere`, m)
+  }
 
-if (!text) return conn.reply(m.chat, `${emoji} Ingrese el nombre de algun anime\n\n> Ejemplo, ${usedPrefix + command} Roshidere`, m)
-let res = await fetch('https://api.jikan.moe/v4/manga?q=' + text)
-if (!res.ok) return conn.reply(m.chat, `${msm} Ocurrió un fallo.`, m)
+  let res = await fetch('https://api.jikan.moe/v4/manga?q=' + text)
+  if (!res.ok) return conn.reply(m.chat, `⚠️ Error en el sistema de escaneo. Intente más tarde.`, m)
 
-let json = await res.json()
-let { chapters, title_japanese, url, type, score, members, background, status, volumes, synopsis, favorites } = json.data[0]
-let author = json.data[0].authors[0].name
-let animeingfo = `✨ Título: ${title_japanese}
-🎞️ Capítulo: ${chapters}
-💫 Transmisión: ${type}
-🗂 Estado: ${status}
-🗃 Volumes: ${volumes}
-🌟 Favorito: ${favorites}
-🧮 Puntaje: ${score}
-👥 Miembros: ${members}
-🔗 Url: ${url}
-👨‍🔬 Autor: ${author}
-📝 Fondo: ${background}
-💬 Sinopsis: ${synopsis}
- ` 
-conn.sendFile(m.chat, json.data[0].images.jpg.image_url, 'anjime.jpg', '✨ *I N F O - A N I M E* ✨\n\n' + animeingfo, fkontak, m)
+  let json = await res.json()
+  let data = json.data[0]
 
-} 
-handler.help = ['infoanime'] 
-handler.tags = ['anime'] 
-handler.group = true;
+  let {
+    chapters,
+    title_japanese,
+    url,
+    type,
+    score,
+    members,
+    background,
+    status,
+    volumes,
+    synopsis,
+    favorites
+  } = data
+
+  let author = data.authors[0]?.name || 'Desconocido'
+
+  let animeInfo = `🎴 *ARCHIVO DE MANGA/ANIME DETECTADO* 🎴
+
+📌 *Título Japonés:* ${title_japanese}
+📚 *Capítulos:* ${chapters}
+🎞️ *Formato:* ${type}
+📡 *Estado:* ${status}
+📦 *Volúmenes:* ${volumes}
+❤️ *Favoritos:* ${favorites}
+⭐ *Puntaje:* ${score}
+👥 *Miembros:* ${members}
+👨‍🔬 *Autor:* ${author}
+🌐 *URL:* ${url}
+
+🧠 *Sinopsis:*\n${synopsis || 'No disponible'}
+
+📂 *Contexto de Fondo:*\n${background || 'No especificado'}
+
+━━━━━━━━━━━━━━━━━━━━━
+⛔ *RESTRICCIÓN DE CONTENIDO CORPORATIVA*
+
+🚫 No se permite la búsqueda ni difusión de animes que contengan:
+— Temática +18
+— Hentai
+— Gore explícito
+— Material perturbador
+
+⚠️ Si se detecta el uso de este comando con dichos fines, el sistema de vigilancia notificará al *administrador de turno*, quien procederá con la eliminación inmediata del *mensaje y usuario* a nivel de toda la comunidad.
+
+— Sistema respaldado por FNaF LATAM™
+`
+
+  conn.sendFile(m.chat, data.images.jpg.image_url, 'animeinfo.jpg', animeInfo, fkontak, m)
+}
+
+handler.help = ['infoanime']
+handler.tags = ['anime']
+handler.group = true
 handler.register = true
-handler.command = ['infoanime','animeinfo'] 
+handler.command = ['infoanime', 'animeinfo']
 
 export default handler
