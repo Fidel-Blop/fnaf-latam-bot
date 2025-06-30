@@ -1,118 +1,118 @@
-const handler = async (m, { conn, command, text, usedPrefix }) => {
-  if (!text) return conn.reply(m.chat, `❀ Por favor, mensiona a un Usuario para comprobar su test.`, m);
-  const percentages = (500).getRandom();
+const handler = async (m, { conn, command, text }) => {
+  if (!text) return conn.reply(m.chat, `👁️ *Sistema de escaneo inactivo.*\n\n⛓️ Ingrese el nombre o mención del sujeto para iniciar el análisis.`, m);
+
+  const porcentaje = Math.floor(Math.random() * 101); // 0 a 100
   let emoji = '';
-  let description = '';
+  let descripción = '';
+  let categoría = command.toUpperCase();
+
   switch (command) {
     case 'gay':
       emoji = '🏳️‍🌈';
-      if (percentages < 50) {
-        description = `💙 Los calculos han arrojado que ${text.toUpperCase()} es *${percentages}%* Gay ${emoji}\n> ✰ Eso es bajo, ¡Tu eres Joto, no Gay!`;
-      } else if (percentages > 100) {
-        description = `💜 Los calculos han arrojado que ${text.toUpperCase()} es *${percentages}%* Gay ${emoji}\n> ✰ ¡Incluso más gay de lo que pensábamos!`;
-      } else {
-        description = `🖤 Los calculos han arrojado que ${text.toUpperCase()} es *${percentages}%* Gay ${emoji}\n> ✰ Lo tuyo, lo tuyo es que eres Gay.`;
-      }
+      descripción = porcentaje < 50
+        ? `⚙️ *${text.toUpperCase()}* tiene un índice gay de *${porcentaje}%* ${emoji}\n> Registro bajo... comportamiento estable.`
+        : porcentaje > 100
+        ? `📡 *${text.toUpperCase()}* ha superado los límites de calibración con *${porcentaje}%* gay ${emoji}\n> Inestabilidad emocional detectada.`
+        : `🧠 *${text.toUpperCase()}* tiene un *${porcentaje}%* de energía gay ${emoji}\n> Compatible con los patrones internos de Freddy Fazbear Entertainment™.`;
       break;
+
     case 'lesbiana':
-      emoji = '🏳️‍🌈';
-      if (percentages < 50) {
-        description = `👻 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n✰ Quizás necesites más películas románticas en tu vida.`;
-      } else if (percentages > 100) {
-        description = `❣️ Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ ¡Eso es un amor extremo por las Chicas!`;
-      } else {
-        description = `💗 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Mantén el amor floreciendo!`;
-      }
+      emoji = '🌸';
+      descripción = porcentaje < 50
+        ? `🦴 *${text.toUpperCase()}* muestra un *${porcentaje}%* de código lesbiano ${emoji}\n> Muestra débil, revisar sistema.`
+        : porcentaje > 100
+        ? `📡 *${text.toUpperCase()}* sobrepasa el umbral con *${porcentaje}%* ${emoji}\n> Actividad intensa registrada.`
+        : `🔊 *${text.toUpperCase()}* se encuentra en *${porcentaje}%* de amor lésbico ${emoji}\n> Monitoreo en curso.`;
       break;
+
     case 'pajero':
     case 'pajera':
       emoji = '😏💦';
-      if (percentages < 50) {
-        description = `🧡 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Tal vez necesites más hobbies!`;
-      } else if (percentages > 100) {
-        description = `💕 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Eso es una resistencia admirable!`;
-      } else {
-        description = `💞 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Mantén el buen trabajo (en solitario).`;
-      }
+      descripción = porcentaje < 50
+        ? `💤 *${text.toUpperCase()}* muestra *${porcentaje}%* de actividad solitaria ${emoji}\n> Estado: pasivo.`
+        : porcentaje > 100
+        ? `🔥 *${text.toUpperCase()}* tiene *${porcentaje}%* de acumulación energética ${emoji}\n> Posible sobrecarga...`
+        : `📼 *${text.toUpperCase()}* se encuentra en *${porcentaje}%* de uso frecuente ${emoji}\n> Patrón repetitivo detectado.`;
       break;
+
     case 'puto':
     case 'puta':
-      emoji = '🔥🥵';
-      if (percentages < 50) {
-        description = `😼 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✧ ¡Más suerte en tu próxima conquista!`;
-      } else if (percentages > 100) {
-        description = `😻 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command}. ${emoji}\n> ✰ ¡Estás en llamas!`;
-      } else {
-        description = `😺 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Mantén ese encanto ardiente!`;
-      }
+      emoji = '🥵';
+      descripción = porcentaje < 50
+        ? `🔍 *${text.toUpperCase()}* está a *${porcentaje}%* en el índice de deseo ${emoji}\n> Nivel contenido.`
+        : porcentaje > 100
+        ? `🔥 *${text.toUpperCase()}* ha alcanzado niveles máximos ${emoji}\n> ALARMA: comportamiento hipersocial.`
+        : `🧩 *${text.toUpperCase()}* presenta *${porcentaje}%* de magnetismo social ${emoji}\n> Estado: seductor/a.`;
       break;
+
     case 'manco':
     case 'manca':
-      emoji = '💩';
-      if (percentages < 50) {
-        description = `🌟 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ ¡No eres el único en ese club!`;
-      } else if (percentages > 100) {
-        description = `💌 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ ¡Tienes un talento muy especial!`;
-      } else {
-        description = `🥷 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Mantén esa actitud valiente!`;
-      }
+      emoji = '🎮💀';
+      descripción = porcentaje < 50
+        ? `🛠️ *${text.toUpperCase()}* tiene un *${porcentaje}%* de torpeza técnica ${emoji}\n> Aún puedes mejorar.`
+        : porcentaje > 100
+        ? `🧷 *${text.toUpperCase()}* excede los parámetros de ineficiencia ${emoji}\n> Entrenamiento urgente recomendado.`
+        : `🔧 *${text.toUpperCase()}* se encuentra en *${porcentaje}%* de coordinación deficiente ${emoji}`;
       break;
+
     case 'rata':
       emoji = '🐁';
-      if (percentages < 50) {
-        description = `💥 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Nada de malo en disfrutar del queso!`;
-      } else if (percentages > 100) {
-        description = `💖 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Un auténtico ratón de lujo!`;
-      } else {
-        description = `👑 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Come queso con responsabilidad!`;
-      }
+      descripción = porcentaje < 50
+        ? `🧀 *${text.toUpperCase()}* está a *${porcentaje}%* de roedorismo ${emoji}\n> No representa amenaza inmediata.`
+        : porcentaje > 100
+        ? `🪤 *${text.toUpperCase()}* se ha infiltrado con *${porcentaje}%* ${emoji}\n> Activar trampas.`
+        : `⚙️ *${text.toUpperCase()}* demuestra un *${porcentaje}%* de código roedor ${emoji}`;
       break;
+
     case 'prostituto':
     case 'prostituta':
-      emoji = '🫦👅';
-      if (percentages < 50) {
-        description = `❀ Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ El mercado está en auge!`;
-      } else if (percentages > 100) {
-        description = `💖 Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Un/a verdadero/a profesional!`;
-      } else {
-        description = `✨️ Los cálculos han arrojado que ${text.toUpperCase()} es *${percentages}%* ${command} ${emoji}\n> ✰ Siempre es hora de negocios!`;
-      }
+      emoji = '💋';
+      descripción = porcentaje < 50
+        ? `💬 *${text.toUpperCase()}* presenta *${porcentaje}%* de interacción comercial ${emoji}\n> Aún puedes decir que no.`
+        : porcentaje > 100
+        ? `💼 *${text.toUpperCase()}* ha alcanzado niveles profesionales ${emoji}\n> Tarifa no disponible.`
+        : `🪪 *${text.toUpperCase()}* se encuentra en *${porcentaje}%* de atractivo transaccional ${emoji}`;
       break;
-      default:
-      m.reply(`🍭 Comando inválido.`);
+
+    default:
+      return m.reply(`⛔ Comando no reconocido por el sistema central.`);
   }
-  const responses = [
-    "El universo ha hablado.",
-    "Los científicos lo confirman.",
-    "¡Sorpresa!"
+
+  const frasesFinales = [
+    '📡 Diagnóstico completado.',
+    '🎥 Análisis finalizado.',
+    '🧠 Datos cargados en el archivo central.',
   ];
-  const response = responses[Math.floor(Math.random() * responses.length)];
-  const cal = `💫 *CALCULADORA*
+  const firma = '— Informe firmado por el subsistema de IA de FNaF LATAM™';
+  const mensajeFinal = `🕶️ *[ MÓDULO DE EVALUACIÓN ${categoría} ACTIVADO ]*
 
-${description}
+${descripción}
 
-➤ ${response}`.trim()  
-  async function loading() {
-var hawemod = [
-"《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
-"《 ████▒▒▒▒▒▒▒▒》30%",
-"《 ███████▒▒▒▒▒》50%",
-"《 ██████████▒▒》80%",
-"《 ████████████》100%"
-]
-   let { key } = await conn.sendMessage(m.chat, {text: `🤍 ¡Calculando Porcentaje!`, mentions: conn.parseMention(cal)}, {quoted: fkontak})
- for (let i = 0; i < hawemod.length; i++) {
-   await new Promise(resolve => setTimeout(resolve, 1000)); 
-   await conn.sendMessage(m.chat, {text: hawemod[i], edit: key, mentions: conn.parseMention(cal)}, {quoted: fkontak}); 
+${frasesFinales.getRandom()}
+${firma}`;
+
+  const barraProgreso = [
+    "《 █▒▒▒▒▒▒▒▒▒▒▒》10%",
+    "《 ████▒▒▒▒▒▒▒▒》30%",
+    "《 ███████▒▒▒▒▒》50%",
+    "《 ██████████▒▒》80%",
+    "《 ████████████》100%"
+  ];
+
+  const { key } = await conn.sendMessage(m.chat, { text: `👁️ Iniciando escaneo del sujeto: *${text.toUpperCase()}*`, mentions: conn.parseMention(mensajeFinal) }, { quoted: m });
+
+  for (let i = 0; i < barraProgreso.length; i++) {
+    await new Promise(resolve => setTimeout(resolve, 700));
+    await conn.sendMessage(m.chat, { text: barraProgreso[i], edit: key }, { quoted: m });
   }
-  await conn.sendMessage(m.chat, {text: cal, edit: key, mentions: conn.parseMention(cal)}, {quoted: fkontak});         
- }
-loading()    
+
+  await conn.sendMessage(m.chat, { text: mensajeFinal, edit: key, mentions: conn.parseMention(mensajeFinal) }, { quoted: m });
 };
-handler.help = ['gay <@tag> | <nombre>', 'lesbiana <@tag> | <nombre>', 'pajero <@tag> | <nombre>', 'pajera <@tag> | <nombre>', 'puto <@tag> | <nombre>', 'puta <@tag> | <nombre>', 'manco <@tag> | <nombre>', 'manca <@tag> | <nombre>', 'rata <@tag> | <nombre>', 'prostituta <@tag> | <nombre>', 'prostituto <@tag> | <nombre>'];
+
+handler.help = ['gay', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'].map(cmd => `${cmd} <@tag|nombre>`);
 handler.tags = ['fun'];
+handler.command = ['gay', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'];
 handler.register = true;
 handler.group = true;
-handler.command = ['gay', 'lesbiana', 'pajero', 'pajera', 'puto', 'puta', 'manco', 'manca', 'rata', 'prostituta', 'prostituto'];
 
 export default handler;
