@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 
 let handler = async (m, { text }) => {
   if (!text) {
-    m.reply(`${emoji} Por favor, proporciona el termino de búsqueda que deseas realizar a *Google*.`);
+    m.reply(`👁 *Ingreso incompleto.*\n📎 Por favor, proporciona el término que deseas rastrear en la red archivada de Google.\n\n📌 Ejemplo: /google Animatronics Fazbear`);
     return;
   }
 
@@ -12,24 +12,28 @@ let handler = async (m, { text }) => {
     const response = await fetch(apiUrl);
     const result = await response.json();
 
-    if (!result.status) {
-      m.reply('Error al realizar la búsqueda.');
+    if (!result.status || !result.data || result.data.length === 0) {
+      m.reply('⚠️ No se encontraron resultados relevantes en el núcleo de búsqueda.');
       return;
     }
 
-    let replyMessage = `${emoji2} Resultados de la búsqueda:\n\n`;
+    let output = `📡 *SISTEMA DE RASTREO GOOGLE*\n🔎 Consulta: *"${text}"*\n\n🧠 Resultado encontrado:\n━━━━━━━━━━━━━━━━━━`;
+
     result.data.slice(0, 1).forEach((item, index) => {
-      replyMessage += `☁️ *${index + 1}. ${item.title}*\n`;
-      replyMessage += `📰 *${item.description}*\n`;
-      replyMessage += `🔗 URL: ${item.url}`;
+      output += `\n\n⚙️ *#${index + 1}*`;
+      output += `\n🗂️ *Título:* ${item.title}`;
+      output += `\n📖 *Descripción:* ${item.description}`;
+      output += `\n🔗 *URL:* ${item.url}`;
     });
 
-m.react('✅')
+    output += `\n\n✅ Consulta finalizada.\n— Sistema respaldado por FNaF LATAM™`;
 
-    m.reply(replyMessage);
+    await m.react('✅')
+    m.reply(output);
+
   } catch (error) {
-    console.error(`${msm} Error al realizar la solicitud a la API:`, error);
-    m.reply(`${msm} Ocurrió un error al obtener los resultados.`);
+    console.error('❌ Falla en el módulo de rastreo:', error);
+    m.reply(`🚨 *ERROR DEL SISTEMA*\nNo se pudo completar la operación de búsqueda.\n\n— Sistema respaldado por FNaF LATAM™`);
   }
 };
 
