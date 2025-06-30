@@ -3,55 +3,80 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 
-    if (!text) return conn.reply(m.chat, `❀ Por favor, proporciona el nombre de una canción o artista.`, m)
+    if (!text) 
+      return conn.reply(m.chat, `👁️ Sistema de monitoreo FNaF LATAM™ activo.\n\n🦴 Entrada auditiva no detectada. Por favor, ingrese el nombre de una pista o artista para activar la sincronización.`, m)
 
     try {
+        // Consulta base de datos auditiva Spotify - FNaF LATAM Monitor
         let songInfo = await spotifyxv(text)
-        if (!songInfo.length) throw `✧ No se encontró la canción.`
-        let song = songInfo[0]
-        const res = await fetch(`https://api.sylphy.xyz/download/spotify?url=${song.url}&apikey=sylph-96ccb836bc`)
+        if (!songInfo.length) throw `⚙️ Archivo auditivo no localizado en la base de datos.`
 
-        if (!res.ok) throw `Error al obtener datos de la API, código de estado: ${res.status}`
+        let song = songInfo[0]
+
+        // Sincronizando enlace de descarga
+        const res = await fetch(`https://api.sylphy.xyz/download/spotify?url=${song.url}&apikey=sylph-96ccb836bc`)
+        if (!res.ok) throw `⛓️ Error en conexión con servidor de descargas. Código: ${res.status}`
 
         const data = await res.json().catch((e) => { 
-            console.error('Error parsing JSON:', e)
-            throw "Error al analizar la respuesta JSON."
+            console.error('❌ Error en análisis de datos JSON:', e)
+            throw "🧠 Fallo en procesamiento de datos."
         })
 
-        if (!data.data.dl_url) throw "No se pudo obtener el enlace de descarga."
-        const info = `「✦」Descargando *<${data.data.title}>*\n\n> ✧ Artista » *${data.data.artist}*\n> ✰ Album » *${data.data.album}*\n> ⴵ Duracion » *${data.data.duration}*\n> 🜸 Link » ${song.url}`
+        if (!data.data.dl_url) throw "⛓️ Enlace de descarga no disponible."
 
-        await conn.sendMessage(m.chat, { text: info, contextInfo: { forwardingScore: 9999999, isForwarded: false, 
-        externalAdReply: {
-            showAdAttribution: true,
-            containsAutoReply: true,
-            renderLargerThumbnail: true,
-            title: botname,
-            body: dev,
-            mediaType: 1,
-            thumbnailUrl: data.data.img,
-            mediaUrl: song.url,
-            sourceUrl: song.url
-        }}}, { quoted: m })
+        const info = `📡 FNaF LATAM™ - Protocolo de descarga audiovisual iniciado.\n
+🎥 TÍTULO: *<${data.data.title}>*
+🐻 ARTISTA: *${data.data.artist}*
+🕰️ ÁLBUM: *${data.data.album}*
+⏱️ DURACIÓN: *${data.data.duration}*
+🔗 ORIGEN: ${song.url}
 
-        conn.sendMessage(m.chat, { audio: { url: data.data.dl_url }, fileName: `${data.data.title}.mp3`, mimetype: 'audio/mp4', ptt: true }, { quoted: m })
+— Sistema respaldado por FNaF LATAM™`
+
+        await conn.sendMessage(m.chat, { 
+          text: info, 
+          contextInfo: { 
+            forwardingScore: 9999999, 
+            isForwarded: false,
+            externalAdReply: {
+              showAdAttribution: true,
+              containsAutoReply: true,
+              renderLargerThumbnail: true,
+              title: 'FNaF LATAM™ Monitoreo',
+              body: 'Monitoreo Freddy Fazbear Entertainment™',
+              mediaType: 1,
+              thumbnailUrl: data.data.img,
+              mediaUrl: song.url,
+              sourceUrl: song.url
+            }
+          }}, { quoted: m })
+
+        // Envío del audio con etiqueta de nota de voz
+        await conn.sendMessage(m.chat, { 
+          audio: { url: data.data.dl_url }, 
+          fileName: `${data.data.title}.mp3`, 
+          mimetype: 'audio/mp4', 
+          ptt: true 
+        }, { quoted: m })
 
     } catch (e1) {
-        m.reply(`${e1.message || e1}`)
+        return m.reply(`🦴 Error en sistema FNaF LATAM™: ${e1.message || e1}`)
     }
 }
+
 handler.help = ['spotify', 'music']
-handler.tags = ['downloader']
+handler.tags = ['descargas', 'monitoreo']
 handler.command = ['spotify', 'splay']
 handler.group = true
 
 export default handler
 
+
 async function spotifyxv(query) {
     let token = await tokens()
     let response = await axios({
         method: 'get',
-        url: 'https://api.spotify.com/v1/search?q=' + query + '&type=track',
+        url: 'https://api.spotify.com/v1/search?q=' + encodeURIComponent(query) + '&type=track',
         headers: {
             Authorization: 'Bearer ' + token
         }
