@@ -2,48 +2,84 @@ import { igdl } from 'ruhend-scraper'
 
 const handler = async (m, { text, conn, args }) => {
   if (!args[0]) {
-    return conn.reply(m.chat, `${emoji} Por favor, ingresa un enlace de Facebook.`, m)
+    return conn.reply(
+      m.chat,
+      `👁 *PROTOCOLO DE EXTRACCIÓN NO INICIADO*\n\n⚠️ Debes ingresar un *enlace válido de Facebook* para proceder con la recuperación audiovisual.`,
+      m
+    )
   }
 
-  let res;
+  let res
   try {
-    await m.react(rwait);
-    res = await igdl(args[0]);
+    await m.react('📡')
+    res = await igdl(args[0])
   } catch (e) {
-    return conn.reply(m.chat, `${msm} Error al obtener datos. Verifica el enlace.`, m)
+    return conn.reply(
+      m.chat,
+      `⚠️ *ERROR EN LA SOLICITUD*\n\n🧠 No se pudo establecer conexión con la base de datos.\nVerifica el enlace ingresado.`,
+      m
+    )
   }
 
-  let result = res.data;
+  let result = res.data
   if (!result || result.length === 0) {
-    return conn.reply(m.chat, `${emoji2} No se encontraron resultados.`, m)
+    return conn.reply(
+      m.chat,
+      `❌ *ARCHIVO NO DETECTADO*\n\n⛓️ No se encontraron resultados compatibles con el sistema.`,
+      m
+    )
   }
 
-  let data;
+  let data
   try {
-    data = result.find(i => i.resolution === "720p (HD)") || result.find(i => i.resolution === "360p (SD)");
+    data =
+      result.find((i) => i.resolution === '720p (HD)') ||
+      result.find((i) => i.resolution === '360p (SD)')
   } catch (e) {
-    return conn.reply(m.chat, `${msm} Error al procesar los datos.`, m)
+    return conn.reply(
+      m.chat,
+      `❌ *ERROR AL PROCESAR LA RESOLUCIÓN DEL ARCHIVO.*`,
+      m
+    )
   }
 
   if (!data) {
-    return conn.reply(m.chat, `${emoji2} No se encontró una resolución adecuada.`, m)
+    return conn.reply(
+      m.chat,
+      `🧠 *RESOLUCIÓN INCOMPATIBLE*\n\nNo se encontró un archivo apto para transferencia.`,
+      m
+    )
   }
 
-  let video = data.url;
+  let video = data.url
   try {
-    await conn.sendMessage(m.chat, { video: { url: video }, caption: `${emoji} Aqui tienes ฅ^•ﻌ•^ฅ.`, fileName: 'fb.mp4', mimetype: 'video/mp4' }, { quoted: m })
-    await m.react(done);
+    await conn.sendMessage(
+      m.chat,
+      {
+        video: { url: video },
+        caption:
+          `🎥 *EXTRACCIÓN COMPLETA — FB MODULE v1.2*\n\n🧩 Video procesado desde enlace proporcionado.\n\n— Sistema respaldado por *FNaF LATAM™*`,
+        fileName: 'fb.mp4',
+        mimetype: 'video/mp4'
+      },
+      { quoted: m }
+    )
+    await m.react('✅')
   } catch (e) {
-    return conn.reply(m.chat, `${msm} Error al enviar el video.`, m)
-    await m.react(error);
+    await m.react('❌')
+    return conn.reply(
+      m.chat,
+      `⚠️ *ERROR AL TRANSMITIR EL ARCHIVO*\n\nEs posible que el archivo sea demasiado grande o que el formato sea inestable.`,
+      m
+    )
   }
 }
 
 handler.help = ['facebook', 'fb']
 handler.tags = ['descargas']
 handler.command = ['facebook', 'fb']
-handler.group = true;
-handler.register = true;
-handler.coin = 2;
+handler.group = true
+handler.register = true
+handler.coin = 2
 
 export default handler
