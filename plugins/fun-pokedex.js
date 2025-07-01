@@ -1,23 +1,47 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text }) => {
-if (!text) return conn.reply(m.chat, `${emoji} Por favor, ingresa el nombre del Pokemon que quiere buscar.`, m)
-await m.react(rwait)
-conn.reply(m.chat, `${emoji2} Buscando *<${text}>*, espere un momento...`, m)
-const url = `https://some-random-api.com/pokemon/pokedex?pokemon=${encodeURIComponent(text)}`;
-const response = await fetch(url);
-const json = await response.json();
-if (!response.ok) {
-await m.react(error)
-return conn.reply(m.chat, '⚠️ Ocurrio un error al buscar el Pokemon.', m)}
-const aipokedex = `${emoji} *Pokedex - Información de ${json.name}*\n\n☁️ *Nombre:* ${json.name}\n🔖 *ID:* ${json.id}\n💬 *Tipo:* ${json.type}\n💪 *Habilidades:* ${json.abilities}\n🎴 *Tamaño:* ${json.height}\n⚖️ *Peso:* ${json.weight}\n\n📖 *Descripción:*\n${json.description}\n\n🔍 ¡Encuentra más detalles sobre este Pokémon en la Pokedex!\n\n🔗 https://www.pokemon.com/es/pokedex/${json.name.toLowerCase()}`
-conn.reply(m.chat, aipokedex, m)
-await m.react(done) }
+  if (!text) return conn.reply(m.chat, `👁 *Sistema de escaneo inactivo...* \n\n⛔ Ingrese el nombre de una criatura biológica para proceder con el análisis Pokédex.`, m)
+
+  await m.react('📡')
+  conn.reply(m.chat, `🎥 *Monitoreo FNaF LATAM™ activado.*\n\n🧠 Buscando en bases de datos de especies anómalas: *<${text}>*...`, m)
+
+  try {
+    const url = `https://some-random-api.com/pokemon/pokedex?pokemon=${encodeURIComponent(text)}`
+    const response = await fetch(url)
+    if (!response.ok) throw new Error('No encontrado')
+    const json = await response.json()
+
+    const pokedata = `
+👁 *Módulo Pokédex FNaF LATAM - Archivo: ${json.name.toUpperCase()}*
+
+🔖 *ID Biológico:* ${json.id}
+💬 *Clasificación Elemental:* ${json.type}
+⚙️ *Habilidades Primarias:* ${json.abilities}
+🎴 *Altura:* ${json.height}
+⚖️ *Masa Corporal:* ${json.weight}
+
+📄 *Informe de Campo:*
+${json.description}
+
+📂 Acceso complementario:
+🔗 https://www.pokemon.com/es/pokedex/${json.name.toLowerCase()}
+
+— Sistema respaldado por FNaF LATAM™
+`
+
+    conn.reply(m.chat, pokedata.trim(), m)
+    await m.react('✅')
+  } catch (e) {
+    await m.react('⛔')
+    conn.reply(m.chat, `⚠️ *Error de lectura en la Pokédex.*\n\n📉 Especie no registrada o conexión interrumpida.\n\n— FNaF LATAM™ Monitoring Protocol`, m)
+  }
+}
 
 handler.help = ['pokedex *<pokemon>*']
 handler.tags = ['fun']
-handler.group = true;
-handler.register = true
 handler.command = ['pokedex']
+handler.group = true
+handler.register = true
 
 export default handler
