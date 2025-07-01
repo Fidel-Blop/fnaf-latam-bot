@@ -1,68 +1,60 @@
-const handler = async (m, {conn, text, command, usedPrefix, args}) => {
-// let pp = 'https://www.bighero6challenge.com/images/thumbs/Piedra,-papel-o-tijera-0003318_1584.jpeg'
-  const pp = 'https://telegra.ph/file/c7924bf0e0d839290cc51.jpg';
+const handler = async (m, { conn, text, command, usedPrefix, args }) => {
+  const tiempoDeEspera = 10000;
+  const tiempoRestante = global.db.data.users[m.sender].wait + tiempoDeEspera;
 
-  // 60000 = 1 minuto // 30000 = 30 segundos // 15000 = 15 segundos // 10000 = 10 segundos
-  const time = global.db.data.users[m.sender].wait + 10000;
-  if (new Date - global.db.data.users[m.sender].wait < 10000) throw `${emoji} Tendrás que esperar ${Math.floor((time - new Date()) / 1000)} segundos antes de poder volver a jugar.`;
+  if (new Date - global.db.data.users[m.sender].wait < tiempoDeEspera) {
+    throw `⚠️ *SIMULACIÓN BLOQUEADA*\n\n⏱️ Tiempo restante: ${Math.floor((tiempoRestante - new Date()) / 1000)} segundos\n\n🎮 Reinicio en curso...`;
+  }
 
-  if (!args[0]) return conn.reply(m.chat, `*PIEDRA 🗿, PAPEL 📄 o TIJERA ✂️*\n\n*—◉ Puedes usar éstos comandos:*\n*◉ ${usedPrefix + command} piedra*\n*◉ ${usedPrefix + command} papel*\n*◉ ${usedPrefix + command} tijera*`, m);
- 
-  let astro = Math.random();
-  if (astro < 0.34) {
-    astro = 'piedra';
-  } else if (astro > 0.34 && astro < 0.67) {
-    astro = 'tijera';
+  if (!args[0]) {
+    return conn.reply(
+      m.chat,
+      `🎮 *SISTEMA DE COMBATE: REACCIÓN INSTANTÁNEA*\n\n🔘 Opciones disponibles:\n— ${usedPrefix + command} piedra 🪨\n— ${usedPrefix + command} papel 📄\n— ${usedPrefix + command} tijera ✂️\n\n⚙️ *Selección requerida para continuar...*`,
+      m
+    );
+  }
+
+  const opciones = ['piedra', 'papel', 'tijera'];
+  let astro = opciones[Math.floor(Math.random() * opciones.length)];
+  const jugador = text.toLowerCase();
+  const userData = global.db.data.users[m.sender];
+
+  const respuesta = (estado, emoji, ganancia) => `
+📡 *SISTEMA DE RESPUESTA FNaF LATAM™*
+
+🧠 *Resultado:* ${estado}
+👁 *Tu selección:* ${jugador}
+👁 *IA seleccionó:* ${astro}
+🎁 *Experiencia:* ${ganancia} XP
+
+🪪 Archivo registrado — FNaF LATAM™`.trim();
+
+  let resultado = '';
+  let ganancia = 0;
+
+  if (jugador === astro) {
+    resultado = 'EMPATE ⚠️';
+    ganancia = 500;
+  } else if (
+    (jugador === 'piedra' && astro === 'tijera') ||
+    (jugador === 'papel' && astro === 'piedra') ||
+    (jugador === 'tijera' && astro === 'papel')
+  ) {
+    resultado = '¡VICTORIA ALCANZADA! ✅';
+    ganancia = 1000;
+  } else if (opciones.includes(jugador)) {
+    resultado = '¡DERROTA CONFIRMADA! ❌';
+    ganancia = -300;
   } else {
-    astro = 'papel';
+    return conn.reply(m.chat, `❗ *ERROR DE ENTRADA*\n🔒 Solo se permiten: piedra, papel o tijera.`, m);
   }
-  const textm = text.toLowerCase();
-  if (textm == astro) {
-    global.db.data.users[m.sender].exp += 500;
-    m.reply(`*${emoji2} Empate!*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*🎁 Premio +500 XP*`);
-  } else if (text == 'papel') {
-    if (astro == 'piedra') {
-      global.db.data.users[m.sender].exp += 1000;
-      m.reply(`*${emoji} Tú ganas! 🎉*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*🎁 Premio +1000 XP*`);
-    } else {
-      global.db.data.users[m.sender].exp -= 300;
-      m.reply(`*💀 Tú pierdes! ❌*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*❌ Premio -300 XP*`);
-    }
-  } else if (text == 'tijera') {
-    if (astro == 'papel') {
-      global.db.data.users[m.sender].exp += 1000;
-      m.reply(`*${emoji} Tú ganas! 🎉*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*🎁 Premio +1000 XP*`);
-    } else {
-      global.db.data.users[m.sender].exp -= 300;
-      m.reply(`*☠️ Tú pierdes! ❌*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*❌ Premio -300 XP*`);
-    }
-  } else if (textm == 'tijera') {
-    if (astro == 'papel') {
-      global.db.data.users[m.sender].exp += 1000;
-      m.reply(`*${emoji} Tú ganas! 🎉*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*🎁 Premio +1000 XP*`);
-    } else {
-      global.db.data.users[m.sender].exp -= 300;
-      m.reply(`*☠️ Tú pierdes! ❌*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*❌ Premio -300 XP*`);
-    }
-  } else if (textm == 'papel') {
-    if (astro == 'piedra') {
-      global.db.data.users[m.sender].exp += 1000;
-      m.reply(`*${emoji} Tú ganas! 🎉*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*🎁 Premio +1000 XP*`);
-    } else {
-      global.db.data.users[m.sender].exp -= 300;
-      m.reply(`*☠️ Tú pierdes! ❌*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*❌ Premio -300 XP*`);
-    }
-  } else if (textm == 'piedra') {
-    if (astro == 'tijera') {
-      global.db.data.users[m.sender].exp += 1000;
-      m.reply(`*${emoji} Tú ganas! 🎉*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*🎁 Premio +1000 XP*`);
-    } else {
-      global.db.data.users[m.sender].exp -= 300;
-      m.reply(`*${emoji} Tú pierdes! ❌*\n\n*👉🏻 Tu: ${textm}*\n*👉🏻 El Bot: ${astro}*\n*❌ Premio -300 XP*`);
-    }
-  }
-  global.db.data.users[m.sender].wait = new Date * 1;
+
+  userData.exp += ganancia;
+  userData.wait = new Date() * 1;
+
+  return conn.reply(m.chat, respuesta(resultado, '', ganancia), m);
 };
+
 handler.help = ['ppt'];
 handler.tags = ['games'];
 handler.command = ['ppt'];
