@@ -1,31 +1,52 @@
-var handler = async (m, { conn, command, text }) => {
+let handler = async (m, { conn, text }) => {
+  if (!text) return conn.reply(m.chat, '🔎 Por favor, ingrese el nombre de alguien para analizar.', m)
 
-if (!text) return conn.reply(m.chat, `${emoji} Por favor, ingrese el nombre de alguna persona.`, m)
+  let personalidad = `🎭 *Análisis de Personalidad Freddy Fazbear AI Scanner™*
 
-let personalidad = `\`Nombre\` : ${text}
-\`Buena Moral\` : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Mala Moral\` : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Tipo de persona\` : ${pickRandom(['De buen corazón','Arrogante','Tacaño','Generoso','Humilde','Tímido','Cobarde','Entrometido','Cristal','No binarie XD', 'Pendejo'])}
-\`Siempre\` : ${pickRandom(['Pesado','De malas','Distraido','De molestoso','Chismoso','Pasa jalandosela','De compras','Viendo anime','Chatea en WhatsApp porque esta soltero','Acostado bueno para nada','De mujeriego','En el celular'])}
-\`Inteligencia\` : ${pickRandom(['9%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Pendejo(a)\` : ${pickRandom(['9%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Morosidad\` : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Coraje\` : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Miedo\` : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Fama\` : ${pickRandom(['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98,3%','99,7%','99,9%','1%','2,9%','0%','0,4%'])}
-\`Género\` : ${pickRandom(['Hombre', 'Mujer', 'Homosexual', 'Bisexual', 'Pansexual', 'Feminista', 'Heterosexual', 'Macho alfa', 'Mujerzona', 'Marimacha', 'Palosexual', 'PlayStationSexual', 'Sr. Manuela', 'Pollosexual'])}`
+🔠 Nombre: ${text}
+🔹 Buena Moral: ${pickRandom(porcentajes)}
+🔸 Mala Moral: ${pickRandom(porcentajes)}
+📦 Tipo de persona: ${pickRandom(tipos)}
+🌀 Siempre está: ${pickRandom(siempre)}
+🧠 Inteligencia: ${pickRandom(porcentajes)}
+😵 Nivel de Pendejismo: ${pickRandom(porcentajes)}
+⌛ Morosidad: ${pickRandom(porcentajes)}
+🔥 Coraje: ${pickRandom(porcentajes)}
+😱 Miedo: ${pickRandom(porcentajes)}
+⭐ Fama: ${pickRandom(porcentajes)}
+🧬 Género: ${pickRandom(generos)}
 
-conn.reply(m.chat, personalidad, m)
+📡 *Base de datos escaneada.* Resultado no verificable.`
 
+  conn.reply(m.chat, personalidad, m)
 }
-handler.help = ['personalidad']
+
+handler.help = ['personalidad <nombre>']
 handler.tags = ['fun']
 handler.command = ['personalidad']
-handler.group = true;
+handler.group = true
 handler.register = true
 
 export default handler
 
 function pickRandom(list) {
-return list[Math.floor(Math.random() * list.length)]
+  return list[Math.floor(Math.random() * list.length)]
 }
+
+const porcentajes = ['6%','12%','20%','27%','35%','41%','49%','54%','60%','66%','73%','78%','84%','92%','93%','94%','96%','98.3%','99.7%','99.9%','1%','2.9%','0%','0.4%']
+
+const tipos = [
+  'De buen corazón','Arrogante','Tacaño','Generoso','Humilde','Tímido','Cobarde',
+  'Entrometido','Curioso sin límites','Paciente como una tortuga','Explosivo','Digno de terapia'
+]
+
+const siempre = [
+  'Pesado','De malas','Molestando a todos','Desconectado de la realidad',
+  'Viendo anime','Scroll infinito en TikTok','Soltero y chateando',
+  'Acostado sin ganas','Mujeriego serial','Con el celular pegado al rostro'
+]
+
+const generos = [
+  'Hombre','Mujer','Bisexual','Pansexual','Heterosexual',
+  'Macho alfa','Feminista','Gamersexual','Indefinido','Fan de Freddy'
+]
