@@ -8,551 +8,410 @@ let handler = async (m, { conn, args }) => {
     let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     
     let txt = `
-Hola! Soy *${botname}* (｡•̀ᴗ-)✧
-Aquí tienes la lista de comandos
-╭┈ ↷
-│ᰔᩚ Cliente » @${userId.split('@')[0]}
-│❀ Modo » Publico
-│✦ Bot » ${(conn.user.jid == global.conn.user.jid ? 'Principal 🅥' : 'Prem Bot 🅑')}
-│ⴵ Activada » ${uptime}
-│✰ Usuarios » ${totalreg}
-│✧ Comandos » ${totalCommands}
-│🜸 Baileys » Multi Device
-╰─────────────────
-Crea un *Sub-Bot* con tu número utilizando *#qr* o *#code*
+🎥 *[FNaF LATAM BOT - INTERFAZ DEL MENÚ]*  
+┌────────── SYSTEM FEED ──────────┐  
+│ 👁‍🗨 Unidad conectada: @${userId.split('@')[0]}  
+│ ⚙️ Estado del protocolo: *Público - Sin cifrado*  
+│ 🧠 Núcleo IA: ${(conn.user.jid == global.conn.user.jid ? 'Nodo Principal 🅥' : 'Unidad Alterna 🅑')}  
+│ ⛓️ Uptime del sistema: ${uptime}  
+│ 📡 Sujetos registrados: ${totalreg}  
+│ 🦴 Comandos integrados: ${totalCommands}  
+│ 🔊 Interfaz: *Multi Dispositivo - Fase Baileys*  
+└───────────────────────────────┘  
+📡 Enlace de acceso seguro a la comunidad de BYDLHFOX (owner) :
+🔗 https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t
+*Recuerda:* No todos los que entran... logran salir.  
 
-• :･ﾟ⊹˚• \`『 Info-Bot 』\` •˚⊹:･ﾟ•
+💾 *Sistema respaldado por FNaF LATAM™*
 
-❍ Comandos para ver estado e información de la Bot.
-ᰔᩚ *#help • #menu*
-> ✦ Ver la lista de comandos de la Bot.
-ᰔᩚ *#uptime • #runtime*
-> ✦ Ver tiempo activo o en linea de la Bot.
-ᰔᩚ *#sc • #script*
-> ✦ Link del repositorio oficial de la Bot
-ᰔᩚ *#staff • #colaboradores*
-> ✦ Ver la lista de desarrolladores de la Bot.
-ᰔᩚ *#serbot • #serbot code*
-> ✦ Crea una sesión de Sub-Bot.
-ᰔᩚ *#bots • #sockets*
-> ✦ Ver la lista de Sub-Bots activos.
-ᰔᩚ *#creador*
-> ✦ Contacto del creador de la Bot.
-ᰔᩚ *#status • #estado*
-> ✦ Ver el estado actual de la Bot.
-ᰔᩚ *#links • #grupos*
-> ✦ Ver los enlaces oficiales de la Bot.
-ᰔᩚ *#infobot • #infobot*
-> ✦ Ver la información completa de la Bot.
-ᰔᩚ *#sug • #newcommand*
-> ✦ Sugiere un nuevo comando.
-ᰔᩚ *#p • #ping*
-> ✦ Ver la velocidad de respuesta del Bot.
-ᰔᩚ *#reporte • #reportar*
-> ✦ Reporta alguna falla o problema de la Bot.
-ᰔᩚ *#sistema • #system*
-> ✦ Ver estado del sistema de alojamiento.
-ᰔᩚ *#speed • #speedtest*
-> ✦ Ver las estadísticas de velocidad de la Bot.
-ᰔᩚ *#views • #usuarios*
-> ✦ Ver la cantidad de usuarios registrados en el sistema.
-ᰔᩚ *#funciones • #totalfunciones*
-> ✦ Ver todas las funciones de la Bot.
-ᰔᩚ *#ds • #fixmsgespera*
-> ✦ Eliminar archivos de sesión innecesarios.
-ᰔᩚ *#editautoresponder*
-> ✦ Configurar un Prompt personalizado de la Bot.
 
-• :･ﾟ⊹˚• \`『 Buscadores 』\` •˚⊹:･ﾟ•
+👁️‍🗨️ :･ﾟ⊹˚• ` Info Principal ` •˚⊹:･ﾟ•
+📡 Comandos de auditoría y diagnóstico para el núcleo de vigilancia FNaF LATAM™:
 
-❍ Comandos para realizar búsquedas en distintas plataformas.
+⛓️ *#help • #menu*  
+> 🎥 Consulta el panel de comandos autorizados.
+🔊 *#uptime • #runtime*  
+> 📡 Tiempo operativo del núcleo desde la última activación
+📊 *#status • #estado*  
+> 📡 Estado actual del módulo central.
+📎 *#links • #grupos*  
+> 🛠️ Enlaces de transmisión y zonas autorizadas.
+🎥 *#infobot • #infobot*  
+> 💽 Ficha técnica completa del núcleo de vigilancia.
+🧷 *#sug • #newcommand*  
+> 🧠 Sugiere una nueva función para integrar al sistema.
+📶 *#p • #ping*  
+> 📍 Diagnóstico de latencia del protocolo.
+⚠️ *#reporte • #reportar*  
+> 🚨 Informe de errores para el centro de control.
+🖥️ *#sistema • #system*  
+> ⚙️ Estado del alojamiento y parámetros internos.
+📡 *#speed • #speedtest*  
+> 🌀 Test de respuesta y transferencia del núcleo.
+🪫 *#views • #usuarios*  
+> 🔍 Número de unidades activas dentro del sistema.
+📂 *#funciones • #totalfunciones*  
+> 🔧 Número total de funciones ejecutables registradas.
+
+
+👁️‍🗨️ :･ﾟ⊹˚• 『 SISTEMA :: BÚSQUEDA DE ARCHIVOS EXTERNOS 』 •˚⊹:･ﾟ•
+⚙️ Iniciando protocolo de escaneo y recopilación de datos externos...
+> Unidad de rastreo en línea activada... 📡
+
 ᰔᩚ *#tiktoksearch • #tiktoks*
-> ✦ Buscador de videos de tiktok.
+> 🎥 Sincronizando base de datos TikTok. Acceso autorizado a videos públicos.
 ᰔᩚ *#tweetposts*
-> ✦ Buscador de posts de Twitter/X.
+> 🧠 Enlace neural con red X (anteriormente Twitter) establecido. Rastreando publicaciones.
 ᰔᩚ *#ytsearch • #yts*
-> ✦ Realiza búsquedas de Youtube.
-ᰔᩚ *#githubsearch*
-> ✦ Buscador de usuarios de GitHub.
+> 📽️ Sistema FNaF LATAM conectado a servidores YouTube. Escaneando videos.
 ᰔᩚ *#cuevana • #cuevanasearch*
-> ✦ Buscador de películas/series por Cuevana.
+> 📺 Analizando sectores no oficiales de entretenimiento. Resultados no garantizados.
 ᰔᩚ *#google*
-> ✦ Realiza búsquedas por Google.
+> 🧠 Nodo principal enlazado con Google™. Iniciando protocolo de consulta abierta.
 ᰔᩚ *#pin • #pinterest*
-> ✦ Buscador de imagenes de Pinterest.
-ᰔᩚ *#imagen • #image*
-> ✦ buscador de imagenes de Google.
+> 📌 Activando buscador visual Pinterest. Extrayendo imágenes de referencia.
 ᰔᩚ *#infoanime*
-> ✦ Buscador de información de anime/manga.
-ᰔᩚ *#hentaisearch • #searchhentai*
-> ✦ Buscador de capítulos hentai.
-ᰔᩚ #xnxxsearch • #xnxxs*
-> ✦ Buscador de vídeos de Xnxx.
-ᰔᩚ *#xvsearch • #xvideossearch*
-> ✦ Buscador de vídeos de Xvideos.
-ᰔᩚ *#pornhubsearch • #phsearch*
-> ✦ Buscador de videos de Pornhub.
-ᰔᩚ *#npmjs*
-> ✦ Buscandor de npmjs.
+> 💽 Buscando archivos de registro en sector Anime/Manga. Respuesta en curso. (NO se permite búsquedas de Animes/Mangas +18, hentai, etc.) 
 
-• :･ﾟ⊹˚• \`『 Descargas 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de descargas para varios archivos.
+📦 :･ﾟ⊹˚• 『 MÓDULO DE ADQUISICIÓN DIGITAL :: FNAF LATAM 』 •˚⊹:･ﾟ•
+⚙️ Accediendo a los canales de descarga externos...  
+> Protocolo de adquisición de archivos activo. 🛰️
+
 ᰔᩚ *#tiktok • #tt*
-> ✦ Descarga videos de TikTok.
+> 🎥 Recuperando registros visuales de TikTok.
 ᰔᩚ *#mediafire • #mf*
-> ✦ Descargar un archivo de MediaFire.
-ᰔᩚ *#pinvid • #pinvideo* + [enlacé]
-> ✦ Descargar vídeos de Pinterest. 
-ᰔᩚ *#mega • #mg* + [enlacé]
-> ✦ Descargar un archivo de MEGA.
+> ⛓️ Descargando datos comprimidos desde MediaFire™.
+ᰔᩚ *#pinvid • #pinvideo* + [enlace]
+> 🖼️ Extrayendo secuencias visuales de Pinterest.
 ᰔᩚ *#play • #play2*
-> ✦ Descarga música/video de YouTube.
+> 🔊 Capturando contenido multimedia desde servidores de YouTube.
 ᰔᩚ *#ytmp3 • #ytmp4*
-> ✦ Descarga música/video de YouTube mediante url.
+> 🧠 Extrayendo datos en formato MP3/MP4 directamente desde la fuente.
 ᰔᩚ *#fb • #facebook*
-> ✦ Descarga videos de Facebook.
-ᰔᩚ *#twitter • #x* + [Link]
-> ✦ Descargar un video de Twitter/X
+> 📺 Enlace establecido con Facebook. Iniciando transferencia de video.
+ᰔᩚ *#twitter • #x* + [link]
+> 📡 Analizando nodos de Twitter/X. Extrayendo contenido visual.
 ᰔᩚ *#ig • #instagram*
-> ✦ Descarga contenido de Instagram.
-ᰔᩚ *#tts • #tiktoks* + [busqueda]
-> ✦ Buscar videos de tiktok 
-ᰔᩚ *#terabox • #tb* + [enlace]
-> ✦ Descargar archivos por Terabox.
+> 📷 Rastreando elementos visuales de Instagram. Extracción en curso.
+ᰔᩚ *#tts • #tiktoks* + [búsqueda]
+> 🔍 Localizando grabaciones cortas en TikTok según parámetro ingresado.
 ᰔᩚ *#ttimg • #ttmp3* + <url>
-> ✦ Descarga fotos/audios de tiktok. 
-ᰔᩚ *#gitclone* + <url> 
-> ✦ Descarga un repositorio de github.
-ᰔᩚ *#xvideosdl*
-> ✦ Descarga videos porno de (Xvideos). 
-ᰔᩚ *#xnxxdl*
-> ✦ Descarga videos porno de (xnxx).
+> 🖼️ Descarga de material visual o sonoro desde TikTok en progreso.
 ᰔᩚ *#apk • #modapk*
-> ✦ Descarga un apk de Aptoide.
+> 📱 Buscando paquetes de instalación modificados. Fuente: Aptoide.
 ᰔᩚ *#tiktokrandom • #ttrandom*
-> ✦ Descarga un video aleatorio de tiktok.
-ᰔᩚ *#npmdl • #npmdownloader*
-> ✦ Descarga paquetes de NPMJs.
+> 🎲 Selección aleatoria de material visual desde TikTok.
 
-• :･ﾟ⊹˚• \`『 Economia 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de economía y rpg para ganar dinero y otros recursos.
+💰 :･ﾟ⊹˚• 『 TERMINAL DE ECONOMÍA INTERNA :: FNAF LATAM 』 •˚⊹:･ﾟ•
+⚙️ Iniciando protocolo económico...  
+> Unidad de control monetario y recompensas en línea. ⛓️
+
 ᰔᩚ *#w • #work • #trabajar*
-> ✦ Trabaja para ganar ${moneda}.
-ᰔᩚ *#slut • #protituirse*
-> ✦ Trabaja como prostituta y gana ${moneda}.
+> ⚒️ Asignación laboral activa. Recompensa en ${moneda} otorgada.
+ᰔᩚ *#slut • #prostituirse*
+> 👠 Activando trabajo en zona roja. Ganancias en ${moneda} calculadas.
 ᰔᩚ *#cf • #suerte*
-> ✦ Apuesta tus ${moneda} a cara o cruz.
-ᰔᩚ *#crime • #crimen
-> ✦ Trabaja como ladrón para ganar ${moneda}.
+> 🎲 Lanzamiento de moneda en curso. Probabilidades: 50/50.
+ᰔᩚ *#crime • #crimen*
+> 🧤 Infiltración en sistema legal... Robo simulado ejecutado.
 ᰔᩚ *#ruleta • #roulette • #rt*
-> ✦ Apuesta ${moneda} al color rojo o negro.
+> 🎡 Activando ruleta de colores. Selecciona rojo o negro.
 ᰔᩚ *#casino • #apostar*
-> ✦ Apuesta tus ${moneda} en el casino.
+> 🃏 Conectando con servidores del casino... Jugada en proceso.
 ᰔᩚ *#slot*
-> ✦ Apuesta tus ${moneda} en la ruleta y prueba tu suerte.
+> 🎰 Probando suerte con máquinas de azar. Buena fortuna, sujeto.
 ᰔᩚ *#cartera • #wallet*
-> ✦ Ver tus ${moneda} en la cartera.
+> 🧾 Consultando registros financieros de usuario...
 ᰔᩚ *#banco • #bank*
-> ✦ Ver tus ${moneda} en el banco.
+> 🏦 Accediendo a cuenta bancaria de FazbearCorp™.
 ᰔᩚ *#deposit • #depositar • #d*
-> ✦ Deposita tus ${moneda} al banco.
+> 💳 Depósito realizado. Seguridad de fondos garantizada.
 ᰔᩚ *#with • #retirar • #withdraw*
-> ✦ Retira tus ${moneda} del banco.
+> 💸 Extracción de fondos confirmada.
 ᰔᩚ *#transfer • #pay*
-> ✦ Transfiere ${moneda} o XP a otros usuarios.
+> 🔄 Transfiriendo recursos a otra entidad registrada.
 ᰔᩚ *#miming • #minar • #mine*
-> ✦ Trabaja como minero y recolecta recursos.
+> ⛏️ Activando simulador de minería. Recursos en proceso de recolección.
 ᰔᩚ *#buyall • #buy*
-> ✦ Compra ${moneda} con tu XP.
+> 🛒 Compra autorizada. XP convertido a ${moneda}.
 ᰔᩚ *#daily • #diario*
-> ✦ Reclama tu recompensa diaria.
+> 📅 Recompensa diaria procesada. Registro actualizado.
 ᰔᩚ *#cofre*
-> ✦ Reclama un cofre diario lleno de recursos.
+> 🎁 Cofre misterioso abierto. Inventario actualizado.
 ᰔᩚ *#weekly • #semanal*
-> ✦ Reclama tu regalo semanal.
+> 🗓️ Bono semanal validado.
 ᰔᩚ *#monthly • #mensual*
-> ✦ Reclama tu recompensa mensual.
+> 📦 Recompensa mensual entregada con éxito.
 ᰔᩚ *#steal • #robar • #rob*
-> ✦ Intenta robarle ${moneda} a alguien.
+> 🕶️ Intentando extracción forzosa de fondos. Riesgo elevado.
 ᰔᩚ *#robarxp • #robxp*
-> ✦ Intenta robar XP a un usuario.
+> 🧠 Intento de sustracción de XP en progreso...
 ᰔᩚ *#eboard • #baltop*
-> ✦ Ver el ranking de usuarios con más ${moneda}.
+> 🏆 Consultando el ranking de unidades con mayor acumulación de ${moneda}...
 ᰔᩚ *#aventura • #adventure*
-> ✦ Aventúrate en un nuevo reino y recolecta recursos.
+> 🗺️ Iniciando misión de exploración. Ecosistema hostil detectado.
 ᰔᩚ *#curar • #heal*
-> ✦ Cura tu salud para volverte aventurar.
+> 💉 Iniciando protocolo de recuperación vital.
 ᰔᩚ *#cazar • #hunt • #berburu*
-> ✦ Aventúrate en una caza de animales.
+> 🐾 Caza autorizada. Movimiento depredador simulado.
 ᰔᩚ *#inv • #inventario*
-> ✦ Ver tu inventario con todos tus ítems.
+> 🎒 Inventario sincronizado. Verificando ítems almacenados...
 ᰔᩚ *#mazmorra • #explorar*
-> ✦ Explorar mazmorras para ganar ${moneda}.
+> ⛓️ Misión en mazmorra activa. Sistema hostil en escaneo.
 ᰔᩚ *#halloween*
-> ✦ Reclama tu dulce o truco (Solo en Halloween).
+> 🎃 ¡Evento especial de Halloween desbloqueado! Dulce o truco activado.
 ᰔᩚ *#christmas • #navidad*
-> ✦ Reclama tu regalo navideño (Solo en Navidad).
+> 🎄 ¡Protocolo festivo de Navidad activado! Recompensas entregadas.
 
-• :･ﾟ⊹˚• \`『 Gacha 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de gacha para reclamar y colecciónar personajes.
-ᰔᩚ *#rollwaifu • #rw • #roll*
-> ✦ Waifu o husbando aleatorio.
-ᰔᩚ  *#claim • #c • #reclamar*
-> ✦ Reclamar un personaje.
-ᰔᩚ *#harem • #waifus • #claims*
-> ✦ Ver tus personajes reclamados.
-ᰔᩚ *#charimage • #waifuimage • #wimage* 
-> ✦ Ver una imagen aleatoria de un personaje.
-ᰔᩚ *#charinfo • #winfo • #waifuinfo*
-> ✦ Ver información de un personaje.
-ᰔᩚ *#givechar • #givewaifu • #regalar*
-> ✦ Regalar un personaje a otro usuario.
-ᰔᩚ *#vote • #votar*
-> ✦ Votar por un personaje para subir su valor.
-ᰔᩚ *#waifusboard • #waifustop • #topwaifus*
-> ✦ Ver el top de personajes con mayor valor.
+🎥 :･ﾟ⊹˚• 『 SISTEMA DE STICKERS :: FAZBEAR VISUAL NODE 』 •˚⊹:･ﾟ•
+⚙️ Control gráfico en línea... Sistema creativo activo.  
+> 🖼️ Conversión de elementos visuales en curso...
 
-• :･ﾟ⊹˚• \`『 Stickers 』\` •˚⊹:･ﾟ•
-
-❍ Comandos para creaciones de stickers etc.
 ᰔᩚ *#sticker • #s*
-> ✦ Crea stickers de (imagen/video)
+> 🎞️ Extrayendo fragmento visual... Generando sticker desde imagen o video.
 ᰔᩚ *#setmeta*
-> ✦ Estable un pack y autor para los stickers.
+> 🏷️ Asignando etiquetas de autoría al paquete de stickers.
 ᰔᩚ *#delmeta*
-> ✦ Elimina tu pack de stickers.
+> 🧽 Eliminando huella digital del paquete gráfico.
 ᰔᩚ *#pfp • #getpic*
-> ✦ Obtén la foto de perfil de un usuario.
+> 📸 Recuperando imagen de vigilancia del usuario objetivo.
 ᰔᩚ *#qc*
-> ✦ Crea stickers con texto o de un usuario.
+> ✒️ Creación de sticker con texto codificado o avatar de usuario.
 ᰔᩚ *#toimg • #img*
-> ✦ Convierte stickers en imagen.
-ᰔᩚ *#brat • #ttp • #attp*︎ 
-> ✦ Crea stickers con texto.
+> 📂 Descifrando sticker... Restaurando imagen original.
+ᰔᩚ *#brat • #ttp • #attp*
+> 🧠 Sintetizando texto visual. Render gráfico en ejecución.
 ᰔᩚ *#emojimix*
-> ✦ Fuciona 2 emojis para crear un sticker.
+> 🤖 Fusionando estructuras gráficas básicas... Combinación de emojis exitosa.
 ᰔᩚ *#wm*
-> ✦ Cambia el nombre de los stickers.
+> 🪪 Modificando firma del archivo gráfico. Identificación reprogramada.
 
-•:･ﾟ⊹˚• \`『 Herramientas 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de herramientas con muchas funciones.
-ᰔᩚ *#calcular • #calcular • #cal*
-> ✦ Calcular todo tipo de ecuaciones.
+🛠️ :･ﾟ⊹˚• 『 NODO DE HERRAMIENTAS :: FAZBEAR SERVICE PROTOCOL 』 •˚⊹:･ﾟ•
+🧩 Subsistema de funciones múltiples conectado a la red interna...
+> 📟 Herramientas en línea para análisis, simulación y manipulación de datos.
+
+ᰔᩚ *#calcular • #cal • #calcular*
+> 🧮 Módulo de Cálculo Activo. Procesando ecuaciones en canal lógico.
 ᰔᩚ *#tiempo • #clima*
-> ✦ Ver el clima de un pais.
+> 🌤️ Accediendo al radar atmosférico. Visualización meteorológica regional.
 ᰔᩚ *#horario*
-> ✦ Ver el horario global de los países.
+> 🕐 Sincronizando relojes... Acceso a hora planetaria global.
 ᰔᩚ *#fake • #fakereply*
-> ✦ Crea un mensaje falso de un usuario.
+> 🪞 Simulación social activada. Enviando réplica falsa.
 ᰔᩚ *#enhance • #remini • #hd*
-> ✦ Mejora la calidad de una imagen.
+> 🧠 Reconstrucción gráfica en curso... Aumentando resolución.
 ᰔᩚ *#letra*
-> ✦ Cambia la fuente de las letras.
+> ✍️ Modificando fuente visual. Reemplazo estético en ejecución.
 ᰔᩚ *#read • #readviewonce • #ver*
-> ✦ Ver imágenes de una sola vista.
+> 👁️ Subvirtiendo seguridad... Visualizando contenido de acceso único.
 ᰔᩚ *#whatmusic • #shazam*
-> ✦ Descubre el nombre de canciones o vídeos.
+> 🔊 Nodo auditivo sincronizado. Análisis sonoro en progreso...
 ᰔᩚ *#ss • #ssweb*
-> ✦ Ver el estado de una página web.
+> 🌐 Captura remota activa. Imagen digital de página extraída.
 ᰔᩚ *#length • #tamaño*
-> ✦ Cambia el tamaño de imágenes y vídeos.
+> 🧱 Ajustando dimensiones... Redimensionando imagen o video.
 ᰔᩚ *#say • #decir* + [texto]
-> ✦ Repetir un mensaje.
+> 🎙️ Reproduciendo patrón verbal. Transmisión activada.
 ᰔᩚ *#todoc • #toducument*
-> ✦ Crea documentos de (audio, imágenes y vídeos).
+> 🗂️ Codificando archivo universal. Exportando como documento multimedia.
 ᰔᩚ *#translate • #traducir • #trad*
-> ✦ Traduce palabras en otros idiomas.
+> 🌐 Traducción automática iniciada. Idioma identificado... Traduciendo.
 
-• :･ﾟ⊹˚• \`『 Perfil 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de perfil para ver, configurar y comprobar estados de tu perfil.
+🎭 :･ﾟ⊹˚• 『 ARCHIVOS DE PERFIL :: IDENTIFICACIÓN DEL USUARIO 』 •˚⊹:･ﾟ•
+🧠 Accediendo al *Módulo de Registro de Visitantes*. 
+> ⚠️ Advertencia: Toda la información será almacenada en el núcleo de memoria de Fazbear Systems™.
+
 ᰔᩚ *#reg • #verificar • #register*
-> ✦ Registra tu nombre y edad en el bot.
+> 🪪 Registro de presencia activado. Escaneando nombre y edad...
 ᰔᩚ *#unreg*
-> ✦ Elimina tu registro del bot.
+> 🗑️ Datos eliminados del registro. Huella digital borrada.
 ᰔᩚ *#profile*
-> ✦ Muestra tu perfil de usuario.
-ᰔᩚ *#marry* [mension / etiquetar]
-> ✦ Propón matrimonio a otro usuario.
+> 👤 Visualizando expediente del usuario... Procesando identidad.
+ᰔᩚ *#marry* [@usuario]
+> 💍 Protocolo de emparejamiento emocional activado. Solicitud enviada...
 ᰔᩚ *#divorce*
-> ✦ Divorciarte de tu pareja.
+> 💔 Enlace emocional anulado. Separación ejecutada exitosamente.
 ᰔᩚ *#setgenre • #setgenero*
-> ✦ Establece tu género en el perfil del bot.
+> 🧬 Ingresando código genético... Género establecido.
 ᰔᩚ *#delgenre • #delgenero*
-> ✦ Elimina tu género del perfil del bot.
+> 🧬 Borrando identificador de género. Nodo actualizado.
 ᰔᩚ *#setbirth • #setnacimiento*
-> ✦ Establece tu fecha de nacimiento en el perfil del bot.
+> 🍼 Configurando fecha de origen biológico. Datos registrados.
 ᰔᩚ *#delbirth • #delnacimiento*
-> ✦ Elimina tu fecha de nacimiento del perfil del bot.
+> 🗓️ Fecha de origen removida del núcleo de perfil.
 ᰔᩚ *#setdescription • #setdesc*
-> ✦ Establece una descripción en tu perfil del bot.
+> 📝 Registro de identidad expandido. Descripción añadida.
 ᰔᩚ *#deldescription • #deldesc*
-> ✦ Elimina la descripción de tu perfil del bot.
-ᰔᩚ *#lb • #lboard* + <Paginá>
-> ✦ Top de usuarios con más (experiencia y nivel).
-ᰔᩚ *#level • #lvl* + <@Mencion>
-> ✦ Ver tu nivel y experiencia actual.
+> 🧾 Descripción eliminada. Perfil limpiado.
+ᰔᩚ *#lb • #lboard* + <Página>
+> 📊 Mostrando tabla de rendimiento. Evaluando niveles de actividad...
+ᰔᩚ *#level • #lvl* + <@usuario>
+> 🧱 Accediendo al nivel de usuario. Comparando progresión interna.
 ᰔᩚ *#comprarpremium • #premium*
-> ✦ Compra un pase premium para usar el bot sin límites.
+> 💳 Compra de pase prioritario. Acceso extendido autorizado.
 ᰔᩚ *#confesiones • #confesar*
-> ✦ Confiesa tus sentimientos a alguien de manera anonima.
+> 💌 Transmisión emocional anónima activa. Enviando a canales internos.
 
-• :･ﾟ⊹˚• \`『 Grupos 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de grupos para una mejor gestión de ellos.
+👁️‍🗨️ :･ﾟ⊹˚• 『 MÓDULO DE CONTROL DE GRUPO :: PROTOCOLO DE SUPERVISIÓN DE ZONAS 』 •˚⊹:･ﾟ•
+🛰️ Activando herramientas de monitoreo de comportamiento y manejo de zonas compartidas.  
+> ⚠️ Uso exclusivo del personal autorizado de FNaF Latinoamérica™.
+
 ᰔᩚ *#hidetag*
-> ✦ Envia un mensaje mencionando a todos los usuarios
+> 🔊 Transmisión masiva a todas las entidades presentes en la zona.
 ᰔᩚ *#gp • #infogrupo*
-> ✦  Ver la Informacion del grupo.
+> 📋 Extrayendo datos del ecosistema del grupo. Información listada.
 ᰔᩚ *#linea • #listonline*
-> ✦ Ver la lista de los usuarios en linea.
+> 🟢 Escaneo térmico completado. Usuarios conectados detectados.
 ᰔᩚ *#setwelcome*
-> ✦ Establecer un mensaje de bienvenida personalizado.
+> 🛬 Mensaje de bienvenida implantado en la rutina de entrada.
 ᰔᩚ *#setbye*
-> ✦ Establecer un mensaje de despedida personalizado.
+> 🛫 Mensaje de despedida implantado en la rutina de salida.
 ᰔᩚ *#link*
-> ✦ El bot envia el link del grupo.
-ᰔᩚ *admins • admin*
-> ✦ Mencionar a los admins para solicitar ayuda.
+> 🔗 Enlace de entrada al perímetro generado.
+ᰔᩚ *#admins • #admin*
+> 👥 Mención a operativos principales del sistema de grupo.
 ᰔᩚ *#restablecer • #revoke*
-> ✦ Restablecer el enlace del grupo.
-ᰔᩚ *#grupo • #group* [open / abrir]
-> ✦ Cambia ajustes del grupo para que todos los usuarios envien mensaje.
-ᰔᩚ *#grupo • #gruop* [close / cerrar]
-> ✦ Cambia ajustes del grupo para que solo los administradores envien mensaje.
-ᰔᩚ *#kick* [número / mension]
-> ✦ Elimina un usuario de un grupo.
-ᰔᩚ *#add • #añadir • #agregar* [número]
-> ✦ Invita a un usuario a tu grupo.
-ᰔᩚ *#promote* [mension / etiquetar]
-> ✦ El bot dara administrador al usuario mencionando.
-ᰔᩚ *#demote* [mension / etiquetar]
-> ✦ El bot quitara administrador al usuario mencionando.
+> 🧩 Generando nueva llave de acceso. Código anterior revocado.
+ᰔᩚ *#grupo [open / abrir]*  
+> 🔓 Acceso libre habilitado. Zona abierta al público.
+ᰔᩚ *#grupo [close / cerrar]*  
+> 🔐 Acceso limitado. Solo administradores pueden emitir señales.
+ᰔᩚ *#kick* [@usuario]
+> ⚠️ Eliminando entidad no autorizada. Supervisión reforzada.
+ᰔᩚ *#add • #añadir* [número]
+> 🛠️ Usuario invitado a la zona bajo ID verificado.
+ᰔᩚ *#promote* [@usuario]
+> 🧬 Otorgando privilegios de control a la entidad seleccionada.
+ᰔᩚ *#demote* [@usuario]
+> 🧬 Revocando privilegios administrativos. Usuario desclasificado.
 ᰔᩚ *#gpbanner • #groupimg*
-> ✦ Cambiar la imagen del grupo.
+> 🖼️ Imagen de identificación del grupo actualizada.
 ᰔᩚ *#gpname • #groupname*
-> ✦ Cambiar el nombre del grupo.
+> 🧾 Nombre de la zona de control modificado.
 ᰔᩚ *#gpdesc • #groupdesc*
-> ✦ Cambiar la descripción del grupo.
-ᰔᩚ *#advertir • #warn • #warning*
-> ✦ Darle una advertencia aún usuario.
-ᰔᩚ ︎*#unwarn • #delwarn*
-> ✦ Quitar advertencias.
+> 🗒️ Descripción del perímetro modificada.
+ᰔᩚ *#advertir • #warn*
+> 🚨 Registro de conducta marcado. Nivel de alerta aumentado.
+ᰔᩚ *#unwarn • #delwarn*
+> 🟢 Nivel de alerta reducido. Advertencia removida.
 ᰔᩚ *#advlist • #listadv*
-> ✦ Ver lista de usuarios advertidos.
+> 📂 Accediendo al historial de advertencias.
 ᰔᩚ *#bot on*
-> ✦ Enciende el bot en un grupo.
+> ⚙️ Inteligencia Fazbear activada en esta sala.
 ᰔᩚ *#bot off*
-> ✦ Apaga el bot en un grupo.
-ᰔᩚ *#mute* [mension / etiquetar]
-> ✦ El bot elimina los mensajes del usuario.
-ᰔᩚ *#unmute* [mension / etiquetar]
-> ✦ El bot deja de eliminar los mensajes del usuario.
+> 🔌 Modo de descanso activado. Sistema inactivo en esta zona.
+ᰔᩚ *#mute* [@usuario]
+> 🔇 Silenciamiento de transmisiones de la entidad activado.
+ᰔᩚ *#unmute* [@usuario]
+> 🔊 Restablecimiento de transmisiones para la entidad.
 ᰔᩚ *#encuesta • #poll*
-> ✦ Crea una encuesta.
+> 📊 Activando módulo de votación interna. Proceso democrático iniciado.
 ᰔᩚ *#delete • #del*
-> ✦ Elimina mensaje de otros usuarios.
+> 🗑️ Mensaje detectado y eliminado de la red.
 ᰔᩚ *#fantasmas*
-> ✦ Ver lista de inactivos del grupo.
+> 👻 Identificando sujetos inactivos... Presencia no verificada.
 ᰔᩚ *#kickfantasmas*
-> ✦ Elimina a los inactivos del grupo.
+> 🧹 Expulsión automática de presencias inactivas.
 ᰔᩚ *#invocar • #tagall • #todos*
-> ✦ Invoca a todos los usuarios de un grupo.
+> 🔔 Todos los sistemas notificados. Llamado masivo ejecutado.
 ᰔᩚ *#setemoji • #setemo*
-> ✦ Cambia el emoji que se usa en la invitación de usuarios.
+> 😶‍🌫️ Nuevo identificador gráfico asignado al grupo.
 ᰔᩚ *#listnum • #kicknum*
-> ✦ Elimine a usuario por el prefijo de país.
+> 🚷 Filtrado por prefijo internacional. Usuarios bloqueados por región.
 
-• :･ﾟ⊹˚• \`『 Anime 』\` •˚⊹:･ﾟ•
+📡 — Terminal de vigilancia FNaF LATAM™ Supervisión remota de grupos.
 
-❍ Comandos de reacciones de anime.
-ᰔᩚ *#angry • #enojado* + <mencion>
-> ✦ Estar enojado
-ᰔᩚ *#bite* + <mencion>
-> ✦ Muerde a alguien
-ᰔᩚ *#bleh* + <mencion>
-> ✦ Sacar la lengua
-ᰔᩚ *#blush* + <mencion>
-> ✦ Sonrojarte
-ᰔᩚ *#bored • #aburrido* + <mencion>
-> ✦ Estar aburrido
-ᰔᩚ *#cry* + <mencion>
-> ✦ Llorar por algo o alguien
-ᰔᩚ *#cuddle* + <mencion>
-> ✦ Acurrucarse
-ᰔᩚ *#dance* + <mencion>
-> ✦ Sacate los pasitos prohíbidos
-ᰔᩚ *#drunk* + <mencion>
-> ✦ Estar borracho
-ᰔᩚ *#eat • #comer* + <mencion>
-> ✦ Comer algo delicioso
-ᰔᩚ *#facepalm* + <mencion>
-> ✦ Darte una palmada en la cara
-ᰔᩚ *#happy • #feliz* + <mencion>
-> ✦ Salta de felicidad
-ᰔᩚ *#hug* + <mencion>
-> ✦ Dar un abrazo
-ᰔᩚ *#impregnate • #preg* + <mencion>
-> ✦ Embarazar a alguien
-ᰔᩚ *#kill* + <mencion>
-> ✦ Toma tu arma y mata a alguien
-ᰔᩚ *#kiss • #besar* • #kiss2 + <mencion>
-> ✦ Dar un beso
-ᰔᩚ *#laugh* + <mencion>
-> ✦ Reírte de algo o alguien
-ᰔᩚ *#lick* + <mencion>
-> ✦ Lamer a alguien
-ᰔᩚ *#love • #amor* + <mencion>
-> ✦ Sentirse enamorado
-ᰔᩚ *#pat* + <mencion>
-> ✦ Acaricia a alguien
-ᰔᩚ *#poke* + <mencion>
-> ✦ Picar a alguien
-ᰔᩚ *#pout* + <mencion>
-> ✦ Hacer pucheros
-ᰔᩚ *#punch* + <mencion>
-> ✦ Dar un puñetazo
-ᰔᩚ *#run* + <mencion>
-> ✦ Correr
-ᰔᩚ *#sad • #triste* + <mencion>
-> ✦ Expresar tristeza
-ᰔᩚ *#scared* + <mencion>
-> ✦ Estar asustado
-ᰔᩚ *#seduce* + <mencion>
-> ✦ Seducir a alguien
-ᰔᩚ *#shy • #timido* + <mencion>
-> ✦ Sentir timidez
-ᰔᩚ *#slap* + <mencion>
-> ✦ Dar una bofetada
-ᰔᩚ *#dias • #days*
-> ✦ Darle los buenos días a alguien 
-ᰔᩚ *#noches • #nights*
-> ✦ Darle las buenas noches a alguien 
-ᰔᩚ *#sleep* + <mencion>
-> ✦ Tumbarte a dormir
-ᰔᩚ *#smoke* + <mencion>
-> ✦ Fumar
-ᰔᩚ *#think* + <mencion>
-> ✦ Pensar en algo
 
-• :･ﾟ⊹˚• \`『 NSFW 』\` •˚⊹:･ﾟ•
+🎮 :･ﾟ⊹˚• 『 MÓDULO DE ENTRETENIMIENTO :: ZONA DE JUEGOS 』 •˚⊹:･ﾟ•
+🎰 Conectando al sistema de juegos de Freddy Fazbear’s Mega Pizzaplex™...  
+> ⚠️ Advertencia: Algunos juegos contienen niveles altos de caos y risas.
 
-❍ Comandos NSFW (Contenido para adultos)
-ᰔᩚ *#anal* + <mencion>
-> ✦ Hacer un anal
-ᰔᩚ *#waifu*
-> ✦ Buscá una waifu aleatorio.
-ᰔᩚ *#bath* + <mencion>
-> ✦ Bañarse
-ᰔᩚ *#blowjob • #mamada • #bj* + <mencion>
-> ✦ Dar una mamada
-ᰔᩚ *#boobjob* + <mencion>
-> ✦ Hacer una rusa
-ᰔᩚ *#cum* + <mencion>
-> ✦ Venirse en alguien.
-ᰔᩚ *#fap* + <mencion>
-> ✦ Hacerse una paja
-ᰔᩚ *#ppcouple • #ppcp*
-> ✦ Genera imagenes para amistades o parejas.
-ᰔᩚ *#footjob* + <mencion>
-> ✦ Hacer una paja con los pies
-ᰔᩚ *#fuck • #coger • #fuck2* + <mencion>
-> ✦ Follarte a alguien
-ᰔᩚ *#cafe • #coffe*
-> ✦ Tomate un cafecito con alguien
-ᰔᩚ *#violar • #perra + <mencion>
-> ✦ Viola a alguien
-ᰔᩚ *#grabboobs* + <mencion>
-> ✦ Agarrrar tetas
-ᰔᩚ *#grop* + <mencion>
-> ✦ Manosear a alguien
-ᰔᩚ *#lickpussy* + <mencion>
-> ✦ Lamer un coño
-ᰔᩚ *#rule34 • #r34* + [Tags]
-> ✦ Buscar imagenes en Rule34
-ᰔᩚ *#sixnine • #69* + <mencion>
-> ✦ Haz un 69 con alguien
-ᰔᩚ *#spank • #nalgada* + <mencion>
-> ✦ Dar una nalgada
-ᰔᩚ *#suckboobs* + <mencion>
-> ✦ Chupar tetas
-ᰔᩚ *#undress • #encuerar* + <mencion>
-> ✦ Desnudar a alguien
-ᰔᩚ *#yuri • #tijeras* + <mencion>
-> ✦ Hacer tijeras.
+ᰔᩚ *#amistad • #amigorandom*  
+> ✦ Estableciendo vínculo aleatorio con otro usuario. ¡Haz nuevos compañeros!
 
-• :･ﾟ⊹˚• \`『 Juegos 』\` •˚⊹:･ﾟ•
+ᰔᩚ *#chiste*  
+> ✦ Enviando un chiste desde los servidores de Bonnie.
 
-❍ Comandos de juegos para jugar con tus amigos.
-ᰔᩚ *#amistad • #amigorandom* 
-> ✦ hacer amigos con un juego. 
-ᰔᩚ *#chaqueta • #jalamela*
-> ✦ Hacerte una chaqueta.
-ᰔᩚ *#chiste*
-> ✦ La bot te cuenta un chiste.
-ᰔᩚ *#consejo* 
-> ✦ La bot te da un consejo. 
-ᰔᩚ *#doxeo • #doxear* + <mencion>
-> ✦ Simular un doxeo falso.
-ᰔᩚ *#facto*
-> ✦ La bot te lanza un facto. 
-ᰔᩚ *#formarpareja*
-> ✦ Forma una pareja. 
-ᰔᩚ *#formarpareja5*
-> ✦ Forma 5 parejas diferentes.
-ᰔᩚ *#frase*
-> ✦ La bot te da una frase.
-ᰔᩚ *#huevo*
-> ✦ Agarrale el huevo a alguien.
-ᰔᩚ *#chupalo* + <mencion>
-> ✦ Hacer que un usuario te la chupe.
-ᰔᩚ *#aplauso* + <mencion>
-> ✦ Aplaudirle a alguien.
-ᰔᩚ *#marron* + <mencion>
-> ✦ Burlarte del color de piel de un usuario. 
-ᰔᩚ *#suicidar*
-> ✦ Suicidate. 
-ᰔᩚ *#iq • #iqtest* + <mencion>
-> ✦ Calcular el iq de alguna persona. 
-ᰔᩚ *#meme*
-> ✦ La bot te envía un meme aleatorio. 
-ᰔᩚ *#morse*
-> ✦ Convierte un texto a codigo morse. 
-ᰔᩚ *#nombreninja*
-> ✦ Busca un nombre ninja aleatorio. 
-ᰔᩚ *#paja • #pajeame* 
-> ✦ La bot te hace una paja.
-ᰔᩚ *#personalidad* + <mencion>
-> ✦ La bot busca tu personalidad. 
-ᰔᩚ *#piropo*
-> ✦ Lanza un piropo.
-ᰔᩚ *#pregunta*
-> ✦ Hazle una pregunta a la bot.
-ᰔᩚ *#ship • #pareja*
-> ✦ La bot te da la probabilidad de enamorarte de una persona. 
-ᰔᩚ *#sorteo*
-> ✦ Empieza un sorteo. 
-ᰔᩚ *#top*
-> ✦ Empieza un top de personas.
-ᰔᩚ *#formartrio* + <mencion>
-> ✦ Forma un trio.
-ᰔᩚ *#ahorcado*
-> ✦ Diviertete con la bot jugando el juego ahorcado.
-ᰔᩚ *#mates • #matematicas*
-> ✦ Responde las preguntas de matemáticas para ganar recompensas.
-ᰔᩚ *#ppt*
-> ✦ Juega piedra papel o tijeras con la bot.
-ᰔᩚ *#sopa • #buscarpalabra*
-> ✦ Juega el famoso juego de sopa de letras.
-ᰔᩚ *#pvp • #suit* + <mencion>
-> ✦ Juega un pvp contra otro usuario.
-ᰔᩚ *#ttt*
-> ✦ Crea una sala de juego. 
-  `.trim()
+ᰔᩚ *#consejo*  
+> ✦ Entregando sabiduría vintage cortesía de Old Man Consejos.
+
+ᰔᩚ *#doxeo • #doxear* + <@usuario>  
+> ✦ Generando un doxeo falso (solo por humor, no real).
+
+ᰔᩚ *#facto*  
+> ✦ ¡Dato salvaje aparece! ¿Lo sabías?
+
+ᰔᩚ *#formarpareja*  
+> ✦ Escaneando corazones... Match encontrado 💖
+
+ᰔᩚ *#formarpareja5*  
+> ✦ Fusionando almas... Formando 5 parejas virtuales.
+
+ᰔᩚ *#frase*  
+> ✦ Sacando una frase del archivo de sabiduría de Fideos.
+
+ᰔᩚ *#aplauso* + <@usuario>  
+> ✦ 🎉 Enviando aplausos al usuario. ¡Se lo merece!
+
+ᰔᩚ *#iq • #iqtest* + <@usuario>  
+> ✦ Ejecutando test de coeficiente intelectual ficticio...
+
+ᰔᩚ *#meme*  
+> ✦ Reproduciendo imagen divertida desde el servidor de Roxy.
+
+ᰔᩚ *#morse*  
+> ✦ Traduciendo texto a código Morse... •-•••-•••!
+
+ᰔᩚ *#nombreninja*  
+> ✦ Tu nuevo nombre ninja ha sido asignado. ¡Prepárate!
+
+ᰔᩚ *#personalidad* + <@usuario>  
+> ✦ Analizando patrones... Descubriendo tu personalidad.
+
+ᰔᩚ *#piropo*  
+> ✦ Activando modo romántico. Enviando piropo encantador.
+
+ᰔᩚ *#pregunta*  
+> ✦ Haz una pregunta, la IA responderá según sus circuitos lógicos.
+
+ᰔᩚ *#ship • #pareja*  
+> ✦ Calculando compatibilidad entre almas. ¿Son el uno para el otro?
+
+ᰔᩚ *#sorteo*  
+> ✦ Activando ruleta de la suerte. ¡Elige un ganador aleatorio!
+
+ᰔᩚ *#top*  
+> ✦ Generando ranking personalizado. ¿Quién estará en el puesto 1?
+
+ᰔᩚ *#formartrio* + <@usuario>  
+> ✦ Triángulo amoroso detectado. ¡Formación establecida!
+
+ᰔᩚ *#ahorcado*  
+> ✦ Comenzando partida de ahorcado. ¡Adivina la palabra!
+
+ᰔᩚ *#mates • #matematicas*  
+> ✦ Modo educación activado. Responde operaciones y gana puntos.
+
+ᰔᩚ *#ppt*  
+> ✦ Piedra, papel o tijera. ¡Desafía al bot!
+
+ᰔᩚ *#sopa • #buscarpalabra*  
+> ✦ Iniciando sopa de letras. ¡Encuentra todas las palabras!
+
+ᰔᩚ *#pvp • #suit* + <@usuario>  
+> ✦ ¡Duelo activado! Ronda uno… ¡Lucha!
+
+ᰔᩚ *#ttt*  
+> ✦ Creando sala de juego. Esperando al segundo jugador...
+
+📟 — Zona recreativa de FNaF LATAM™ sincronizada con éxito. Listos para jugar.
+`.trim()
 
   await conn.sendMessage(m.chat, { 
       text: txt,
