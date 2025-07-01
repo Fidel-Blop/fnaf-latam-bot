@@ -1,25 +1,40 @@
+// Adaptación oficial FNaF LATAM™ — Unidad de datos irónicos con clasificación de amenaza
+
 const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
 
-var handler = async (m, { conn, text}) => {
+var handler = async (m, { conn }) => {
+    const loadingMsg = `📡 *Unidad de datos activa...* Sincronizando con *base de ironía de Freddy Fazbear Entertainment™*.\n\n🔍 Preparando facto...`;
+    const output = pickRandom(global.factos);
+    const threatLevel = pickRandom([
+        '🟢 Nivel de sarcasmo: bajo – Inofensivo para animatrónicos.',
+        '🟡 Nivel de sarcasmo: moderado – Puede causar risas incómodas.',
+        '🔴 Nivel de sarcasmo: alto – Riesgo de daño emocional en 3… 2… 1...',
+        '🔵 Nivel de sarcasmo: neutro – Apto para toda la pizzería.',
+        '🟣 Nivel de sarcasmo: anómalo – Desencadena glitches en la red Fazbear.',
+        '⚫ Nivel de sarcasmo: letal – Activando protocolo de contención verbal.'
+    ]);
 
-conn.reply(m.chat, `${emoji2} Buscando un facto, espere un momento...`, m)
+    conn.reply(m.chat, loadingMsg, m);
 
-conn.reply(m.chat, `*┏━_͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡_͜͡━┓*\n\n❥ *"${pickRandom(global.factos)}"*\n\n*┗━_͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡_͜͡━┛*`, m)
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-}
-handler.help = ['facto']
-handler.tags = ['fun']
-handler.command = ['facto']
-handler.fail = null
-handler.exp = 0
+    const finalMsg = `*🎥 MONITOREO FNaF LATAM: EJECUCIÓN AUTORIZADA*\n\n👁 *Facto detectado:*\n\n❝ *${output}* ❞\n\n⛓ ${threatLevel}\n\n— Sistema respaldado por *FNaF LATAM™ SecureNet*`;
+
+    conn.reply(m.chat, finalMsg, m);
+};
+
+handler.help = ['facto'];
+handler.tags = ['fun'];
+handler.command = ['facto'];
+handler.fail = null;
+handler.exp = 0;
 handler.group = true;
-handler.register = true
+handler.register = true;
 
-export default handler
+export default handler;
 
-let hasil = Math.floor(Math.random() * 5000)
 function pickRandom(list) {
-return list[Math.floor(list.length * Math.random())]
+    return list[Math.floor(Math.random() * list.length)];
 }
 
 global.factos = [
@@ -49,7 +64,7 @@ global.factos = [
     "Si fueras una aplicación, serías una que nadie quiere descargar.",
     "Eres como una sombra: siempre estás ahí, pero no eres bienvenido.",
     "Tu cerebro es como un disco duro lleno: no puede almacenar más.",
-    "Eres como un tren descarrilado: solo causan caos.",
+    "Eres como un tren descarrilado: solo causas caos.",
     "Si fueras un clima, serías una tormenta: oscuro y destructivo.",
     "Eres como una cadena de mensajes: nadie te quiere, pero todos te reciben.",
     "Tu vida es como un rompecabezas con piezas que nunca encajan.",
