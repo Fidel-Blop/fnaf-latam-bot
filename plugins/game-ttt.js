@@ -1,24 +1,31 @@
 import TicTacToe from '../lib/tictactoe.js';
 
-const handler = async (m, {conn, usedPrefix, command, text}) => {
+const handler = async (m, { conn, usedPrefix, command, text }) => {
   conn.game = conn.game || {};
 
-  if (Object.values(conn.game).find((room) => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) {
-    throw `${emoji2} Todavía estás en un juego con un usuario.`;
+  // Verificar si ya estás en una partida activa
+  if (Object.values(conn.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) {
+    throw `⚠️ Unidad en conflicto detectada.\nFinaliza la sesión de juego activa antes de iniciar otra. — Sistema respaldado por FNaF LATAM™`;
   }
 
+  // Solicitar nombre de sala
   if (!text) {
-    return m.reply(`${emoji} Se requiere poner el nombre de la sala de juego\n\n*—◉ Ejemplo*\n*◉ ${usedPrefix + command} nueva sala*`, m.chat);
+    return m.reply(
+      `🧩 Protocolo de Juego: Tres en Raya Activado\n\n⚙️ Ingreso incompleto. Necesitas asignar un identificador de sala.\n\n📌 *Ejemplo:* ${usedPrefix + command} nueva_sala\n\n— Sistema respaldado por FNaF LATAM™`,
+      m.chat
+    );
   }
 
-  let room = Object.values(conn.game).find((room) => room.state === 'WAITING' && (text ? room.name === text : true));
+  // Buscar si ya existe una sala con ese nombre esperando jugador
+  let room = Object.values(conn.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true));
 
   if (room) {
-    await m.reply(`${emoji} Iniciando el juego, un jugador se unió a la partida.`);
+    await m.reply(`📡 Segundo operador registrado.\nIniciando protocolo FazPlay™...`);
+
     room.o = m.chat;
     room.game.playerO = m.sender;
     room.state = 'PLAYING';
-    
+
     const arr = room.game.render().map((v) => {
       return {
         X: '❎',
@@ -36,21 +43,27 @@ const handler = async (m, {conn, usedPrefix, command, text}) => {
     });
 
     const str = `
-🎮 TRES EN RAYA 🎮
+🎮 TRES EN RAYA: SISTEMA DE ENFRENTAMIENTO 🎮
 
-❎ = @${room.game.playerX.split('@')[0]}
-⭕ = @${room.game.playerO.split('@')[0]}
+❎ = Unidad @${room.game.playerX.split('@')[0]}  
+⭕ = Unidad @${room.game.playerO.split('@')[0]}
 
-        ${arr.slice(0, 3).join('')}
-        ${arr.slice(3, 6).join('')}
-        ${arr.slice(6).join('')}
+██ ██ ██
+${arr.slice(0, 3).join('')}
+${arr.slice(3, 6).join('')}
+${arr.slice(6).join('')}
+██ ██ ██
 
-Turno de @${room.game.currentTurn.split('@')[0]}
+🎯 Turno de @${room.game.currentTurn.split('@')[0]}
+
+— Protocolo FazWatch™ v1.3.7 activo
+— Sistema respaldado por FNaF LATAM™
 `.trim();
 
-    if (room.x !== room.o) await conn.sendMessage(room.x, {text: str, mentions: conn.parseMention(str)}, {quoted: m});
-    await conn.sendMessage(room.o, {text: str, mentions: conn.parseMention(str)}, {quoted: m});
+    if (room.x !== room.o) await conn.sendMessage(room.x, { text: str, mentions: conn.parseMention(str) }, { quoted: m });
+    await conn.sendMessage(room.o, { text: str, mentions: conn.parseMention(str) }, { quoted: m });
   } else {
+    // Crear nueva sala
     room = {
       id: 'tictactoe-' + Date.now(),
       x: m.chat,
@@ -60,8 +73,12 @@ Turno de @${room.game.currentTurn.split('@')[0]}
       name: text
     };
 
-    const imgplay = `https://cope-cdnmed.agilecontent.com/resources/jpg/8/9/1590140413198.jpg`;
-    conn.reply(m.chat, `*🕹 TRES EN RAYA 🎮*\n\n◉ Esperando al segundo jugador\n◉ Para borrar o salirse de la partida use el comando *${usedPrefix}delttt*\n\n◉ Para unirse a la partida escriba: (${usedPrefix + command} ${text})`, m);
+    conn.reply(
+      m.chat,
+      `🧩 MÓDULO DE COMBATE FNaF LATAM™ — TRES EN RAYA ACTIVADO 🧩\n\n📡 Unidad registrada: @${m.sender.split('@')[0]}\n\n⌛ En espera de segundo jugador...\n\n📝 Para cancelar esta operación usa: *${usedPrefix}delttt*\n\n🎮 Para unirse: *${usedPrefix + command} ${text}*\n\n— Sistema respaldado por FNaF LATAM™`,
+      m
+    );
+
     conn.game[room.id] = room;
   }
 };
