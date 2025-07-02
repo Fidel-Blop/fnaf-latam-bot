@@ -1,23 +1,30 @@
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) return conn.reply(m.chat, `${emoji} Por favor, ingrese el error que desea reportar.`, m)
-    if (text.length < 10) return conn.reply(m.chat, `${emoji} Especifique bien el error, mínimo 10 caracteres.`, m)
-    if (text.length > 1000) return conn.reply(m.chat, `${emoji2} *Máximo 1000 caracteres para enviar el error.`, m)
-    const teks = `*✖️ \`R E P O R T E\` ✖️*
+    if (!text) return conn.reply(m.chat, `${emoji} Por favor, ingresa el error que deseas reportar.`, m);
+    if (text.length < 10) return conn.reply(m.chat, `${emoji} Detalla bien el error, mínimo 10 caracteres.`, m);
+    if (text.length > 1000) return conn.reply(m.chat, `${emoji2} *Máximo 1000 caracteres para reportar.*`, m);
 
-☁️ Número:
+    const teks = `
+╔═══════════════╗
+║    ⚠️  REPORT ERROR ⚠️    ║
+╚═══════════════╝
+
+☁️ *NÚMERO:*
 • Wa.me/${m.sender.split`@`[0]}
 
-👤 Usuario: 
+👤 *USUARIO:*
 • ${m.pushName || 'Anónimo'}
 
-💬 Mensaje:
-• ${text}`
-    await conn.reply(`${suittag}@s.whatsapp.net`, m.quoted ? teks + m.quoted.text : teks, m, { mentions: conn.parseMention(teks) })
+💬 *MENSAJE:*
+• ${text}
+`.trim();
 
-    m.reply(`${emoji} El reporte se envío a mi creador, cualquier informe falso puede ocasionar baneo.`)
+    await conn.reply(`5492604097541@s.whatsapp.net`, m.quoted ? teks + '\n\n» Mensaje citado:\n' + m.quoted.text : teks, m, { mentions: conn.parseMention(teks) });
+
+    m.reply(`${emoji} Tu reporte fue enviado correctamente. ¡Gracias por ayudarnos a mejorar FNaF LATAM Bot!`);
 }
-handler.help = ['reportar']
-handler.tags = ['info']
-handler.command = ['reporte', 'report', 'reportar', 'bug', 'error']
 
-export default handler
+handler.help = ['reportar'];
+handler.tags = ['info'];
+handler.command = ['reporte', 'report', 'reportar', 'bug', 'error'];
+
+export default handler;
