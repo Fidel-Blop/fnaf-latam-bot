@@ -1,28 +1,39 @@
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-const pp = await conn.profilePictureUrl(m.chat, 'image').catch(_ => icono) 
-let isClose = { // Switch Case Like :v
-'open': 'not_announcement',
-'close': 'announcement',
-'abierto': 'not_announcement',
-'cerrado': 'announcement',
-'abrir': 'not_announcement',
-'cerrar': 'announcement',
-}[(args[0] || '')]
-if (isClose === undefined)
-return conn.reply(m.chat, `${emoji} *Elija una opción para configurar el grupo*\n\nEjemplo:\n*✰ #${command} abrir*\n*✰ #${command} cerrar*\n*✰ #${command} close*\n*✰ #${command} open*`, m)
-await conn.groupSettingUpdate(m.chat, isClose)
+  const pp = await conn.profilePictureUrl(m.chat, 'image').catch(_ => './src/catalogo.jpg');
 
-if (isClose === 'not_announcement'){
-m.reply(`${emoji} *Ya pueden escribir en este grupo.*`)
-}
+  // Mapeo de comandos a estados de grupo
+  let isClose = {
+    'open': 'not_announcement',
+    'close': 'announcement',
+    'abierto': 'not_announcement',
+    'cerrado': 'announcement',
+    'abrir': 'not_announcement',
+    'cerrar': 'announcement',
+  }[(args[0] || '').toLowerCase()];
 
-if (isClose === 'announcement'){
-m.reply(`${emoji2} *Solos los admins pueden escribir en este grupo.*`)
-}}
-handler.help = ['group open / close', 'grupo abrir / cerrar']
-handler.tags = ['grupo']
-handler.command = ['group', 'grupo']
-handler.admin = true
-handler.botAdmin = true
+  if (isClose === undefined) {
+    return conn.reply(
+      m.chat,
+      `🔒 *PROTOCOLO DE ACCESO GRUPAL*\n\n⚠️ Opción inválida.\n\n📌 *Ejemplos válidos:*\n✦ ${usedPrefix + command} abrir\n✦ ${usedPrefix + command} cerrar\n✦ ${usedPrefix + command} open\n✦ ${usedPrefix + command} close\n\n— Sistema respaldado por FNaF LATAM™`,
+      m
+    );
+  }
 
-export default handler
+  await conn.groupSettingUpdate(m.chat, isClose);
+
+  if (isClose === 'not_announcement') {
+    m.reply(`🔓 *Acceso de transmisión habilitado*\n\n📡 Los operadores ahora pueden interactuar libremente en el canal.\n\n— Sistema respaldado por FNaF LATAM™`);
+  }
+
+  if (isClose === 'announcement') {
+    m.reply(`🔐 *Zona restringida activada*\n\n📢 Solo supervisores (admins) tienen permiso de transmisión en esta zona.\n\n🛑 El resto de las unidades ha sido silenciado temporalmente.\n\n— Sistema respaldado por FNaF LATAM™`);
+  }
+};
+
+handler.help = ['group open / close', 'grupo abrir / cerrar'];
+handler.tags = ['grupo'];
+handler.command = ['group', 'grupo'];
+handler.admin = true;
+handler.botAdmin = true;
+
+export default handler;
