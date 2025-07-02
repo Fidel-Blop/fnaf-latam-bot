@@ -1,33 +1,37 @@
 import db from '../lib/database.js'
-import { cpus as _cpus, totalmem, freemem, platform, hostname } from 'os'
-import speed from 'performance-now'
+import { platform, hostname, totalmem, freemem } from 'os'
 import { sizeFormatter } from 'human-readable'
 
-let format = sizeFormatter({
-    std: 'JEDEC',
-    decimalPlaces: 2,
-    keepTrailingZeroes: false,
-    render: (literal, symbol) => `${literal} ${symbol}B`,
+const format = sizeFormatter({
+  std: 'JEDEC',
+  decimalPlaces: 2,
+  keepTrailingZeroes: false,
+  render: (literal, symbol) => `${literal} ${symbol}B`,
 })
 
 let handler = async (m, { conn, usedPrefix }) => {
-    let bot = global.db.data.settings[conn.user.jid]
-    let totalStats = Object.values(global.db.data.stats).reduce((total, stat) => total + stat.total, 0)
-    let totalf = Object.values(global.plugins).filter((v) => v.help && v.tags).length
+  const bot = global.db.data.settings[conn.user.jid]
+  const totalStats = Object.values(global.db.data.stats).reduce((total, stat) => total + stat.total, 0)
+  const totalPlugins = Object.values(global.plugins).filter(v => v.help && v.tags).length
+  const ownerJid = global.owner[0][0] + '@s.whatsapp.net'
 
-    let info = `✿  *Informacion de ${global.botname}*\n\n`
-    info += `✎˚₊· ͟͟͞͞➳❥ *Prefijo* : [  ${usedPrefix}  ]\n`
-    info += `✥˚₊· ͟͟͞͞➳❥ *Total Plugins* : ${totalf}\n`
-    info += `✦˚₊· ͟͟͞͞➳❥ *Comandos Ejecutados* : ${toNum(totalStats)} ( *${totalStats}* )\n\n`
-    info += `*◤ Hosts:*\n`
-    info += `✰˚₊· ͟͟͞͞➳❥ *Plataforma* : ${platform()}\n`
-    info += `✿˚₊· ͟͟͞͞➳❥ *Servidor* : ${hostname()}\n`
-    info += `✧˚₊· ͟͟͞͞➳❥ *RAM* : ${format(totalmem() - freemem())} / ${format(totalmem())}\n`
-    info += `⚘˚₊· ͟͟͞͞➳❥ *Free-RAM* : ${format(freemem())}\n\n`
-    info += `❒ *NodeJS Uso de memoria* :\n`
-    info += `${'```' + Object.keys(process.memoryUsage()).map((key) => `${key}: ${format(process.memoryUsage()[key])}`).join('\n') + '```'}`
+  const info = 
+    `🎮 *Información del Bot - ${global.botname}*\n\n` +
+    `⚙️ *Prefijo:* ${usedPrefix}\n` +
+    `🔌 *Plugins cargados:* ${totalPlugins}\n` +
+    `📊 *Comandos ejecutados:* ${formatNumber(totalStats)} (Total: ${totalStats})\n\n` +
+    `💻 *Sistema operativo:* ${platform()}\n` +
+    `🖥️ *Servidor:* ${hostname()}\n` +
+    `🧠 *RAM usada:* ${format(totalmem() - freemem())} / ${format(totalmem())}\n` +
+    `📉 *RAM libre:* ${format(freemem())}\n\n` +
+    `📌 *Uso memoria NodeJS:*\n` +
+    '```' +
+    Object.entries(process.memoryUsage())
+      .map(([key, val]) => `${key}: ${format(val)}`)
+      .join('\n') +
+    '```'
 
-    await conn.reply(m.chat, info, fkontak, { contextInfo: { mentionedJid: [owner[0][0] + '@s.whatsapp.net'] } })
+  await conn.reply(m.chat, info, null, { contextInfo: { mentionedJid: [ownerJid] } })
 }
 
 handler.help = ['botinfo']
@@ -36,16 +40,10 @@ handler.command = ['info', 'botinfo', 'infobot']
 
 export default handler
 
-function toNum(number) {
-    if (number >= 1000 && number < 1000000) {
-        return (number / 1000).toFixed(1) + 'k'
-    } else if (number >= 1000000) {
-        return (number / 1000000).toFixed(1) + 'M'
-    } else if (number <= -1000 && number > -1000000) {
-        return (number / 1000).toFixed(1) + 'k'
-    } else if (number <= -1000000) {
-        return (number / 1000000).toFixed(1) + 'M'
-    } else {
-        return number.toString()
-    }
+function formatNumber(number) {
+  if (number >= 1_000_000) return (number / 1_000_000).toFixed(1) + 'M'
+  if (number >= 1_000) return (number / 1_000).toFixed(1) + 'k'
+  if (number <= -1_000_000) return (number / 1_000_000).toFixed(1) + 'M'
+  if (number <= -1_000) return (number / 1_000).toFixed(1) + 'k'
+  return number.toString()
 }
