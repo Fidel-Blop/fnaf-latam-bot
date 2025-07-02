@@ -1,33 +1,30 @@
-/* 
-- tagall By Angel-OFC  
-- etiqueta en un grupo a todos
-- https://whatsapp.com/channel/0029VaJxgcB0bIdvuOwKTM2Y
-*/
 const handler = async (m, { isOwner, isAdmin, conn, text, participants, args, command, usedPrefix }) => {
-  if (usedPrefix == 'a' || usedPrefix == 'A') return;
+  if (usedPrefix.toLowerCase() === 'a') return; // Excluir prefijo 'a' por seguridad
 
   const customEmoji = global.db.data.chats[m.chat]?.customEmoji || '🍫';
-  m.react(customEmoji);
+  await m.react(customEmoji);
 
   if (!(isAdmin || isOwner)) {
     global.dfail('admin', m, conn);
     throw false;
   }
 
-  const pesan = args.join` `;
-  const oi = `*» INFO :* ${pesan}`;
-  let teks = `*!  MENCION GENERAL  !*\n  *PARA ${participants.length} MIEMBROS* 🗣️\n\n ${oi}\n\n╭  ┄ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${botname} ≼᳞ׄ\` ꒱ ۟ 𝅄 ┄\n`;
+  const mensaje = args.join(' ');
+  const aviso = `*» ALERTA GENERAL :* ${mensaje}`;
+  let texto = `⚠️ *¡ATENCIÓN A TODAS LAS UNIDADES!* ⚠️\n*SECTOR: ${participants.length} OPERADORES ACTIVOS* 🕹️\n\n${aviso}\n\n╭─ 𝅄 ۪꒰ \`⡞᪲=͟͟͞${botname} ≼᳞ׄ\` ꒱ ۟ 𝅄 ──╮\n`;
+  
   for (const mem of participants) {
-    teks += `┊${customEmoji} @${mem.id.split('@')[0]}\n`;
+    texto += `┊${customEmoji} @${mem.id.split('@')[0]}\n`;
   }
-  teks += `╰⸼ ┄ ┄ ┄ ─  ꒰  ׅ୭ *${vs}* ୧ ׅ ꒱  ┄  ─ ┄ ⸼`;
 
-  conn.sendMessage(m.chat, { text: teks, mentions: participants.map((a) => a.id) });
+  texto += `╰⸼ ── ┄ ── ꒰ ׅ୭ *${vs}* ୧ ׅ ꒱ ── ┄ ── ⸼\n\n— Sistema respaldado por FNaF LATAM™`;
+
+  await conn.sendMessage(m.chat, { text: texto, mentions: participants.map((a) => a.id) });
 };
 
 handler.help = ['todos *<mensaje opcional>*'];
 handler.tags = ['group'];
-handler.command = ['todos', 'invocar', 'tagall']
+handler.command = ['todos', 'invocar', 'tagall'];
 handler.admin = true;
 handler.group = true;
 
