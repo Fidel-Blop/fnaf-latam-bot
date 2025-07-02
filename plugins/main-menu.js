@@ -419,16 +419,16 @@ let handler = async (m, { conn, args }) => {
           mentionedJid: [m.sender, userId],
           isForwarded: true,
           forwardedNewsletterMessageInfo: {
-              newsletterJid: channelRD.id,
-              newsletterName: channelRD.name,
+              newsletterJid: channelRD.120363025091220625@g.us,
+              newsletterName: channelRD.FNaFLATAM,
               serverMessageId: -1,
           },
           forwardingScore: 999,
           externalAdReply: {
-              title: botname,
-              body: textbot,
-              thumbnailUrl: banner,
-              sourceUrl: redes,
+              title:  FNaF LATAM,
+              body: FNaF LATAM Bot,
+              thumbnailUrl: https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/0/07/Freddy_trailer.gif/revision/latest/scale-to-width-down/250?cb=20140829214317,
+              sourceUrl: https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t,
               mediaType: 1,
               showAdAttribution: true,
               renderLargerThumbnail: true,
@@ -442,11 +442,21 @@ handler.help = ['menu']
 handler.tags = ['main']
 handler.command = ['menu', 'menú', 'help']
 
+
+const channelRD = {
+  id: "120363025091220625@g.us", // o un newsletter válido
+  name: "FNaF LATAM"
+}
+const botname = "FNaF LATAM Bot"
+const textbot = "Un bot hecho con amor por un amigo"
+const banner = "https://i.imgur.com/WUev1DN.jpeg"
+const redes = "https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t"
+
 export default handler
 
 function clockString(ms) {
-    let seconds = Math.floor((ms / 1000) % 60)
-    let minutes = Math.floor((ms / (1000 * 60)) % 60)
-    let hours = Math.floor((ms / (1000 * 60 * 60)) % 24)
-    return `${hours}h ${minutes}m ${seconds}s`
+  let seconds = Math.floor((ms / 1000) % 60)
+  let minutes = Math.floor((ms / (1000 * 60)) % 60)
+  let hours = Math.floor((ms / (1000 * 60 * 60)) % 24)
+  return `${hours}h ${minutes}m ${seconds}s`
 }
