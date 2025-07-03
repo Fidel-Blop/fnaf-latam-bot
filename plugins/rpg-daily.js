@@ -1,25 +1,21 @@
-var handler = async (m, { conn }) => {
+let handler = async (m, { conn }) => {
     let coin = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
     let exp = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
     let d = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
 
-    global.db.data.users[m.sender].diamond += d;
-    global.db.data.users[m.sender].coin += coin;
+    let user = global.db.data.users[m.sender];
+    let time = user.lastclaim + 86400000;
 
-    let time = global.db.data.users[m.sender].lastclaim + 86400000;
-    if (new Date() - global.db.data.users[m.sender].lastclaim < 7200000) {
-        return conn.reply(m.chat, `${emoji4} *Vuelve en ${msToTime(time - new Date())}*`, m);
+    if (new Date() - user.lastclaim < 7200000) {
+        return conn.reply(m.chat, `⚠️ Protocolo de Espera Activado\n\n📡 Aún no puedes reclamar tu recompensa diaria.\n⏱️ Tiempo estimado: *${msToTime(time - new Date())}*\n\n— Monitoreo programado por Fazbear Entertainment™\n— Sistema respaldado por FNaF LATAM™`, m);
     }
 
-    global.db.data.users[m.sender].exp += exp;
-    conn.reply(m.chat, `${emoji} *Recompensa Diaria*
+    user.diamond += d;
+    user.coin += coin;
+    user.exp += exp;
+    user.lastclaim = Date.now();
 
-Recursos:
-✨ Xp : *+${exp}*
-💎 Diamantes : *+${d}*
-💸 ${moneda} : *+${coin}*`, m);
-
-    global.db.data.users[m.sender].lastclaim = Date.now();
+    conn.reply(m.chat, `📦 Subrutina de Recompensa Diaria — Activada\n\n🔁 Procesando entrega automatizada de recursos...\n\n✨ *Exp:* +${exp}\n💎 *Diamantes:* +${d}\n💸 *${moneda}:* +${coin}\n\n🎮 Turno registrado en el sistema de vigilancia central.\n— Sistema respaldado por FNaF LATAM™`, m);
 }
 
 handler.help = ['daily', 'claim'];
@@ -40,5 +36,5 @@ function msToTime(duration) {
     minutes = (minutes < 10) ? '0' + minutes : minutes;
     seconds = (seconds < 10) ? '0' + seconds : seconds;
 
-    return hours + ' Horas ' + minutes + ' Minutos';
+    return `${hours} Horas ${minutes} Minutos`;
 }
