@@ -1,47 +1,56 @@
-const handler = async (m, { isPrems, conn }) => {
+const handler = async (m, { conn }) => {
   if (!global.db.data.users[m.sender]) {
-    throw `${emoji4} Usuario no encontrado.`;
+    throw `⚠️ ##ERROR## Usuario no registrado en la base de datos. Contacte al operador.`;
   }
 
-  const lastCofreTime = global.db.data.users[m.sender].lastcofre;
-  const timeToNextCofre = lastCofreTime + 86400000;
+  const user = global.db.data.users[m.sender];
+  const lastCofre = user.lastcofre || 0;
+  const nextCofre = lastCofre + 86400000; // 24h cooldown
 
-  if (Date.now() < timeToNextCofre) {
-    const tiempoRestante = timeToNextCofre - Date.now();
-    const mensajeEspera = `${emoji3} Ya reclamaste tu cofre\n⏰️ Regresa en: *${msToTime(tiempoRestante)}* para volver a reclamar.`;
-    await conn.sendMessage(m.chat, { text: mensajeEspera }, { quoted: m });
-    return;
+  if (Date.now() < nextCofre) {
+    const tiempoRestante = nextCofre - Date.now();
+    const espera = msToTime(tiempoRestante);
+    const aviso = `⏳ Sistema de vigilancia activado 👁️\n` +
+      `--::SEQUENCE_BREAK::--\n` +
+      `Monitoreo FNaF LATAM: Cofre ya reclamado\n` +
+      `📡 Tiempo para siguiente acceso: *${espera}*\n` +
+      `— Sistema respaldado por FNaF LATAM™`;
+    return await conn.sendMessage(m.chat, { text: aviso }, { quoted: m });
   }
 
+  // Generación de recursos aleatorios con fluctuaciones de sistema
   const img = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745557947304.jpeg';
-  const dia = Math.floor(Math.random() * 100);
-  const tok = Math.floor(Math.random() * 10);
-  const ai = Math.floor(Math.random() * 40);
-  const expp = Math.floor(Math.random() * 5000);
+  const recursos = {
+    coin: Math.floor(Math.random() * 100),
+    tokens: Math.floor(Math.random() * 10),
+    diamonds: Math.floor(Math.random() * 40),
+    exp: Math.floor(Math.random() * 5000),
+  };
 
-  global.db.data.users[m.sender].coin += dia;
-  global.db.data.users[m.sender].diamonds += ai;
-  global.db.data.users[m.sender].joincount += tok;
-  global.db.data.users[m.sender].exp += expp;
-  global.db.data.users[m.sender].lastcofre = Date.now();
+  user.coin += recursos.coin;
+  user.joincount += recursos.tokens;
+  user.diamonds += recursos.diamonds;
+  user.exp += recursos.exp;
+  user.lastcofre = Date.now();
 
   const texto = `
-╭━〔 Cσϝɾҽ Aʅҽαƚσɾισ 〕⬣
-┃📦 *Obtienes Un Cofre*
-┃ ¡Felicidades!
-╰━━━━━━━━━━━━⬣
+╭━〔 Freddy Fazbear Security Protocol v1.3.7 activado ⛓️ 〕⬣
+┃ 📦 Cofre Aleatorio - Unidad de Observación Conectada 🎥
+┃
+┃ • 💸 Créditos: *${recursos.coin} ${moneda}*
+┃ • ⚜️ Tokens: *${recursos.tokens}*
+┃ • 💎 Diamantes: *${recursos.diamonds}*
+┃ • ✨ Experiencia: *${recursos.exp}*
+┃
+┃ -- Sistema FazWatch asegura la integridad de recursos --
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━⬣
 
-╭━〔 Nυҽʋσʂ Rҽƈυɾʂσʂ 〕⬣
-┃ *${dia} ${moneda}* 💸
-┃ *${tok} Tokens* ⚜️
-┃ *${ai} Diamantes* 💎
-┃ *${expp} Exp* ✨
-╰━━━━━━━━━━━━⬣`;
+— Sistema respaldado por FNaF LATAM™`;
 
   try {
-    await conn.sendFile(m.chat, img, 'yuki.jpg', texto, fkontak);
-  } catch (error) {
-    throw `${msm} Ocurrió un error al enviar el cofre.`;
+    await conn.sendFile(m.chat, img, 'cofre.jpg', texto, m);
+  } catch {
+    throw `⚠️ ##ERROR## Fallo en la transferencia de datos. Intentelo más tarde.`;
   }
 };
 
@@ -55,14 +64,13 @@ handler.register = true;
 export default handler;
 
 function msToTime(duration) {
-  const milliseconds = parseInt((duration % 1000) / 100);
   let seconds = Math.floor((duration / 1000) % 60);
   let minutes = Math.floor((duration / (1000 * 60)) % 60);
   let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-  hours = (hours < 10) ? '0' + hours : hours;
-  minutes = (minutes < 10) ? '0' + minutes : minutes;
-  seconds = (seconds < 10) ? '0' + seconds : seconds;
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
 
   return `${hours} Horas ${minutes} Minutos`;
 }
