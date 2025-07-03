@@ -1,21 +1,34 @@
 let handler = async (m, { conn, args, participants }) => {
-    let users = Object.entries(global.db.data.users).map(([key, value]) => {
-        return { ...value, jid: key };
-    });
+  // Escaneo de miembros del grupo actual
+  let localUsers = participants.map(p => {
+    const data = global.db.data.users[p.jid] || {};
+    return {
+      jid: p.jid,
+      coin: data.coin || 0,
+      bank: data.bank || 0
+    };
+  });
 
-    let sortedLim = users.sort((a, b) => (b.coin || 0) + (b.bank || 0) - (a.coin || 0) - (a.bank || 0));
-    let len = args[0] && args[0].length > 0 ? Math.min(10, Math.max(parseInt(args[0]), 10)) : Math.min(10, sortedLim.length);
-    
-    let text = `「${emoji}」Los usuarios con más *¥${moneda}* son:\n\n`;
+  // Ordenar por suma de coin + banco
+  let sorted = localUsers.sort((a, b) => (b.coin + b.bank) - (a.coin + a.bank));
+  let len = args[0] && !isNaN(args[0]) ? Math.min(10, Math.max(parseInt(args[0]), 1)) : Math.min(10, sorted.length);
 
-    text += sortedLim.slice(0, len).map(({ jid, coin, bank }, i) => {
-        let total = (coin || 0) + (bank || 0);
-        return `✰ ${i + 1} » *${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]}:*` +
-               `\n\t\t Total→ *¥${total} ${moneda}*`;
-    }).join('\n');
+  // Composición del mensaje
+  let rankingText = `📡 *Freddy Fazbear Monitoring Unit v2.3*\n`;
+  rankingText += `🗂️ Escaneo financiero en curso...\n`;
+  rankingText += `⛓️ Grupo escaneado: ${await conn.getName(m.chat)}\n\n`;
+  rankingText += `📁 *Top ${len} acumuladores de ¥${moneda} (grupo local):*\n\n`;
 
-    await conn.reply(m.chat, text.trim(), m, { mentions: conn.parseMention(text) });
-}
+  rankingText += sorted.slice(0, len).map((user, i) => {
+    const total = user.coin + user.bank;
+    const name = conn.getName(user.jid) || 'Usuario';
+    return `📌 ${i + 1}. *${name}*\n↳ 🧾 Total: ¥${total} ${moneda}`;
+  }).join('\n\n');
+
+  rankingText += `\n\n🔒 Protocolo financiero local completado.\n— Sistema respaldado por FNaF LATAM™`;
+
+  await conn.reply(m.chat, rankingText.trim(), m);
+};
 
 handler.help = ['baltop'];
 handler.tags = ['rpg'];
@@ -26,19 +39,3 @@ handler.fail = null;
 handler.exp = 0;
 
 export default handler;
-
-function sort(property, ascending = true) {
-    if (property) return (...args) => args[ascending & 1][property] - args[!ascending & 1][property];
-    else return (...args) => args[ascending & 1] - args[!ascending & 1];
-}
-
-function toNumber(property, _default = 0) {
-    if (property) return (a, i, b) => {
-        return { ...b[i], [property]: a[property] === undefined ? _default : a[property] };
-    }
-    else return a => a === undefined ? _default : a;
-}
-
-function enumGetKey(a) {
-    return a.jid;
-}
