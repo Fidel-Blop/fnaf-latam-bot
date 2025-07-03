@@ -1,32 +1,32 @@
 let handler = async (m, { conn, text }) => {
     let code = text.trim().toUpperCase();
-
     if (!code) {
-        return conn.reply(m.chat, `${emoji} Por favor, ingrese un código para canjear.`, m);
+        return conn.reply(m.chat, `🎟️ *Sistema de Redención Fazbear*\n\n⚠️ Código ausente. Usa:\n.canJear ABC123`, m);
     }
 
     let codesDB = global.db.data.codes || {};
     let user = global.db.data.users[m.sender];
+    let entry = codesDB[code];
 
-    if (!codesDB[code]) {
-        return conn.reply(m.chat, `${emoji2} Código no válido.`, m);
+    if (!entry) {
+        return conn.reply(m.chat, `❌ *[ERROR]* Código *inválido* o no existe en el sistema.\n\nVerificá que esté bien escrito o pedí uno válido.`, m);
     }
 
-    if (codesDB[code].claimedBy.includes(m.sender)) {
-        return conn.reply(m.chat, `${emoji2} Ya has canjeado este código.`, m);
+    if (entry.claimedBy.includes(m.sender)) {
+        return conn.reply(m.chat, `🚫 Ya has canjeado este código anteriormente.\nCada usuario puede redimirlo una sola vez.`, m);
     }
 
-    if (codesDB[code].claimedBy.length >= 5) {
-        return conn.reply(m.chat, `${emoji2} Este código fue agotado completamente... Espera a que el creador ponga otro código.`, m);
+    if (entry.claimedBy.length >= 50) {
+        return conn.reply(m.chat, `📛 Este código ha sido *agotado completamente*.\n🕛 Esperá a que se publique uno nuevo.`, m);
     }
 
-    user.coin += codesDB[code].coin;
-    codesDB[code].claimedBy.push(m.sender);
+    // Aplicar recompensa
+    user.coin += entry.coin;
+    entry.claimedBy.push(m.sender);
 
-    let remaining = 50 - codesDB[code].claimedBy.length;
-
-    conn.reply(m.chat, `${emoji} Has canjeado el código con éxito. Has recibido ${codesDB[code].coin} ${moneda}.\nQuedan ${remaining} vacantes para canjear el código.`, m);
-}
+    const restantes = 50 - entry.claimedBy.length;
+    conn.reply(m.chat, `✅ *Código Redimido con Éxito*\n\n🎉 Has recibido: *${entry.coin} ${moneda}*\n📦 Código: *${code}*\n🧍‍♂️ Redimido por ti: *Sí*\n🔢 Redenciones restantes: *${restantes}/50*\n\n— Sistema FNaF LATAM™`, m);
+};
 
 handler.help = ['canjear <código>'];
 handler.tags = ['economia'];
