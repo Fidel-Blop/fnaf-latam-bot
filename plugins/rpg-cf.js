@@ -1,42 +1,41 @@
-let users = {};
-
 let handler = async (m, { conn, text, usedPrefix, command }) => {
-    let [eleccion, cantidad] = text.split(' ');
-    if (!eleccion || !cantidad) {
-        return m.reply(`${emoji} Por favor, elige cara o cruz y una cantidad de ${moneda} para apostar.\nEjemplo: *${usedPrefix + command} cara 50*`);
-    }
+  let [eleccion, cantidad] = text.trim().split(/\s+/);
+  let user = global.db.data.users[m.sender];
 
-    eleccion = eleccion.toLowerCase();
-    cantidad = parseInt(cantidad);
-    if (eleccion !== 'cara' && eleccion !== 'cruz') {
-        return m.reply(`${emoji2} Elección no válida. Por favor, elige cara o cruz.\nEjemplo: *${usedPrefix + command} cara*`);
-    }
+  if (!eleccion || !cantidad) {
+    return m.reply(`${emoji} Usa bien el comando:\n*${usedPrefix + command} cara 50*`);
+  }
 
-    if (isNaN(cantidad) || cantidad <= 0) {
-        return m.reply(`${emoji2} Cantidad no válida. Por favor, elige una cantidad de ${moneda} para apostar.\nEjemplo: *${usedPrefix + command} cara 50*`);
-    }
+  eleccion = eleccion.toLowerCase();
+  cantidad = parseInt(cantidad);
 
-    let userId = m.sender;
-    if (!users[userId]) users[userId] = { coin: 100 };
-    let user = global.db.data.users[m.sender];
-    if (user.coin < cantidad) {
-        return m.reply(`${emoji2} No tienes suficientes ${moneda} para apostar. Tienes ${user.coin} ${moneda}.`);
-    }
+  if (!['cara', 'cruz'].includes(eleccion)) {
+    return m.reply(`${emoji2} Solo *cara* o *cruz*, no inventes 🤡`);
+  }
 
-    let resultado = Math.random() < 0.5 ? 'cara' : 'cruz';
-   let mensaje = `${emoji} La moneda ha caído en `
-    if (resultado === eleccion) {
-        user.coin += cantidad; 
-    mensaje += `*${resultado}* y has ganado *${cantidad} ${moneda}*!`;
-    } else {
-        user.coin -= cantidad;
-        mensaje += `*${resultado}* y has perdido *${cantidad} ${moneda}*!`;
-    }
+  if (isNaN(cantidad) || cantidad <= 0) {
+    return m.reply(`${emoji2} Pon una cantidad real, bro. Ejemplo:\n*${usedPrefix + command} cruz 100*`);
+  }
 
-    await conn.reply(m.chat, mensaje, m);
+  if (user.coin < cantidad) {
+    return m.reply(`${emoji2} No tienes suficiente dinero, te queda *${user.coin} ${moneda}* para apostar.`);
+  }
+
+  let resultado = Math.random() < 0.5 ? 'cara' : 'cruz';
+
+  await conn.reply(m.chat, `🪙 Tirando la moneda... ¡suerte! 🍀`, m);
+  await new Promise(r => setTimeout(r, 1800));
+
+  if (resultado === eleccion) {
+    user.coin += cantidad;
+    return conn.reply(m.chat, `🎉 ¡Ganaste!\nLa moneda cayó en *${resultado.toUpperCase()}*.\nGanaste *${cantidad} ${moneda}*.\nSaldo: *${user.coin} ${moneda}*`, m);
+  } else {
+    user.coin -= cantidad;
+    return conn.reply(m.chat, `💀 Mala suerte...\nLa moneda cayó en *${resultado.toUpperCase()}*.\nPerdiste *${cantidad} ${moneda}*.\nSaldo: *${user.coin} ${moneda}*`, m);
+  }
 };
 
-handler.help = ['cf'];
+handler.help = ['cf <cara|cruz> <cantidad>'];
 handler.tags = ['economy'];
 handler.command = ['cf', 'suerte', 'caracruz'];
 handler.group = true;
