@@ -1,14 +1,27 @@
-let handler = async (m, {conn, usedPrefix}) => {
-let who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.sender
-if (who == conn.user.jid) return error 
-if (!(who in global.db.data.users)) return conn.reply(m.chat, `${emoji4} El usuario no se encuentra en mi base de Datos.`, m)
-let user = global.db.data.users[who]
-await m.reply(`${who == m.sender ? `Tienes *${user.coin} ${moneda} 💸* en tu Cartera` : `El usuario @${who.split('@')[0]} tiene *${user.coin} ${moneda} 💸* en su Cartera`}. `, null, { mentions: [who] })}
+let handler = async (m, { conn, usedPrefix }) => {
+  let who = m.mentionedJid && m.mentionedJid[0]
+    ? m.mentionedJid[0]
+    : m.quoted
+    ? m.quoted.sender
+    : m.sender;
 
-handler.help = ['wallet']
-handler.tags = ['economy']
-handler.command = ['wallet', 'cartera']
-handler.group = true
-handler.register = true
+  if (who == conn.user.jid) return m.react('❌');
+  if (!(who in global.db.data.users)) {
+    return conn.reply(m.chat, `🚫 El usuario no se encuentra en la base de datos.`, m);
+  }
 
-export default handler
+  let user = global.db.data.users[who];
+  let text = who === m.sender
+    ? `💼 *Tu Cartera*\n\n💸 Tienes: *${user.coin} ${moneda}*`
+    : `💼 *Cartera de @${who.split('@')[0]}*\n\n💸 Tiene: *${user.coin} ${moneda}*`;
+
+  return conn.reply(m.chat, text, m, { mentions: [who] });
+};
+
+handler.help = ['wallet', 'cartera'];
+handler.tags = ['economy'];
+handler.command = ['wallet', 'cartera'];
+handler.group = true;
+handler.register = true;
+
+export default handler;
