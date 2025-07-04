@@ -118,6 +118,8 @@ let handler = async (m, { conn, args }) => {
 > 🎲 Lanzamiento de moneda en curso. Probabilidades: 50/50.
 ᰔᩚ *#crime • #crimen*
 > 🧤 Infiltración en sistema legal... Robo simulado ejecutado.
+ᰔᩚ *#UCN • #ucn*
+> 🕹️ Desafía la Ultimate Custom Night. Si fallás, los animatrónicos no te perdonarán. Si ganás, las recompensas son legendarias.
 ᰔᩚ *#ruleta • #roulette • #rt*
 > 🎡 Activando ruleta de colores. Selecciona rojo o negro.
 ᰔᩚ *#casino • #apostar*
