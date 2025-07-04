@@ -125,5 +125,5 @@ const trabajo = [
   "Completaste Hopeless Pursuit en vivo y tus seguidores te premiaron y ganaste"
   "Alcanzaste el puntaje máximo en Fruity Maze. Dominaste el juego y fuiste recompensado con"
 
-
+export default handler;
 ];
