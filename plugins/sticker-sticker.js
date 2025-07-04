@@ -1,47 +1,51 @@
 import { sticker } from '../lib/sticker.js'
-import uploadFile from '../lib/uploadFile.js'
-import uploadImage from '../lib/uploadImage.js'
-import { webp2png } from '../lib/webp2mp4.js'
+import { isUrl } from '../lib/func.utils.js'
 
 let handler = async (m, { conn, args }) => {
-let stiker = false
-let userId = m.sender
-let packstickers = global.db.data.users[userId] || {}
-let texto1 = packstickers.text1 || global.packsticker
-let texto2 = packstickers.text2 || global.packsticker2
-try {
-let q = m.quoted ? m.quoted : m
-let mime = (q.msg || q).mimetype || q.mediaType || ''
-let txt = args.join(' ')
+  let userId = m.sender
+  let packstickers = global.db.data.users[userId] || {}
+  let texto1 = packstickers.text1 || global.packsticker
+  let texto2 = packstickers.text2 || global.packsticker2
 
-if (/webp|image|video/g.test(mime) && q.download) {
-if (/video/.test(mime) && (q.msg || q).seconds > 16)
-return conn.reply(m.chat, '✧ El video no puede durar más de *15 segundos*', m)
-let buffer = await q.download()
-await m.react('🕓')
+  let stiker = false
 
-let marca = txt ? txt.split(/[\u2022|]/).map(part => part.trim()) : [texto1, texto2]
-stiker = await sticker(buffer, false, marca[0], marca[1])
-} else if (args[0] && isUrl(args[0])) {
-let buffer = await sticker(false, args[0], texto1, texto2)
-stiker = buffer
-} else {
-return conn.reply(m.chat, '❀ Por favor, envía una *imagen* o *video* para hacer un sticker.', m)
-}} catch (e) {
-await conn.reply(m.chat, '⚠︎ Ocurrió un Error: ' + e.message, m)
-await m.react('✖️')
-} finally {
-if (stiker) {
-conn.sendFile(m.chat, stiker, 'sticker.webp', '', m)
-await m.react('✅')
-}}}
+  try {
+    let q = m.quoted ? m.quoted : m
+    let mime = (q.msg || q).mimetype || q.mediaType || ''
+    let txt = args.join(' ')
+    let marca = txt ? txt.split(/[\u2022|]/).map(part => part.trim()) : [texto1, texto2]
 
-handler.help = ['sticker']
+    if (/webp|image|video/g.test(mime) && q.download) {
+      if (/video/.test(mime) && (q.msg || q).seconds > 16) {
+        return conn.reply(m.chat, '⚠️ El video no puede durar más de *15 segundos*.', m)
+      }
+      const buffer = await q.download()
+      await m.react('🕓')
+      stiker = await sticker(buffer, false, marca[0], marca[1])
+    } else if (args[0] && isUrl(args[0])) {
+      stiker = await sticker(false, args[0], texto1, texto2)
+    } else {
+      return conn.reply(m.chat, `❀ Por favor, responde a una *imagen* o *video* (≤15s), o envía un link directo a una imagen para generar el sticker.`, m)
+    }
+  } catch (e) {
+    await conn.reply(m.chat, `⚠︎ Error al generar el sticker: ${e.message}`, m)
+    await m.react('✖️')
+  } finally {
+    if (stiker) {
+      await conn.sendFile(m.chat, stiker, 'sticker.webp', '', m)
+      await m.react('✅')
+    }
+  }
+}
+
+handler.help = ['s', 'sticker']
 handler.tags = ['sticker']
 handler.command = ['s', 'sticker']
+handler.register = true
+handler.group = false // O true si lo preferís solo en grupos
 
 export default handler
 
-const isUrl = (text) => {
-return text.match(new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)(jpe?g|gif|png)/, 'gi'))
-}
+// Módulo utilitario si no lo tenés aparte
+const isUrl = (text = '') =>
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)\.(jpg|jpeg|png|gif|webp)/i.test(text)
