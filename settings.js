@@ -5,96 +5,129 @@ import fs from 'fs'
 import cheerio from 'cheerio'
 import fetch from 'node-fetch'
 import axios from 'axios'
-import moment from 'moment-timezone' 
+import moment from 'moment-timezone'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//      ⚙ CONFIGURACIÓN FNAF LATAM ⚙
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
-//BETA: Si quiere evitar escribir el número que será bot en la consola, agregué desde aquí entonces:
-//Sólo aplica para opción 2 (ser bot con código de texto de 8 digitos)
-global.botNumber = '' //Ejemplo: 573218138672
+// Número del bot (solo necesario si usás código de login de 8 dígitos)
+global.botNumber = '' // Ejemplo: 5492604097541
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//      👑 OWNER PRINCIPAL 👑
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
 global.owner = [
-// <-- Número @s.whatsapp.net -->
-  ['5212202410659', '🜲 Propietario 🜲', true],
-  ['5492916450307'],
-  ['5219541690054'],
-  ['5214811527445'], 
-  ['5216671548329'],
-  
-// <-- Número @lid -->
-  ['117094280605916', 'Destroy', true],
-  ['258892692984006', 'DevAlexJs', true], 
-  ['58566677377081', 'Legna', true]
+  ['5492604097541', 'Fideos - Owner', true]
 ];
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
-global.mods = []
-global.suittag = ['5212202410659'] 
-global.prems = []
+global.mods = [] // Moderadores
+global.suittag = ['5492604097541'] 
+global.prems = ['527298793467'] // Premiums
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         📦 IDENTIDAD DEL BOT
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
 global.libreria = 'Baileys'
-global.baileys = 'V 6.7.17' 
-global.vs = '2.2.5'
-global.nameqr = 'YukiBot-MD'
-global.namebot = '✿◟Yυƙι-Sυσυ-Bσƚ◞✿'
-global.sessions = 'Sessions'
-global.jadi = 'JadiBots' 
-global.yukiJadibts = true
+global.baileys = 'V 6.7.17'
+global.vs = '1.0.0'
+global.nameqr = 'fnafqr'
+global.namebot = '🤖 FNaF LATAM Bot 🤖'
+global.sessions = 'sessions'
+global.jadi = 'JadiBots'
+global.yukiJadibts = false
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//        ✨ DATOS DEL CREADOR
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
-global.packname = '⪛✰ 𝐘𝐮𝐤𝐢-𝐒𝐮𝐨𝐮-𝐁𝐨𝐭 ✰⪜'
-global.botname = 'ᥡᥙkі sᥙ᥆ᥙ'
-global.wm = '✿◟Yυƙι Sυσυ◞✿'
-global.author = '© mᥲძᥱ ᥕі𝗍һ ᑲᥡ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜'
-global.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜'
-global.textbot = 'Yuki, mᥲძᥱ ᥕі𝗍һ ᑲᥡ ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ'
-global.etiqueta = 'ⁱᵃᵐ|𝔇ĕ𝐬†𝓻⊙γ𒆜'
+global.packname = '📦 FNaF LATAM'
+global.botname = 'FNaF LATAM Bot'
+global.wm = '© FNaF LATAM'
+global.author = 'By Fideos'
+global.dev = 'Desarrollador Independiente'
+global.textbot = 'FNaF LATAM - Powered by Fideos'
+global.etiqueta = 'FNaF LATAM'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         💰 MONEDA DEL JUEGO
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
-global.moneda = '¥enes'
-global.welcom1 = '❍ Edita Con El Comando setwelcome'
-global.welcom2 = '❍ Edita Con El Comando setbye'
-global.banner = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742678744381.jpeg'
-global.avatar = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1742678797993.jpeg'
+global.moneda = 'Faz-Coins'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//       👋 BIENVENIDA & DESPEDIDA
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
-global.gp1 = 'https://chat.whatsapp.com/GeMUm4iACPPKRPrKBRKM8c'
-global.comunidad1 = 'https://chat.whatsapp.com/I0dMp2fEle7L6RaWBmwlAa'
-global.channel = 'https://whatsapp.com/channel/0029VbAfPu9BqbrEMFWXKE0d'
-global.channel2 = 'https://whatsapp.com/channel/0029VbAfPu9BqbrEMFWXKE0d'
-global.md = 'https://github.com/The-King-Destroy/Yuki_Suou-Bot'
-global.correo = 'thekingdestroy507@gmail.com'
+global.welcom1 = '👋 Bienvenido a FNaF LATAM'
+global.welcom2 = '👋 Nos vemos, vuelve pronto.'
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         📷 IMAGEN DEL BOT
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
-global.catalogo = fs.readFileSync('./src/catalogo.jpg');
-global.estilo = { key: {  fromMe: false, participant: `0@s.whatsapp.net`, ...(false ? { remoteJid: "5219992095479-1625305606@g.us" } : {}) }, message: { orderMessage: { itemCount : -999999, status: 1, surface : 1, message: packname, orderTitle: 'Bang', thumbnail: catalogo, sellerJid: '0@s.whatsapp.net'}}}
-global.ch = {
-ch1: '120363416409380841@newsletter',
+global.banner = 'https://images.app.goo.gl/DZuXX'
+global.avatar = 'https://static.wikia.nocookie.net/ficcion-sin-limites/images/d/d7/FreddyNewRender.webp/revision/latest?cb=20240225142852&path-prefix=es'
+
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         🌐 LINKS Y REDES
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+
+global.gp1 = 'https://chat.whatsapp.com/JS4eoUk3QSh1htxzTTR5dr?mode=ac_t'
+global.comunidad1 = 'https://chat.whatsapp.com/LXl7xPDKUWeGUBFYxrs16k?mode=ac_t'
+
+
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         🛍️ MENSAJE ESTILO CATÁLOGO
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+
+global.catalogo = fs.readFileSync('./src/catalogo.jpg')
+global.estilo = {
+  key: {
+    fromMe: false,
+    participant: `0@s.whatsapp.net`,
+    ...(false ? { remoteJid: "0-0@g.us" } : {})
+  },
+  message: {
+    orderMessage: {
+      itemCount: 1,
+      status: 1,
+      surface: 1,
+      message: packname,
+      orderTitle: 'FNaF LATAM Pack',
+      thumbnail: catalogo,
+      sellerJid: '0@s.whatsapp.net'
+    }
+  }
 }
-global.multiplier = 60
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+global.ch = {
+  ch1: '120363416409380841@newsletter'
+}
+
+global.multiplier = 60 // Dificultad de nivel (más alto = más difícil)
+
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         📦 DEPENDENCIAS
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
 global.cheerio = cheerio
 global.fs = fs
 global.fetch = fetch
 global.axios = axios
-global.moment = moment   
+global.moment = moment
 
-//*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
+//         🔁 AUTO-RELOAD
+//*━━━━━━━━━━━━━━━━━━━━━━━━━━━*
 
 let file = fileURLToPath(import.meta.url)
 watchFile(file, () => {
   unwatchFile(file)
-  console.log(chalk.redBright("Update 'settings.js'"))
+  console.log(chalk.redBright("🔁 Se actualizó 'settings.js'"))
   import(`${file}?update=${Date.now()}`)
 })
