@@ -25,6 +25,9 @@ const textosFallo = [
   `⚰️ El animatrónico objetivo @${'${objetivo.split`@`[0]}' } ya había sido saqueado.`,
   `👁️ Unidad objetivo no contiene elementos valiosos. Evita riesgos innecesarios.`,
   `🧾 Registro contable indica saldo: 0. Robo innecesario.`
+  `⏱️ Fallaste el reto 50/20 por 5 segundos... El daño emocional fue devastador. Perdiste *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
+  `🔪 Fred te eliminó sin piedad tras fallar. Has perdido *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
+  `⚙️ El traje Springlock falló y pagaste el precio... *${'${cantidadRobada}'}* ${global.moneda || '¥enes'} deducidos.`
 ];
 
 const textosSinObjetivo = [
