@@ -13,11 +13,24 @@ var handler = async (m, { conn }) => {
     let timeRemaining = user.halloween + cooldown - currentDate.getTime();
 
     if (!isOctober) {
-        return m.reply(`🎃 ¡Solo puedes reclamar tu regalo de Halloween en octubre! Vuelve en octubre de ${currentYear}.`);
+        return m.reply(`📅 [ALERTA DE PROTOCOLO]
+
+El sistema de eventos estacionales solo puede activarse durante el mes de octubre.
+
+⛔ Acceso denegado. Espera hasta octubre de ${currentYear}.
+
+— Sistema respaldado por FNaF LATAM™`);
     }
 
     if (timeRemaining > 0) {
-        return m.reply(`${emoji3} ¡Ya reclamaste tu regalo de Halloween este año! Vuelve en:\n *${msToTime(timeRemaining)}*`);
+        return m.reply(`🕒 [SISTEMA DE REGISTRO ANUAL]
+
+⚠️ Registro previo detectado. Ya reclamaste tu recompensa de Halloween este año.
+
+⌛ Tiempo restante hasta el próximo desbloqueo:
+*${msToTime(timeRemaining)}*
+
+— Sistema respaldado por FNaF LATAM™`);
     }
 
     let coinReward = pickRandom([5, 10, 15, 20]);
@@ -31,12 +44,19 @@ var handler = async (m, { conn }) => {
     user.gifts = (user.gifts || 0) + giftReward;
 
     m.reply(`
-\`\`\`🎃 ¡Feliz Halloween! ¡Disfruta de tu regalo de Halloween! 👻\`\`\`
+🎃 Freddy Fazbear Security Protocol v1.3.7 activado...
 
-💸 *${moneda}* : +${coinReward}
-🍬 *Dulces* : +${candyReward}
-✨ *Experiencia* : +${expReward}
-🎃 *Regalos de Halloween* : +${giftReward}`);
+📡 *Evento estacional detectado: HALLOWEEN  👻*
+✅ Transferencia de recursos autorizada.
+
+🟣 *Transferencia completada:*
+
+💸 Moneda Fazbear: +${coinReward}
+🍬 Dulces contaminados: +${candyReward}
+✨ Experiencia sintética: +${expReward}
+🎁 Regalos de evento (sello Jack-o): +${giftReward}
+
+— Sistema respaldado por FNaF LATAM™`);
 
     user.halloween = new Date().getTime();
 }
