@@ -1,3 +1,5 @@
+// Código adaptado por Freddy AI Response 🧠 — FazWatch Sticker Subsystem v3.0.4
+
 import { sticker } from '../lib/sticker.js'
 import axios from 'axios'
 
@@ -25,7 +27,15 @@ let handler = async (m, { conn, text }) => {
         text = m.quoted.text
     } else if (!text) {
         return conn.sendMessage(m.chat, {
-            text: `❀ Por favor, responde a un mensaje o ingresa un texto para crear el Sticker.`,
+            text: `🟡 Fazbear Command Interface
+
+⚠️ Entrada no válida detectada...
+
+📌 Por favor, *responde a un mensaje* o *ingresa un texto* para iniciar el protocolo de generación de stickers.
+
+...Esperando parámetro de entrada...
+
+— Sistema respaldado por FNaF LATAM™`,
         }, { quoted: m })
     }
 
@@ -39,13 +49,33 @@ let handler = async (m, { conn, text }) => {
         let stiker = await sticker(buffer, false, texto1, texto2)
 
         if (stiker) {
-            return conn.sendFile(m.chat, stiker, 'sticker.webp', '', m)
+            return conn.sendFile(
+                m.chat,
+                stiker,
+                'sticker.webp',
+                `🧩 FazWatch Sticker Subsystem
+
+✅ *Sticker generado exitosamente*
+
+📤 Proceso completado: Transferencia visual ejecutada.
+
+— Sistema respaldado por FNaF LATAM™`,
+                m
+            )
         } else {
-            throw new Error("✧ No se pudo generar el sticker.")
+            throw new Error("El subsistema de sticker no respondió.")
         }
     } catch (error) {
         return conn.sendMessage(m.chat, {
-            text: `⚠︎ Ocurrió un error: ${error.message}`,
+            text: `🟥 FazWatch Critical Error
+
+❌ *No se pudo completar la operación.*
+
+📡 Código de error: *${error.message || 'Desconocido'}*
+
+⚠️ Reinicia el comando o espera unos segundos.
+
+— Sistema respaldado por FNaF LATAM™`,
         }, { quoted: m })
     }
 }
