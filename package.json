@@ -1,6 +1,6 @@
 {
-"name": "YukiBot-MD",
-"version": "2.2.5",
+"name": "FNaF LATAM Bot",
+"version": "1.0.0",
 "description": "WhatsApp Bot Multi Device",
 "main": "index.js",
 "type": "module",
@@ -18,16 +18,16 @@
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
-"homepage": "https://github.com/The-King-Destroy/Yuki_Suou-Bot",
+"homepage": "https://github.com/Fidel-Blop/fnaf-latam-bot.git",
 "author": {
-"name": "The-King-Destroy"
+"name": "Fideos"
 },
 "repository": {
 "type": "git",
-"url": "git+https://github.com/The-King-Destroy/Yuki_Suou-Bot.git"
+"url": "git+https://github.com/Fidel-Blop/fnaf-latam-bot.git"
 },
 "bugs": {
-"url": "https://github.com/The-King-Destroy/Yuki_Suou-Bot/issues"
+"url": "https://github.com/Fidel-Blop/fnaf-latam-bot.git/issues"
 },
 "license": "MIT-License",
 "dependencies": {
@@ -36,7 +36,7 @@
 "@whiskeysockets/baileys": "github:nstar-y/bail",
 "acrcloud": "^1.4.0",
 "api-dylux": "^1.7.2",
-"aptoide-scraper": "github:DIEGO-OFC/dv-aptoide-scraper",
+"aptoide-scraper": "",
 "awesome-phonenumber": "^3.4.0",
 "axios": "^1.1.2",
 "boxen": "^7.1.1",
