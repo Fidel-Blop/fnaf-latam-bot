@@ -458,7 +458,6 @@ const botname = "FNaF LATAM Bot"
 const banner = "https://i.imgur.com/WUev1DN.jpeg"
 const redes = "https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t"
 
-export default handler
 
 function clockString(ms) {
   let seconds = Math.floor((ms / 1000) % 60)
@@ -466,3 +465,4 @@ function clockString(ms) {
   let hours = Math.floor((ms / (1000 * 60 * 60)) % 24)
   return `${hours}h ${minutes}m ${seconds}s`
 }
+export default handler
