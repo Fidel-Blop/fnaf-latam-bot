@@ -416,22 +416,25 @@ let handler = async (m, { conn, args }) => {
   await conn.sendMessage(m.chat, { 
       text: txt,
       contextInfo: {
-          mentionedJid: [m.sender, userId],
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-              newsletterJid: channelRD.120363025091220625@g.us,
-              newsletterName: channelRD.FNaFLATAM,
-              serverMessageId: -1,
-          },
-          forwardingScore: 999,
-          externalAdReply: {
-              title:  FNaF LATAM,
-              body: FNaF LATAM Bot,
-              thumbnailUrl: https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/0/07/Freddy_trailer.gif/revision/latest/scale-to-width-down/250?cb=20140829214317,
-              sourceUrl: https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t,
-              mediaType: 1,
-              showAdAttribution: true,
-              renderLargerThumbnail: true,
+      contextInfo: {
+    mentionedJid: [m.sender, userId],
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+        newsletterJid: channelRD.id,
+        newsletterName: channelRD.name,
+        serverMessageId: -1,
+    },
+    forwardingScore: 999,
+    externalAdReply: {
+        title: channelRD.name,
+        body: botname,
+        thumbnailUrl: banner,
+        sourceUrl: redes,
+        mediaType: 1,
+        showAdAttribution: true,
+        renderLargerThumbnail: true,
+    },
+},
           },
       },
   }, { quoted: m })
@@ -440,7 +443,7 @@ let handler = async (m, { conn, args }) => {
 
 handler.help = ['menu']
 handler.tags = ['main']
-handler.command = ['menufnaf', 'menúfnaf', 'helpy']
+handler.command = ['menufnaf', 'menúfnaf', 'helpy','menu','help','menú']
 
 
 const channelRD = {
