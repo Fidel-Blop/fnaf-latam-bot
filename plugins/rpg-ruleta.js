@@ -1,59 +1,51 @@
 let cooldowns = {}
 
 let handler = async (m, { conn, text, command, usedPrefix }) => {
-  let users = global.db.data.users[m.sender]
+  let user = global.db.data.users[m.sender]
 
-  let tiempoEspera = 10
+  const tiempoEspera = 10 // segundos
 
   if (cooldowns[m.sender] && Date.now() - cooldowns[m.sender] < tiempoEspera * 1000) {
     let tiempoRestante = segundosAHMS(Math.ceil((cooldowns[m.sender] + tiempoEspera * 1000 - Date.now()) / 1000))
-    conn.reply(m.chat, `${emoji3} Ya has iniciado una apuesta recientemente, espera *⏱ ${tiempoRestante}* para apostar nuevamente`, m)
-    return
+    return conn.reply(m.chat, `${emoji3} Ya iniciaste una apuesta recientemente, espera *⏱ ${tiempoRestante}* para apostar de nuevo.`, m)
   }
-
-  cooldowns[m.sender] = Date.now()
 
   if (!text) return conn.reply(m.chat, `${emoji} Debes ingresar una cantidad de *💸 ${moneda}* y apostar a un color, por ejemplo: *${usedPrefix + command} 20 black*`, m)
 
   let args = text.trim().split(" ")
-  if (args.length !== 2) return conn.reply(m.chat, `${emoji2} Formato incorrecto. Debes ingresar una cantidad de *💸 ${moneda}* y apostar a un color, por ejemplo: *${usedPrefix + command} 20 black*`, m)
+  if (args.length !== 2) return conn.reply(m.chat, `${emoji2} Formato incorrecto. Usa: *${usedPrefix + command} <cantidad> <color>*\nEjemplo: *${usedPrefix + command} 20 black*`, m)
 
   let coin = parseInt(args[0])
   let color = args[1].toLowerCase()
 
-  if (isNaN(coin) || coin <= 0) return conn.reply(m.chat, `${emoji} Por favor, ingresa una cantidad válida para la apuesta.`, m)
+  if (isNaN(coin) || coin <= 0) return conn.reply(m.chat, `${emoji} Ingresa una cantidad válida para apostar.`, m)
 
-  if (coin > 10000) return conn.reply(m.chat, `${emoji}  La cantidad máxima de apuesta es de 50 ${moneda}.`, m)
+  if (coin > 50) return conn.reply(m.chat, `${emoji} La apuesta máxima es de 50 ${moneda}.`, m)
 
-  if (!(color === 'black' || color === 'red')) return conn.reply(m.chat, `${emoji2} Debes apostar a un color válido: *black* o *red*.`, m)
+  if (color !== 'black' && color !== 'red') return conn.reply(m.chat, `${emoji2} Elige un color válido: *black* o *red*.`, m)
 
-  if (coin > users.coin) return conn.reply(m.chat, `${emoji2} No tienes suficientes ${moneda} para realizar esa apuesta.`, m)
+  if (coin > user.coin) return conn.reply(m.chat, `${emoji2} No tienes suficientes ${moneda} para apostar esa cantidad.`, m)
 
-  await conn.reply(m.chat, `${emoji} Apostaste ${coin} *💸 ${moneda}* al color ${color}. Espera *⏱ 10 segundos* para conocer el resultado.`, m)
+  cooldowns[m.sender] = Date.now()
+
+  await conn.reply(m.chat, `${emoji} Apostaste ${coin} *💸 ${moneda}* al color *${color}*. Espera *⏱ 10 segundos* para conocer el resultado.`, m)
 
   setTimeout(() => {
-    let result = Math.random()
-    let win = false
+    let resultado = Math.random()
+    let gano = (resultado < 0.5 && color === 'black') || (resultado >= 0.5 && color === 'red')
 
-    if (result < 0.5) {
-      win = color === 'black'
+    if (gano) {
+      user.coin += coin
+      conn.reply(m.chat, `${emoji} ¡Ganaste! Obtuviste ${coin} *💸 ${moneda}*. Ahora tienes ${user.coin} *💸 ${moneda}*.`, m)
     } else {
-      win = color === 'red'
+      user.coin -= coin
+      conn.reply(m.chat, `${emoji2} Perdiste. Se te descontaron ${coin} *💸 ${moneda}*. Ahora tienes ${user.coin} *💸 ${moneda}*.`, m)
     }
-
-    if (win) {
-      users.coin += coin
-      conn.reply(m.chat, `${emoji} ¡Ganaste! Obtuviste ${coin} *💸 ${moneda}*. Total: ${users.coin} *💸 ${moneda}*.`, m)
-    } else {
-      users.coin -= coin
-      conn.reply(m.chat, `${emoji2} Perdiste. Se restaron ${coin} *💸 ${moneda}*. Total: ${users.coin} *💸 ${moneda}*.`, m)
-    }
-
-
   }, 10000)
 }
+
 handler.tags = ['economy']
-handler.help =['ruleta *<cantidad> <color>*']
+handler.help = ['ruleta <cantidad> <color>']
 handler.command = ['ruleta', 'roulette', 'rt']
 handler.register = true
 handler.group = true 
@@ -61,6 +53,6 @@ handler.group = true
 export default handler
 
 function segundosAHMS(segundos) {
-  let segundosRestantes = segundos % 60
-  return `${segundosRestantes} segundos`
+  let s = segundos % 60
+  return `${s} segundos`
 }
