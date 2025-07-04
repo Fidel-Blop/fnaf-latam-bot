@@ -23,6 +23,16 @@ const escenariosDerrota = [
   `💀 *Funtime Foxy apareció a la hora incorrecta.* Perdiste -*${'${perdida}'}* FazTokens.`
 ];
 
+const textoPrevio = `
+🕹️ *Iniciando Ultimate Custom Night...*
+
+🎛️ Configurando dificultad personalizada: 50/20  
+📡 Sincronizando con el sistema FazbearNet™...  
+🔌 Verificando cámaras, ventilaciones y generador...
+
+🎬 *Todo listo... Comienza la noche.*
+`;
+
 const handler = async (m, { conn }) => {
   const user = global.db.data.users[m.sender];
   const tiempoRestante = cooldown - (Date.now() - (user.lastucn || 0));
@@ -30,16 +40,21 @@ const handler = async (m, { conn }) => {
   if (tiempoRestante > 0) {
     return conn.reply(
       m.chat,
-      `🕒 *Cooldown activo*\n\n⏳ Podés volver a jugar en *${msToTime(tiempoRestante)}*.\n\n💡 Comando sugerido por Criss — 50379661965 \n\n — Sistema respaldado por FNaF LATAM™`
-      ,
+      `🕒 *Cooldown activo*\n\n⏳ Podés volver a jugar en *${msToTime(tiempoRestante)}*.\n\n💡 Comando sugerido por Criss — 50379661965\n\n— Sistema respaldado por FNaF LATAM™`,
       m
     );
   }
 
-  const exito = Math.random() < 0.5; // 50% probabilidad de ganar o perder
+  // Mensaje narrativo previo
+  await conn.reply(m.chat, textoPrevio, m);
+
+  // Espera artificial de 3 segundos antes del resultado
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
+  const exito = Math.random() < 0.5; // 50% probabilidad
 
   if (exito) {
-    const ganancia = Math.floor(Math.random() * 251) + 250; // 250–500 FazTokens
+    const ganancia = Math.floor(Math.random() * 251) + 250; // 250–500
     user.coin += ganancia;
 
     const textoVictoria = pickRandom(escenariosVictoria)
@@ -47,7 +62,7 @@ const handler = async (m, { conn }) => {
 
     await conn.reply(m.chat, textoVictoria, m);
   } else {
-    const perdida = Math.floor(Math.random() * 101) + 50; // 50–150 FazTokens
+    const perdida = Math.floor(Math.random() * 101) + 50; // 50–150
     user.coin = Math.max(0, user.coin - perdida);
 
     const textoDerrota = pickRandom(escenariosDerrota)
