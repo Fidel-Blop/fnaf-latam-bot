@@ -9,7 +9,7 @@ let handler = async (m, { conn, isPrems }) => {
   const cooldownTime = 5 * 60 * 1000; // 5 minutos
 
   if (cooldowns[senderId] && Date.now() - cooldowns[senderId] < cooldownTime) {
-    const timeLeft = segundosAHMS(Math.ceil((cooldowns[senderId] + cooldownTime - Date.now()) / 1000));
+    const timeLeft = segundosAHMS(Math.ceil((cooldowns[senderId] + cooldownTime - Date.now()) / 100));
     return conn.reply(
       m.chat,
       `⏳ Freddy Fazbear Security Protocol v1.3.7
@@ -122,4 +122,8 @@ const trabajo = [
   "Revisaste grabaciones en bucle y obtuviste",
   "Rescataste datos corruptos del servidor central y recibiste",
   "Entrenaste a una nueva unidad FazWatch y ganaste"
+  "Completaste Hopeless Pursuit en vivo y tus seguidores te premiaron y ganaste"
+  "Alcanzaste el puntaje máximo en Fruity Maze. Dominaste el juego y fuiste recompensado con"
+
+
 ];
