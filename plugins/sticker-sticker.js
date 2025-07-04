@@ -42,10 +42,6 @@ handler.help = ['s', 'sticker']
 handler.tags = ['sticker']
 handler.command = ['s', 'sticker']
 handler.register = true
-handler.group = false // O true si lo preferís solo en grupos
+handler.group = false // Cambiar a true si querés solo en grupos
 
 export default handler
-
-// Módulo utilitario si no lo tenés aparte
-const isUrl = (text = '') =>
-  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)\.(jpg|jpeg|png|gif|webp)/i.test(text)
