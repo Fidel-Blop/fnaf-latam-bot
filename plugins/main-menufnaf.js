@@ -1,14 +1,15 @@
 let handler = async (m, { conn, args }) => {
+  try {
     let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
-    let user = global.db.data.users[userId]
-    let name = conn.getName(userId)
+    let user = global.db.data.users[userId] || {}
+    let name = await conn.getName(userId)
     let _uptime = process.uptime() * 1000
     let uptime = clockString(_uptime)
-    let totalreg = Object.keys(global.db.data.users).length
-    let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
-    
+    let totalreg = Object.keys(global.db.data.users || {}).length
+    let totalCommands = Object.values(global.plugins || {}).filter(v => v.help && v.tags).length
+
     let txt = `
-🎥 *[FNaF LATAM BOT - INTERFAZ DEL MENÚ]*  
+    🎥 *[FNaF LATAM BOT - INTERFAZ DEL MENÚ]*  
 
 ┌────────── SYSTEM FEED ──────────┐  
 │ 👁‍🗨 Unidad conectada: @${userId.split('@')[0]}  
@@ -19,7 +20,8 @@ let handler = async (m, { conn, args }) => {
 │ 🦴 Comandos integrados: ${totalCommands}  
 │ 🔊 Interfaz: *Multi Dispositivo - Fase Baileys*  
 └───────────────────────────────┘  
-📡 Enlace de acceso seguro a la comunidad de BYDLHFOX (owner) :
+📡 Enlace de acceso seguro a la comunidad de 
+𝘽𝙔𝘿𝙇𝙃𝙁𝙊𝙓 (owner) :
 🔗 https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t
 *Recuerda:* No todos los que entran... logran salir.  
 
@@ -413,47 +415,46 @@ let handler = async (m, { conn, args }) => {
 > ✦ Creando sala de juego. Esperando al segundo jugador...
 
 📟 — Zona recreativa de FNaF LATAM™ sincronizada con éxito. Listos para jugar.
-`.trim()
+    `
 
-  await conn.sendMessage(m.chat, { 
-      text: txt,
+    await conn.sendMessage(m.chat, { 
+      text: txt.trim(),
       contextInfo: {
-      contextInfo: {
-    mentionedJid: [m.sender, userId],
-    isForwarded: true,
-    forwardedNewsletterMessageInfo: {
-        newsletterJid: channelRD.id,
-        newsletterName: channelRD.name,
-        serverMessageId: -1,
-    },
-    forwardingScore: 999,
-    externalAdReply: {
-        title: channelRD.name,
-        body: botname,
-        thumbnailUrl: banner,
-        sourceUrl: redes,
-        mediaType: 1,
-        showAdAttribution: true,
-        renderLargerThumbnail: true,
-    },
-},
-          },
+        mentionedJid: [m.sender, userId],
+        isForwarded: true,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: channelRD.id,
+          newsletterName: channelRD.name,
+          serverMessageId: -1,
+        },
+        forwardingScore: 999,
+        externalAdReply: {
+          title: channelRD.name,
+          body: botname,
+          thumbnailUrl: banner,
+          sourceUrl: redes,
+          mediaType: 1,
+          showAdAttribution: true,
+          renderLargerThumbnail: true,
+        },
       },
-  }, { quoted: m })
+    }, { quoted: m })
 
+  } catch (error) {
+    console.error('Error en handler menú:', error)
+    await conn.reply(m.chat, '❌ Ocurrió un error al mostrar el menú.', m)
+  }
 }
 
 handler.help = ['menu']
 handler.tags = ['main']
 handler.command = ['menufnaf', 'menúfnaf', 'helpy','menu','help','menú']
 
-
 const channelRD = {
   id: "120363025091220625@g.us", // o un newsletter válido
   name: "FNaF LATAM"
 }
 const botname = "FNaF LATAM Bot"
-const textbot = "Un bot hecho con amor por un amigo"
 const banner = "https://i.imgur.com/WUev1DN.jpeg"
 const redes = "https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t"
 
