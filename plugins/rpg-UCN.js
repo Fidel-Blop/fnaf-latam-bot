@@ -1,4 +1,4 @@
-// 🕹️ Comando UCN — FNaF LATAM™
+// 🕹️ Comando UCN — FNaF LATAM™ 
 // Desafía la Ultimate Custom Night. Si fallás, los animatrónicos no te perdonarán. Si ganás, las recompensas son legendarias.
 
 function pickRandom(list) {
@@ -30,7 +30,8 @@ const handler = async (m, { conn }) => {
   if (tiempoRestante > 0) {
     return conn.reply(
       m.chat,
-      `🕒 *Cooldown activo*\n\n⏳ Podés volver a jugar en *${msToTime(tiempoRestante)}*.\n\n— Sistema respaldado por FNaF LATAM™`,
+      `🕒 *Cooldown activo*\n\n⏳ Podés volver a jugar en *${msToTime(tiempoRestante)}*.\n\n💡 Comando sugerido por Criss — 50379661965 \n\n — Sistema respaldado por FNaF LATAM™`
+      ,
       m
     );
   }
