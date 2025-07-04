@@ -92,10 +92,11 @@ handler.command = ['crimen', 'crime']
 handler.register = true
 handler.group = true
 
-export default handler
 
 function segundosAHMS(segundos) {
   let minutos = Math.floor(segundos / 60)
   let segundosRestantes = segundos % 60
   return `${minutos}m ${segundosRestantes}s`
+
+  export default handler
 }
