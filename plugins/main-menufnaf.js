@@ -9,6 +9,7 @@ let handler = async (m, { conn, args }) => {
     
     let txt = `
 🎥 *[FNaF LATAM BOT - INTERFAZ DEL MENÚ]*  
+
 ┌────────── SYSTEM FEED ──────────┐  
 │ 👁‍🗨 Unidad conectada: @${userId.split('@')[0]}  
 │ ⚙️ Estado del protocolo: *Público - Sin cifrado*  
