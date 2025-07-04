@@ -1,7 +1,7 @@
 <h1 align="center">🍕 FNaF LATAM BOT ⭐</h1>
 
 <p align="center">
-  <img src="https://i.imgur.com/Y4QzM9E.jpeg" width="270" />
+  <img src="https://gamerant.com/five-nights-at-freddys-movie-ending-explained/" width="270" />
 </p>
 
 ---
