@@ -26,8 +26,9 @@ let handler = async (m, { conn, args }) => {
 💾 *Sistema respaldado por FNaF LATAM™*
 
 
-👁️‍🗨️ :･ﾟ⊹˚• ` Info Principal ` •˚⊹:･ﾟ•
+👁️‍🗨️ :･ﾟ⊹˚• Info Principal •˚⊹:･ﾟ•
 📡 Comandos de auditoría y diagnóstico para el núcleo de vigilancia FNaF LATAM™:
+
 
 ⛓️ *#help • #menu*  
 > 🎥 Consulta el panel de comandos autorizados.
