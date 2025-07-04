@@ -114,8 +114,6 @@ let handler = async (m, { conn, args }) => {
 
 ᰔᩚ *#w • #work • #trabajar*
 > ⚒️ Asignación laboral activa. Recompensa en ${moneda} otorgada.
-ᰔᩚ *#slut • #prostituirse*
-> 👠 Activando trabajo en zona roja. Ganancias en ${moneda} calculadas.
 ᰔᩚ *#cf • #suerte*
 > 🎲 Lanzamiento de moneda en curso. Probabilidades: 50/50.
 ᰔᩚ *#crime • #crimen*
