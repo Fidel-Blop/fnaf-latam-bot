@@ -1,16 +1,20 @@
 const baseCoinReward = 20000;
 
 var handler = async (m, { conn }) => {
-
     let user = global.db.data.users[m.sender] || {};
     user.monthly = user.monthly || 0;
 
     const cooldown = 604800000 * 4; // 4 semanas
+    let ahora = Date.now();
+    let tiempoRestante = user.monthly + cooldown - ahora;
 
-    let timeRemaining = user.monthly + cooldown - new Date();
+    if (tiempoRestante > 0) {
+        return m.reply(`🕐 *ACCESO DENEGADO*
 
-    if (timeRemaining > 0) {
-        return m.reply(`${emoji3} ¡Ya reclamaste tu regalo mensual! Vuelve en:\n *${msToTime(timeRemaining)}*`);
+📡 Registro detectado: ya reclamaste la recompensa mensual.
+⏳ Tiempo restante: *${msToTime(tiempoRestante)}*
+
+— Sistema respaldado por FNaF LATAM™`);
     }
 
     let coinReward = pickRandom([1, 2, 3, 4, 5]);
@@ -21,17 +25,24 @@ var handler = async (m, { conn }) => {
     user.exp = (user.exp || 0) + expReward;
     user.diamonds = (user.diamonds || 0) + diamondReward;
 
-    m.reply(`
-\`\`\`🎁 ¡Ha pasado un mes! ¡Disfruta de tu regalo mensual!. \`\`\`
+    let mensaje = `
+🎁 *PROTOCOLO DE RECOMPENSA MENSUAL ACTIVADO*
 
-💸 *${moneda}* : +${coinReward}
-✨ *Experiencia* : +${expReward}
-💎 *Diamantes* : +${diamondReward}`);
+📦 Recompensa asignada:
+💸 +${coinReward} ${global.moneda || '¥enes'}
+✨ +${expReward} XP
+💎 +${diamondReward} Diamantes
 
-    user.monthly = new Date * 1;
-}
+🎥 Cámara de control ha registrado tu ingreso mensual...
+⛓️ Revisión Fazbear completada.
 
-handler.help = ['monthly'];
+— Sistema respaldado por FNaF LATAM™`;
+
+    await conn.reply(m.chat, mensaje, m);
+    user.monthly = ahora;
+};
+
+handler.help = ['mensual', 'monthly'];
 handler.tags = ['rpg'];
 handler.command = ['mensual', 'monthly'];
 handler.group = true;
@@ -47,6 +58,5 @@ function msToTime(duration) {
     var days = Math.floor(duration / (1000 * 60 * 60 * 24));
     var hours = Math.floor((duration % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60));
-    
-    return `${days} días ${hours} horas ${minutes} minutos`;
+    return `${days}d ${hours}h ${minutes}m`;
 }
