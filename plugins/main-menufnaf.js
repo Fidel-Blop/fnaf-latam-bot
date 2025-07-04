@@ -18,7 +18,7 @@ let handler = async (m, { conn, args }) => {
 │ ⛓️ Uptime del sistema: ${uptime}  
 │ 📡 Sujetos registrados: ${totalreg}  
 │ 🦴 Comandos integrados: ${totalCommands}  
-│ 🔊 Interfaz: *Multi Dispositivo - Fase Baileys*  
+│ 🔊 Interfaz: *MD - Multi Dispositivo*  
 └───────────────────────────────┘  
 📡 Enlace de acceso seguro a la comunidad de 
 𝘽𝙔𝘿𝙇𝙃𝙁𝙊𝙓 (owner) :
@@ -455,9 +455,6 @@ const channelRD = {
   name: "FNaF LATAM"
 }
 const botname = "FNaF LATAM Bot"
-const banner = "https://i.imgur.com/WUev1DN.jpeg"
-const redes = "https://chat.whatsapp.com/HU9Dkmzru1P3od24zB1Mvl?mode=ac_t"
-
 
 function clockString(ms) {
   let seconds = Math.floor((ms / 1000) % 60)
