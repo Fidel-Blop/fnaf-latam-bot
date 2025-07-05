@@ -1,41 +1,41 @@
-let handler = async (m, { conn, usedPrefix }) => {
+let handler = async (m, { conn }) => {
   try {
-    let who =
-      m.mentionedJid?.[0] ||
-      (m.quoted ? m.quoted.sender : m.sender);
+    let who = m.mentionedJid?.[0] || m.quoted?.sender || m.sender;
 
-    // Verificación básica
     if (!who || who === conn.user.jid) {
-      return conn.reply(m.chat, '❌ No podés consultar la cartera del bot.', m);
+      await m.react('❌');
+      return;
     }
 
-    // Verifica si existe en la base de datos
     if (!(who in global.db.data.users)) {
-      return conn.reply(m.chat, `🚫 El usuario no se encuentra en la base de datos.`, m);
+      return conn.reply(m.chat, `🚫 Usuario no encontrado en la base de datos.`, m);
     }
 
-    const user = global.db.data.users[who];
-    const nombre = await conn.getName(who).catch(() => 'Desconocido');
-    const moneda = global.moneda || 'FazTokens';
-    const coin = user.coin || 0;
+    let user = global.db.data.users[who];
+    let nombre = await conn.getName(who).catch(() => 'Desconocido');
+    let moneda = global.moneda || 'FazTokens';
 
-    const texto = who === m.sender
-      ? `💼 *Tu Cartera*\n\n💸 Tienes: *${coin.toLocaleString()} ${moneda}*`
-      : `💼 *Cartera de @${who.split('@')[0]}*\n\n💸 Tiene: *${coin.toLocaleString()} ${moneda}*`;
+    let coin = user.coin || 0;
+    let bank = user.bank || 0;
 
-    return conn.reply(m.chat, texto, m, {
-      mentions: [who]
-    });
+    let text = who === m.sender
+      ? `📂 *Tu Balance Actual*\n\n` +
+        `⛀ *Efectivo:* ${coin.toLocaleString()} ${moneda}\n` +
+        `⚿ *Banco:* ${bank.toLocaleString()} ${moneda}`
+      : `📂 *Balance de @${who.split('@')[0]}*\n\n` +
+        `⛀ *Efectivo:* ${coin.toLocaleString()} ${moneda}\n` +
+        `⚿ *Banco:* ${bank.toLocaleString()} ${moneda}`;
 
-  } catch (err) {
-    console.error('[ERROR EN WALLET]:', err);
-    return conn.reply(m.chat, '❌ Ocurrió un error al consultar la cartera. Intentá de nuevo más tarde.', m);
+    return conn.reply(m.chat, text, m, { mentions: [who] });
+  } catch (e) {
+    console.error('[ERROR EN BAL]:', e);
+    return m.reply('❌ Error al consultar el balance.');
   }
 };
 
-handler.help = ['wallet', 'cartera'];
+handler.help = ['bal', 'balance'];
 handler.tags = ['economy'];
-handler.command = ['wallet', 'cartera'];
+handler.command = ['bal', 'balance'];
 handler.group = true;
 handler.register = true;
 
