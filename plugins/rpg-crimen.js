@@ -17,10 +17,10 @@ let handler = async (m, { conn, participants }) => {
 
   // 🔒 Filtramos solo usuarios que están en el grupo actual y que tengan cuenta registrada
   const posiblesVictimas = participants
-    .map(u => u.id)
-    .filter(id => id !== senderId && users[id]) // que no sea él mismo y exista en db
-
+  .filter(p => p.id !== senderId && users[p.id]?.coin !== undefined)
+  .map(p => p.id)
   if (posiblesVictimas.length === 0) {
+
     return m.reply("⚠️ No hay usuarios disponibles en este grupo para realizar un crimen.")
   }
 
