@@ -8,29 +8,29 @@ function pickRandom(list) {
 const cooldown = 5 * 60 * 1000; // 5 minutos
 
 const escenariosVictoria = [
-  `🏆 ¡Completaste la noche 50/20 sin un rasguño! Ganaste +*${'${ganancia}'}* FazTokens.`,
-  `🎉 Superaste la UCN en modo caos absoluto. Te recompensan con +*${'${ganancia}'}* FazTokens.`,
-  `🔥 Sobreviviste a Golden Freddy Mode. Tus reflejos impresionaron a todos. +*${'${ganancia}'}* FazTokens.`,
-  `💡 Desactivaste todos los sistemas a tiempo. Springtrap jamás te alcanzó. +*${'${ganancia}'}* FazTokens.`,
-  `📸 Freddy fue cegado por tu Flash... ¡y ganaste el reto! Te llevás +*${'${ganancia}'}* FazTokens.`, 
-  `🧠 *Dominaste cada mecánica sin fallar una sola vez.* El bot lo registró como un récord legendario. +*${'${ganancia}'}* FazTokens.`,
-  `📀 *Lograste silenciar a todos los animatrónicos a tiempo.* El silencio fue tu mayor arma. +*${'${ganancia}'}* FazTokens.`,
-  `🔋 *Manejaste la energía con precisión quirúrgica.* No se cortó la luz en toda la noche. Recompensa: +*${'${ganancia}'}* FazTokens.`,
-  `🔦 *Con tu flash bien dirigido, mantuviste a todos a raya.* Los animatrónicos no tuvieron oportunidad. +*${'${ganancia}'}* FazTokens.`,
-  `📊 *Supervisaste todos los monitores como un guardia veterano.* El sistema FazbearNet™ te premia con +*${'${ganancia}'}* FazTokens.`, 
+  `🏆 Superaste el *50/20 Mode* sin errores. Has demostrado ser el guardia supremo. *+${ganancia}* FazTokens.`,
+  `🎮 Toy Freddy ganó su partida de FNaF gracias a tu vigilancia. Triunfaste. *+${ganancia}* FazTokens.`,
+  `🧸 Compraste el peluche de Nightmare Bonnie a tiempo. ¡Victoria sin rasguños! *+${ganancia}* FazTokens.`,
+  `🎭 Pusiste la máscara justo cuando Golden Freddy apareció. Te salvaste de milagro. *+${ganancia}* FazTokens.`,
+  `🔕 Silenciaste la llamada de Phone Guy antes de causar alboroto. Recompensa: *+${ganancia}* FazTokens.`,
+  `💡 Iluminaste a los Freddles a tiempo. Nightmare Freddy jamás tuvo oportunidad. *+${ganancia}* FazTokens.`,
+  `🔒 Cerraste las compuertas a Ennard y Molten Freddy justo a tiempo. Dominaste los conductos. *+${ganancia}* FazTokens.`,
+  `🎵 Mantuiste la caja musical cargada toda la noche. El Puppet jamás se despertó. *+${ganancia}* FazTokens.`,
+  `🐥 Cambiaste la música a tiempo. Chica no tuvo oportunidad de acercarse. *+${ganancia}* FazTokens.`,
+  `💰 Reuniste las Fazcoins y le pagaste a Rockstar Freddy. Evitaste su ataque con clase. *+${ganancia}* FazTokens.`
 ];
 
 const escenariosDerrota = [
-  `😵 *No le cerraste la ventilación a Molten Freddy.* Perdiste -*${'${perdida}'}* FazTokens.`,
-  `🔇 *Te olvidaste de silenciar a Phone Guy.* Fuiste detectado. Te quitaron -*${'${perdida}'}* FazTokens.`,
-  `🌀 *No resististe los jumpscares de Nightmare BB.* Tu alma se fragmentó. -*${'${perdida}'}* FazTokens.`,
-  `🥶 *Lefty te localizó por el ruido.* El susto te hizo soltar -*${'${perdida}'}* FazTokens.`,
-  `💀 *Funtime Foxy apareció a la hora incorrecta.* Perdiste -*${'${perdida}'}* FazTokens.`, 
-  `📡 *Olvidaste revisar el sistema de ventilación.* Ennard se coló sin que lo notes. Perdiste -*${'${perdida}'}* FazTokens.`,
-  `🪫 *Sobrecalentaste el generador.* Los animatrónicos aprovecharon el caos. Te arrebataron -*${'${perdida}'}* FazTokens.`,
-  `🔊 *El ruido del sistema atrajo a Music Man.* No pudiste esquivarlo. Perdiste -*${'${perdida}'}* FazTokens.`,
-  `📉 *Ignoraste el medidor de temperatura.* Fue tu final. Los FazTokens se derritieron: -*${'${perdida}'}*`,
-  `🔪 *A Nightmare Freddy no le gustó que descuidaras la cama.* Te quitó -*${'${perdida}'}* FazTokens por el susto.`, 
+  `🕹️ Toy Freddy perdió su partida de FNaF... y vos también. Perdiste *-${perdida}* FazTokens.`,
+  `🛑 No pusiste la máscara a tiempo. Withered Bonnie te reconoció. Susto fatal. *-${perdida}* FazTokens.`,
+  `🎶 Olvidaste mantener la caja musical cargada. El Puppet se soltó. *-${perdida}* FazTokens.`,
+  `🔥 La temperatura superó los 100°C. Jack-O-Chica te incineró. *-${perdida}* FazTokens.`,
+  `🎭 No te pusiste la máscara con Golden Freddy. El error fue letal. *-${perdida}* FazTokens.`,
+  `🔊 Hiciste demasiado ruido. Music Man despertó... y no tuvo piedad. *-${perdida}* FazTokens.`,
+  `🧸 No compraste el peluche a tiempo. Nightmare Fredbear se lanzó sobre vos. *-${perdida}* FazTokens.`,
+  `📞 Dejaste sonar el teléfono. El ruido atrajo compañía mortal. *-${perdida}* FazTokens.`,
+  `🚪 No cerraste la puerta cuando Ennard llegó por el ducto. Perdiste *-${perdida}* FazTokens.`,
+  `🐇 No vigilaste el ducto correctamente. Molten Freddy te atrapó por sorpresa. *-${perdida}* FazTokens.`
 ];
 
 const textoPrevio = `
