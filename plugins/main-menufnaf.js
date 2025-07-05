@@ -418,28 +418,28 @@ let handler = async (m, { conn, args }) => {
     `
 
     await conn.sendMessage(m.chat, { 
-      image: { url: 'https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/c/cc/FreddysBand.jpg/revision/latest?cb=20241123052453' }
-      text: txt.trim(),
-      contextInfo: {
-        mentionedJid: [m.sender, userId],
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: channelRD.id,
-          newsletterName: channelRD.name,
-          serverMessageId: -1,
-        },
-        forwardingScore: 999,
-        externalAdReply: {
-          title: channelRD.name,
-          body: botname,
-          thumbnailUrl: banner,
-          sourceUrl: redes,
-          mediaType: 1,
-          showAdAttribution: true,
-          renderLargerThumbnail: true,
-        },
-      },
-    }, { quoted: m })
+  image: { url: 'https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/c/cc/FreddysBand.jpg/revision/latest?cb=20241123052453' },
+  text: txt.trim(),
+  contextInfo: {
+    mentionedJid: [m.sender, userId],
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: channelRD.id,
+      newsletterName: channelRD.name,
+      serverMessageId: -1,
+    },
+    forwardingScore: 999,
+    externalAdReply: {
+      title: channelRD.name,
+      body: botname,
+      thumbnailUrl: banner,
+      sourceUrl: redes,
+      mediaType: 1,
+      showAdAttribution: true,
+      renderLargerThumbnail: true,
+    },
+  },
+}, { quoted: m })
 
   } catch (error) {
     console.error('Error en handler menú:', error)
