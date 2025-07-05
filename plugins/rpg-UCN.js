@@ -8,39 +8,40 @@ function pickRandom(list) {
 const cooldown = 5 * 60 * 1000; // 5 minutos
 
 const escenariosVictoria = [
-  `🏆 Superaste el *50/20 Mode* sin errores. Has demostrado ser el guardia supremo. *+${ganancia}* FazTokens.`,
-  `🎮 Toy Freddy ganó su partida de FNaF gracias a tu vigilancia. Triunfaste. *+${ganancia}* FazTokens.`,
-  `🧸 Compraste el peluche de Nightmare Bonnie a tiempo. ¡Victoria sin rasguños! *+${ganancia}* FazTokens.`,
-  `🎭 Pusiste la máscara justo cuando Golden Freddy apareció. Te salvaste de milagro. *+${ganancia}* FazTokens.`,
-  `🔕 Silenciaste la llamada de Phone Guy antes de causar alboroto. Recompensa: *+${ganancia}* FazTokens.`,
-  `💡 Iluminaste a los Freddles a tiempo. Nightmare Freddy jamás tuvo oportunidad. *+${ganancia}* FazTokens.`,
-  `🔒 Cerraste las compuertas a Ennard y Molten Freddy justo a tiempo. Dominaste los conductos. *+${ganancia}* FazTokens.`,
-  `🎵 Mantuiste la caja musical cargada toda la noche. El Puppet jamás se despertó. *+${ganancia}* FazTokens.`,
-  `🐥 Cambiaste la música a tiempo. Chica no tuvo oportunidad de acercarse. *+${ganancia}* FazTokens.`,
-  `💰 Reuniste las Fazcoins y le pagaste a Rockstar Freddy. Evitaste su ataque con clase. *+${ganancia}* FazTokens.`
+  `🏆 Superaste el *50/20 Mode* sin errores. Has demostrado ser el guardia supremo. *+GANANCIA* FazTokens.`,
+  `🎮 Toy Freddy ganó su partida de FNaF gracias a tu vigilancia. Triunfaste. *+GANANCIA* FazTokens.`,
+  `🧸 Compraste el peluche de Nightmare Bonnie a tiempo. ¡Victoria sin rasguños! *+GANANCIA* FazTokens.`,
+  `🎭 Pusiste la máscara justo cuando Golden Freddy apareció. Te salvaste de milagro. *+GANANCIA* FazTokens.`,
+  `🔕 Silenciaste la llamada de Phone Guy antes de causar alboroto. Recompensa: *+GANANCIA* FazTokens.`,
+  `💡 Iluminaste a los Freddles a tiempo. Nightmare Freddy jamás tuvo oportunidad. *+GANANCIA* FazTokens.`,
+  `🔒 Cerraste las compuertas a Ennard y Molten Freddy justo a tiempo. Dominaste los conductos. *+GANANCIA* FazTokens.`,
+  `🎵 Mantuiste la caja musical cargada toda la noche. El Puppet jamás se despertó. *+GANANCIA* FazTokens.`,
+  `🐥 Cambiaste la música a tiempo. Chica no tuvo oportunidad de acercarse. *+GANANCIA* FazTokens.`,
+  `💰 Reuniste las Fazcoins y le pagaste a Rockstar Freddy. Evitaste su ataque con clase. *+GANANCIA* FazTokens.`
 ];
 
 const escenariosDerrota = [
-  `🕹️ Toy Freddy perdió su partida de FNaF... y vos también. Perdiste *-${perdida}* FazTokens.`,
-  `🛑 No pusiste la máscara a tiempo. Withered Bonnie te reconoció. Susto fatal. *-${perdida}* FazTokens.`,
-  `🎶 Olvidaste mantener la caja musical cargada. El Puppet se soltó. *-${perdida}* FazTokens.`,
-  `🔥 La temperatura superó los 100°C. Jack-O-Chica te incineró. *-${perdida}* FazTokens.`,
-  `🎭 No te pusiste la máscara con Golden Freddy. El error fue letal. *-${perdida}* FazTokens.`,
-  `🔊 Hiciste demasiado ruido. Music Man despertó... y no tuvo piedad. *-${perdida}* FazTokens.`,
-  `🧸 No compraste el peluche a tiempo. Nightmare Fredbear se lanzó sobre vos. *-${perdida}* FazTokens.`,
-  `📞 Dejaste sonar el teléfono. El ruido atrajo compañía mortal. *-${perdida}* FazTokens.`,
-  `🚪 No cerraste la puerta cuando Ennard llegó por el ducto. Perdiste *-${perdida}* FazTokens.`,
-  `🐇 No vigilaste el ducto correctamente. Molten Freddy te atrapó por sorpresa. *-${perdida}* FazTokens.`
+  `🕹️ Toy Freddy perdió su partida de FNaF... y vos también. Perdiste *-PERDIDA* FazTokens.`,
+  `🛑 No pusiste la máscara a tiempo. Withered Bonnie te reconoció. Susto fatal. *-PERDIDA* FazTokens.`,
+  `🎶 Olvidaste mantener la caja musical cargada. El Puppet se soltó. *-PERDIDA* FazTokens.`,
+  `🔥 La temperatura superó los 100°C. Jack-O-Chica te incineró. *-PERDIDA* FazTokens.`,
+  `🎭 No te pusiste la máscara con Golden Freddy. El error fue letal. *-PERDIDA* FazTokens.`,
+  `🔊 Hiciste demasiado ruido. Music Man despertó... y no tuvo piedad. *-PERDIDA* FazTokens.`,
+  `🧸 No compraste el peluche a tiempo. Nightmare Fredbear se lanzó sobre vos. *-PERDIDA* FazTokens.`,
+  `📞 Dejaste sonar el teléfono. El ruido atrajo compañía mortal. *-PERDIDA* FazTokens.`,
+  `🚪 No cerraste la puerta cuando Ennard llegó por el ducto. Perdiste *-PERDIDA* FazTokens.`,
+  `🐇 No vigilaste el ducto correctamente. Molten Freddy te atrapó por sorpresa. *-PERDIDA* FazTokens.`
 ];
 
 const textoPrevio = `
 🕹️ *Iniciando Ultimate Custom Night...*
 
-🎛️ Configurando dificultad personalizada: 50/20  
-📡 Sincronizando con el sistema FazbearNet™...  
+🎛️ Configurando dificultad personalizada: *50/20*  
+📡 Sincronizando con el sistema *FazbearNet™*  
 🔌 Verificando cámaras, ventilaciones y generador...
 
-🎬 *Todo listo... Comienza la noche.*
+🦴 *Todo listo... Comienza la noche.*  
+⏳ Prepará tus reflejos. Los animatrónicos no tendrán piedad...
 `;
 
 const handler = async (m, { conn }) => {
@@ -58,8 +59,8 @@ const handler = async (m, { conn }) => {
   // Mensaje narrativo previo
   await conn.reply(m.chat, textoPrevio, m);
 
-  // Espera artificial de 3 segundos antes del resultado
-  await new Promise(resolve => setTimeout(resolve, 10000));
+  // Espera artificial antes del resultado
+  await new Promise(resolve => setTimeout(resolve, 10000)); // 10 segundos
 
   const exito = Math.random() < 0.5; // 50% probabilidad
 
@@ -68,7 +69,7 @@ const handler = async (m, { conn }) => {
     user.coin += ganancia;
 
     const textoVictoria = pickRandom(escenariosVictoria)
-      .replace('${ganancia}', ganancia);
+      .replace('GANANCIA', ganancia);
 
     await conn.reply(m.chat, textoVictoria, m);
   } else {
@@ -76,7 +77,7 @@ const handler = async (m, { conn }) => {
     user.coin = Math.max(0, user.coin - perdida);
 
     const textoDerrota = pickRandom(escenariosDerrota)
-      .replace('${perdida}', perdida);
+      .replace('PERDIDA', perdida);
 
     await conn.reply(m.chat, textoDerrota, m);
   }
@@ -89,7 +90,6 @@ handler.tags = ['rpg'];
 handler.command = ['ucn'];
 handler.register = true;
 handler.group = true;
-
 
 function msToTime(duration) {
   let seconds = Math.floor((duration / 1000) % 60);
