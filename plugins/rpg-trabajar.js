@@ -112,5 +112,11 @@ const trabajo = [
   "Entrenaste a una nueva unidad FazWatch y ganaste",
   "Completaste Hopeless Pursuit en vivo y tus seguidores te premiaron y ganaste",
   "Alcanzaste el puntaje máximo en Fruity Maze. Dominaste el juego y fuiste recompensado con"
+
+handler.command = ['w', 'work', 'chambear', 'chamba', 'trabajar'
+handler.help = ['w'];
+handler.tags = ['economy'];
+handler.group = true;
+handler.register = true;
 ];
 export default handler;
