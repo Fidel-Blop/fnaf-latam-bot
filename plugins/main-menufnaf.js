@@ -418,6 +418,7 @@ let handler = async (m, { conn, args }) => {
     `
 
     await conn.sendMessage(m.chat, { 
+      image: { url: 'https://static.wikia.nocookie.net/freddy-fazbears-pizza/images/c/cc/FreddysBand.jpg/revision/latest?cb=20241123052453' }
       text: txt.trim(),
       contextInfo: {
         mentionedJid: [m.sender, userId],
