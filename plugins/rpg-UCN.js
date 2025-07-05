@@ -12,7 +12,12 @@ const escenariosVictoria = [
   `🎉 Superaste la UCN en modo caos absoluto. Te recompensan con +*${'${ganancia}'}* FazTokens.`,
   `🔥 Sobreviviste a Golden Freddy Mode. Tus reflejos impresionaron a todos. +*${'${ganancia}'}* FazTokens.`,
   `💡 Desactivaste todos los sistemas a tiempo. Springtrap jamás te alcanzó. +*${'${ganancia}'}* FazTokens.`,
-  `📸 Freddy fue cegado por tu Flash... ¡y ganaste el reto! Te llevás +*${'${ganancia}'}* FazTokens.`
+  `📸 Freddy fue cegado por tu Flash... ¡y ganaste el reto! Te llevás +*${'${ganancia}'}* FazTokens.`, 
+  `🧠 *Dominaste cada mecánica sin fallar una sola vez.* El bot lo registró como un récord legendario. +*${'${ganancia}'}* FazTokens.`,
+  `📀 *Lograste silenciar a todos los animatrónicos a tiempo.* El silencio fue tu mayor arma. +*${'${ganancia}'}* FazTokens.`,
+  `🔋 *Manejaste la energía con precisión quirúrgica.* No se cortó la luz en toda la noche. Recompensa: +*${'${ganancia}'}* FazTokens.`,
+  `🔦 *Con tu flash bien dirigido, mantuviste a todos a raya.* Los animatrónicos no tuvieron oportunidad. +*${'${ganancia}'}* FazTokens.`,
+  `📊 *Supervisaste todos los monitores como un guardia veterano.* El sistema FazbearNet™ te premia con +*${'${ganancia}'}* FazTokens.`, 
 ];
 
 const escenariosDerrota = [
@@ -20,7 +25,12 @@ const escenariosDerrota = [
   `🔇 *Te olvidaste de silenciar a Phone Guy.* Fuiste detectado. Te quitaron -*${'${perdida}'}* FazTokens.`,
   `🌀 *No resististe los jumpscares de Nightmare BB.* Tu alma se fragmentó. -*${'${perdida}'}* FazTokens.`,
   `🥶 *Lefty te localizó por el ruido.* El susto te hizo soltar -*${'${perdida}'}* FazTokens.`,
-  `💀 *Funtime Foxy apareció a la hora incorrecta.* Perdiste -*${'${perdida}'}* FazTokens.`
+  `💀 *Funtime Foxy apareció a la hora incorrecta.* Perdiste -*${'${perdida}'}* FazTokens.`, 
+  `📡 *Olvidaste revisar el sistema de ventilación.* Ennard se coló sin que lo notes. Perdiste -*${'${perdida}'}* FazTokens.`,
+  `🪫 *Sobrecalentaste el generador.* Los animatrónicos aprovecharon el caos. Te arrebataron -*${'${perdida}'}* FazTokens.`,
+  `🔊 *El ruido del sistema atrajo a Music Man.* No pudiste esquivarlo. Perdiste -*${'${perdida}'}* FazTokens.`,
+  `📉 *Ignoraste el medidor de temperatura.* Fue tu final. Los FazTokens se derritieron: -*${'${perdida}'}*`,
+  `🔪 *A Nightmare Freddy no le gustó que descuidaras la cama.* Te quitó -*${'${perdida}'}* FazTokens por el susto.`, 
 ];
 
 const textoPrevio = `
@@ -49,7 +59,7 @@ const handler = async (m, { conn }) => {
   await conn.reply(m.chat, textoPrevio, m);
 
   // Espera artificial de 3 segundos antes del resultado
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 10000));
 
   const exito = Math.random() < 0.5; // 50% probabilidad
 
