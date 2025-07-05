@@ -1,6 +1,14 @@
-// Código adaptado por Freddy AI Response 🧠 — Sistema FazWatch v1.3.7
-
 let cooldowns = {}
+
+function segundosAHMS(segundos) {
+  let minutos = Math.floor(segundos / 60);
+  let segundosRestantes = segundos % 60;
+  return `${minutos} minutos y ${segundosRestantes} segundos`;
+}
+
+function pickRandom(list) {
+  return list[Math.floor(Math.random() * list.length)];
+}
 
 let handler = async (m, { conn, isPrems }) => {
   const users = global.db.data.users;
@@ -9,7 +17,7 @@ let handler = async (m, { conn, isPrems }) => {
   const cooldownTime = 1 * 60 * 1000; // 1 minuto
 
   if (cooldowns[senderId] && Date.now() - cooldowns[senderId] < cooldownTime) {
-    const timeLeft = segundosAHMS(Math.ceil((cooldowns[senderId] + cooldownTime - Date.now()) / 100));
+    const timeLeft = segundosAHMS(Math.ceil((cooldowns[senderId] + cooldownTime - Date.now()) / 1000));
     return conn.reply(
       m.chat,
       `⏳ Freddy Fazbear Security Protocol v1.3.7
@@ -25,8 +33,8 @@ Debe esperar *${timeLeft}* antes de reactivar *#w*.
 
   cooldowns[senderId] = Date.now();
 
-  const ganancia = Math.floor(Math.random() * 500);
-  users[senderId].coin += ganancia;
+  const ganancia = Math.floor(Math.random() * 500) + 1;
+  users[senderId].coin = (users[senderId].coin || 0) + ganancia;
 
   const escenario = pickRandom(trabajo);
   await conn.reply(
@@ -43,12 +51,7 @@ Debe esperar *${timeLeft}* antes de reactivar *#w*.
   );
 };
 
-handler.help = ['trabajar'];
-handler.tags = ['economy'];
-handler.command = ['w', 'work', 'chambear', 'chamba', 'trabajar'];
-handler.group = true;
-handler.register = true;
-
+// Función para abreviar números grandes
 function toNum(number) {
   if (number >= 1000 && number < 1000000) {
     return (number / 1000).toFixed(1) + 'k';
@@ -62,18 +65,6 @@ function toNum(number) {
     return number.toString();
   }
 }
-
-function segundosAHMS(segundos) {
-  let minutos = Math.floor((segundos % 3600) / 60);
-  let segundosRestantes = segundos % 60;
-  return `${minutos} minutos y ${segundosRestantes} segundos`;
-}
-
-function pickRandom(list) {
-  return list[Math.floor(list.length * Math.random())];
-}
-
-// Escenarios de trabajo originales + 10 nuevos escenarios para FNaF LATAM™
 
 const trabajo = [
   "Trabajas como cortador de galletas y ganas",
@@ -122,5 +113,4 @@ const trabajo = [
   "Completaste Hopeless Pursuit en vivo y tus seguidores te premiaron y ganaste",
   "Alcanzaste el puntaje máximo en Fruity Maze. Dominaste el juego y fuiste recompensado con"
 ];
-
 export default handler;
