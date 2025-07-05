@@ -6,7 +6,7 @@ let handler = async (m, { conn, isPrems }) => {
   const users = global.db.data.users;
   const senderId = m.sender;
   const senderName = await conn.getName(senderId);
-  const cooldownTime = 5 * 60 * 1000; // 5 minutos
+  const cooldownTime = 1 * 60 * 1000; // 1 minuto
 
   if (cooldowns[senderId] && Date.now() - cooldowns[senderId] < cooldownTime) {
     const timeLeft = segundosAHMS(Math.ceil((cooldowns[senderId] + cooldownTime - Date.now()) / 100));
@@ -48,8 +48,6 @@ handler.tags = ['economy'];
 handler.command = ['w', 'work', 'chambear', 'chamba', 'trabajar'];
 handler.group = true;
 handler.register = true;
-
-export default handler;
 
 function toNum(number) {
   if (number >= 1000 && number < 1000000) {
@@ -110,7 +108,6 @@ const trabajo = [
   "Trabajas como zoólogo y ganas",
   "Vendiste sándwiches de pescado y obtuviste",
   "Reparas las máquinas recreativas y recibes",
-
   // Nuevos escenarios FNaF LATAM™
   "Monitoreaste cámaras de seguridad en Freddy Fazbear’s y recibiste",
   "Reiniciaste el sistema de vigilancia corrupto y te pagaron",
@@ -121,9 +118,9 @@ const trabajo = [
   "Desactivaste alarmas falsas y ganaste",
   "Revisaste grabaciones en bucle y obtuviste",
   "Rescataste datos corruptos del servidor central y recibiste",
-  "Entrenaste a una nueva unidad FazWatch y ganaste"
-  "Completaste Hopeless Pursuit en vivo y tus seguidores te premiaron y ganaste"
+  "Entrenaste a una nueva unidad FazWatch y ganaste",
+  "Completaste Hopeless Pursuit en vivo y tus seguidores te premiaron y ganaste",
   "Alcanzaste el puntaje máximo en Fruity Maze. Dominaste el juego y fuiste recompensado con"
+];
 
 export default handler;
-];
