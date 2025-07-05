@@ -2,32 +2,32 @@ const ro = 30;
 
 // Escenarios narrativos FNaF LATAM™
 const textosExito = [
-  `🎭 Unidad infiltrada con éxito. Se sustrajeron *${'${cantidadRobada}'}* ${global.moneda || '¥enes'} de @${'${objetivo.split`@`[0]}'}. — Sistema respaldado por FNaF LATAM™`,
-  `💀 Hackeo exitoso del inventario de @${'${objetivo.split`@`[0]}'}. Recursos obtenidos: *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
-  `🛠️ Conducto de ventilación forzado... objeto robado: *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}. Objetivo: @${'${objetivo.split`@`[0]}'}`,
-  `🔓 Se vulneró el protocolo de seguridad de @${'${objetivo.split`@`[0]}'}. Se extrajeron *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
-  `📡 Monitoreo alterado. El bot no detectó la intrusión... pero tú sí lo lograste. +*${'${cantidadRobada}'}* ${global.moneda || '¥enes'}`,
-  `⚠️ Transmisión interceptada... Extracción completada: *${'${cantidadRobada}'}* ${global.moneda || '¥enes'} robados de @${'${objetivo.split`@`[0]}'}`,
-  `⛓️ Revisión de casillero completada. Objetivo: @${'${objetivo.split`@`[0]}'}. Botín: *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
-  `🔧 Animatrónico en mantenimiento... ¡aprovechaste el descuido! +*${'${cantidadRobada}'}* ${global.moneda || '¥enes'}`,
-  `🧤 Base de datos desprotegida brevemente. Acceso explotado. Se robó: *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
-  `🔓 Cerradura física comprometida. @${'${objetivo.split`@`[0]}' } ha sido víctima de un robo: *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`
+  `🎭 Unidad infiltrada con éxito. Se sustrajeron *{{cantidad}}* {{moneda}} de @{{user}}. — Sistema respaldado por FNaF LATAM™`,
+  `💀 Hackeo exitoso del inventario de @{{user}}. Recursos obtenidos: *{{cantidad}}* {{moneda}}.`,
+  `🛠️ Conducto de ventilación forzado... objeto robado: *{{cantidad}}* {{moneda}}. Objetivo: @{{user}}`,
+  `🔓 Se vulneró el protocolo de seguridad de @{{user}}. Se extrajeron *{{cantidad}}* {{moneda}}.`,
+  `📡 Monitoreo alterado. El bot no detectó la intrusión... pero tú sí lo lograste. +*{{cantidad}}* {{moneda}}`,
+  `⚠️ Transmisión interceptada... Extracción completada: *{{cantidad}}* {{moneda}} robados de @{{user}}`,
+  `⛓️ Revisión de casillero completada. Objetivo: @{{user}}. Botín: *{{cantidad}}* {{moneda}}.`,
+  `🔧 Animatrónico en mantenimiento... ¡aprovechaste el descuido! +*{{cantidad}}* {{moneda}}`,
+  `🧤 Base de datos desprotegida brevemente. Acceso explotado. Se robó: *{{cantidad}}* {{moneda}}.`,
+  `🔓 Cerradura física comprometida. @{{user}} ha sido víctima de un robo: *{{cantidad}}* {{moneda}}.`
 ];
 
 const textosFallo = [
-  `❌ Misión abortada: el objetivo @${'${objetivo.split`@`[0]}' } no posee suficientes ${global.moneda || '¥enes'}. — Sistema respaldado por FNaF LATAM™`,
-  `⚠️ Alarma activada... pero no había nada que robar. Objetivo seco: @${'${objetivo.split`@`[0]}'}`,
+  `❌ Misión abortada: el objetivo @{{user}} no posee suficientes {{moneda}}. — Sistema respaldado por FNaF LATAM™`,
+  `⚠️ Alarma activada... pero no había nada que robar. Objetivo seco: @{{user}}`,
   `🧼 Revisión completada. Resultados: inventario vacío. Sin botín.`,
-  `📉 El objetivo @${'${objetivo.split`@`[0]}' } apenas sobrevive. Robo cancelado.`,
-  `🪫 Energía malgastada en una incursión fallida. @${'${objetivo.split`@`[0]}' } está en quiebra.`,
+  `📉 El objetivo @{{user}} apenas sobrevive. Robo cancelado.`,
+  `🪫 Energía malgastada en una incursión fallida. @{{user}} está en quiebra.`,
   `📛 Escaneo completo. Resultado: sin activos robables.`,
   `🪙 Error de transferencia: fondos insuficientes para ejecutar la sustracción.`,
-  `⚰️ El animatrónico objetivo @${'${objetivo.split`@`[0]}' } ya había sido saqueado.`,
+  `⚰️ El animatrónico objetivo @{{user}} ya había sido saqueado.`,
   `👁️ Unidad objetivo no contiene elementos valiosos. Evita riesgos innecesarios.`,
-  `🧾 Registro contable indica saldo: 0. Robo innecesario.`
-  `⏱️ Fallaste el reto 50/20 por 5 segundos... El daño emocional fue devastador. Perdiste *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
-  `🔪 Fred te eliminó sin piedad tras fallar. Has perdido *${'${cantidadRobada}'}* ${global.moneda || '¥enes'}.`,
-  `⚙️ El traje Springlock falló y pagaste el precio... *${'${cantidadRobada}'}* ${global.moneda || '¥enes'} deducidos.`
+  `🧾 Registro contable indica saldo: 0. Robo innecesario.`,
+  `⏱️ Fallaste el reto 50/20 por 5 segundos... El daño emocional fue devastador. Perdiste *{{cantidad}}* {{moneda}}.`,
+  `🔪 Fred te eliminó sin piedad tras fallar. Has perdido *{{cantidad}}* {{moneda}}.`,
+  `⚙️ El traje Springlock falló y pagaste el precio... *{{cantidad}}* {{moneda}} deducidos.`
 ];
 
 const textosSinObjetivo = [
@@ -77,31 +77,28 @@ const handler = async (m, { conn, usedPrefix, command }) => {
 
   const objetivoData = global.db.data.users[objetivo];
   const cantidadRobada = Math.floor(Math.random() * ro);
+  const moneda = global.moneda || '¥enes';
+  const objetivoTag = objetivo.split('@')[0];
 
   if (objetivoData.coin < cantidadRobada) {
-    return conn.reply(
-      m.chat,
-      textosFallo[Math.floor(Math.random() * textosFallo.length)],
-      m,
-      { mentions: [objetivo] }
-    );
+    const mensajeFallo = pickRandom(textosFallo)
+      .replace(/{{cantidad}}/g, cantidadRobada)
+      .replace(/{{moneda}}/g, moneda)
+      .replace(/{{user}}/g, objetivoTag);
+
+    return conn.reply(m.chat, mensajeFallo, m, { mentions: [objetivo] });
   }
 
   userData.coin += cantidadRobada;
   objetivoData.coin -= cantidadRobada;
   userData.lastrob2 = Date.now();
 
-  // Reemplazo mensaje éxito
-  const mensajeExito = textosExito[Math.floor(Math.random() * textosExito.length)]
-    .replace('${cantidadRobada}', cantidadRobada)
-    .replace(/\${objetivo\.split`@\`\[0\]}/g, objetivo.split`@`[0]);
+  const mensajeExito = pickRandom(textosExito)
+    .replace(/{{cantidad}}/g, cantidadRobada)
+    .replace(/{{moneda}}/g, moneda)
+    .replace(/{{user}}/g, objetivoTag);
 
-  conn.reply(
-    m.chat,
-    mensajeExito,
-    m,
-    { mentions: [objetivo, m.sender] }
-  );
+  conn.reply(m.chat, mensajeExito, m, { mentions: [objetivo, m.sender] });
 };
 
 handler.help = ['robar'];
