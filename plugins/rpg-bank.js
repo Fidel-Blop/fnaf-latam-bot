@@ -1,5 +1,3 @@
-import db from '../lib/database.js';
-
 let handler = async (m, { conn, usedPrefix }) => {
   try {
     let who =
@@ -9,21 +7,22 @@ let handler = async (m, { conn, usedPrefix }) => {
         ? m.quoted.sender
         : m.sender;
 
-    // Verifica si se intenta consultar al propio bot
-    if (who === conn.user.jid || who === undefined) {
-      await m.react('✖️');
-      return;
+    // Evitar consultar al propio bot o si no se puede identificar a nadie
+    if (!who || who === conn.user.jid) {
+      return conn.reply(m.chat, '❌ No podés consultar la cartera del bot.', m);
     }
 
+    // Verificar si el usuario existe en la base de datos
     if (!(who in global.db.data.users)) {
-      return m.reply(
-        `📂 *[ERROR]*: Usuario no localizado en la base de datos interna.`
-      );
+      return conn.reply(m.chat, `📂 *[ERROR]*: Usuario no localizado en la base de datos interna.`, m);
     }
 
     let user = global.db.data.users[who];
     let nombre = await conn.getName(who).catch(() => 'Desconocido');
-    let moneda = 'FazTokens';
+
+    // Usar moneda global si existe, sino definirla localmente
+    const moneda = global.moneda || 'FazTokens';
+
     let coin = user.coin || 0;
     let bank = user.bank || 0;
     let total = coin + bank;
@@ -48,15 +47,14 @@ let handler = async (m, { conn, usedPrefix }) => {
     `.trim();
 
     await conn.reply(m.chat, response, m);
+
   } catch (err) {
     console.error('[ERROR EN BALANCE]:', err);
-    await m.reply(
-      '❌ Hubo un error al consultar el balance.\nPor favor intentá de nuevo o avisá a un administrador.'
-    );
+    await conn.reply(m.chat, '❌ Hubo un error al consultar el balance. Por favor intentá de nuevo o avisá a un admin.', m);
   }
 };
 
-handler.help = ['bal'];
+handler.help = ['bal', 'balance', 'bank'];
 handler.tags = ['rpg'];
 handler.command = ['bal', 'balance', 'bank'];
 handler.register = true;
