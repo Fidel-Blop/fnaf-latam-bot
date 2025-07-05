@@ -5,7 +5,7 @@ let handler = async (m, { conn, text, command, usedPrefix }) => {
   let senderId = m.sender
   let senderName = conn.getName(senderId)
 
-  let tiempo = 5 * 60 // 5 minutos
+  let tiempo = 2 * 60 // 2 minutos
   if (cooldowns[senderId] && Date.now() - cooldowns[senderId] < tiempo * 1000) {
     let tiempo2 = segundosAHMS(Math.ceil((cooldowns[senderId] + tiempo * 1000 - Date.now()) / 1000))
     return m.reply(`⚠️ Sistema de Seguridad Fazbear™\n\n❗Has sido marcado como sospechoso.\n⏱️ Espera *${tiempo2}* antes de intentar otro movimiento.\n\n— Vigilancia activa en tu canal.\n— Sistema respaldado por FNaF LATAM™`)
