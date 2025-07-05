@@ -128,8 +128,6 @@ let handler = async (m, { conn, args }) => {
 > 🎰 Probando suerte con máquinas de azar. Buena fortuna, sujeto.
 ᰔᩚ *#cartera • #wallet*
 > 🧾 Consultando registros financieros de usuario...
-ᰔᩚ *#banco • #bank*
-> 🏦 Accediendo a cuenta bancaria de FazbearCorp™.
 ᰔᩚ *#deposit • #depositar • #d*
 > 💳 Depósito realizado. Seguridad de fondos garantizada.
 ᰔᩚ *#with • #retirar • #withdraw*
