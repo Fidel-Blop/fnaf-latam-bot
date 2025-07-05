@@ -1,34 +1,59 @@
-import db from '../lib/database.js'
+import db from '../lib/database.js';
 
 let handler = async (m, { conn, usedPrefix }) => {
-    let who = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.sender;
-    
-    if (who == conn.user.jid) return m.react('✖️');
-    if (!(who in global.db.data.users)) return m.reply(`📂 *[ERROR]*: Usuario no localizado en la base de datos interna.`);
+  try {
+    let who =
+      m.mentionedJid && m.mentionedJid[0]
+        ? m.mentionedJid[0]
+        : m.quoted
+        ? m.quoted.sender
+        : m.sender;
+
+    // Verifica si se intenta consultar al propio bot
+    if (who === conn.user.jid || who === undefined) {
+      await m.react('✖️');
+      return;
+    }
+
+    if (!(who in global.db.data.users)) {
+      return m.reply(
+        `📂 *[ERROR]*: Usuario no localizado en la base de datos interna.`
+      );
+    }
 
     let user = global.db.data.users[who];
-    let total = (user.coin || 0) + (user.bank || 0);
+    let nombre = await conn.getName(who).catch(() => 'Desconocido');
+    let moneda = 'FazTokens';
+    let coin = user.coin || 0;
+    let bank = user.bank || 0;
+    let total = coin + bank;
 
     let response = `
 📡 Freddy Fazbear Financial Node v4.7
 
 🔎 Escaneo Económico en curso...
-🧾 Usuario: *${conn.getName(who)}*
+🧾 Usuario: *${nombre}*
 🪙 Moneda: ¥${moneda}
 
 ═══════════════════════
-⛀ Cartera: ${user.coin.toLocaleString()} ${moneda}
-⚿ Banco: ${user.bank.toLocaleString()} ${moneda}
+⛀ Cartera: ${coin.toLocaleString()} ${moneda}
+⚿ Banco: ${bank.toLocaleString()} ${moneda}
 ⛁ Total: ${total.toLocaleString()} ${moneda}
 ═══════════════════════
 
 💾 Estado: Base de datos sincronizada.
-💡 Sugerencia recomendada por Rockstar Freddy: Usa *${usedPrefix}deposit <monto>* para resguardar tus fondos.
+💡 Sugerencia de Rockstar Freddy: Usa *${usedPrefix}deposit <monto>* para resguardar tus fondos.
 
 — Sistema respaldado por FNaF LATAM™
     `.trim();
 
     await conn.reply(m.chat, response, m);
+  } catch (err) {
+    console.error('[ERROR EN BALANCE]:', err);
+    await m.reply(
+      '❌ Hubo un error al consultar el balance.\nPor favor intentá de nuevo o avisá a un administrador.'
+    );
+  }
 };
 
 handler.help = ['bal'];
