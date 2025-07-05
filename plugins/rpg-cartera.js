@@ -1,43 +1,35 @@
 let handler = async (m, { conn, usedPrefix }) => {
   try {
-    let who = m.mentionedJid && m.mentionedJid[0]
-      ? m.mentionedJid[0]
-      : m.quoted
-      ? m.quoted.sender
-      : m.sender;
+    let who =
+      m.mentionedJid?.[0] ||
+      (m.quoted ? m.quoted.sender : m.sender);
 
-    if (!who) {
-      await m.react('❌');
-      return;
+    // Verificación básica
+    if (!who || who === conn.user.jid) {
+      return conn.reply(m.chat, '❌ No podés consultar la cartera del bot.', m);
     }
 
-    // Evitar consultar el bot
-    if (who === conn.user.jid) {
-      await m.react('❌');
-      return;
-    }
-
+    // Verifica si existe en la base de datos
     if (!(who in global.db.data.users)) {
       return conn.reply(m.chat, `🚫 El usuario no se encuentra en la base de datos.`, m);
     }
 
-    let user = global.db.data.users[who];
+    const user = global.db.data.users[who];
+    const nombre = await conn.getName(who).catch(() => 'Desconocido');
+    const moneda = global.moneda || 'FazTokens';
+    const coin = user.coin || 0;
 
-    // Definí la moneda si no está global
-    let moneda = typeof global.moneda !== 'undefined' ? global.moneda : 'FazTokens';
-
-    // Si user.coin no existe, asumimos 0
-    let coin = user.coin || 0;
-
-    let text = who === m.sender
+    const texto = who === m.sender
       ? `💼 *Tu Cartera*\n\n💸 Tienes: *${coin.toLocaleString()} ${moneda}*`
       : `💼 *Cartera de @${who.split('@')[0]}*\n\n💸 Tiene: *${coin.toLocaleString()} ${moneda}*`;
 
-    return conn.reply(m.chat, text, m, { mentions: [who] });
+    return conn.reply(m.chat, texto, m, {
+      mentions: [who]
+    });
 
-  } catch (error) {
-    console.error('Error en comando wallet:', error);
-    await m.reply('❌ Ocurrió un error al consultar la cartera. Intentá de nuevo más tarde.', m);
+  } catch (err) {
+    console.error('[ERROR EN WALLET]:', err);
+    return conn.reply(m.chat, '❌ Ocurrió un error al consultar la cartera. Intentá de nuevo más tarde.', m);
   }
 };
 
