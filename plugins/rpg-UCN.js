@@ -90,10 +90,11 @@ handler.command = ['ucn'];
 handler.register = true;
 handler.group = true;
 
-export default handler;
 
 function msToTime(duration) {
   let seconds = Math.floor((duration / 1000) % 60);
   let minutes = Math.floor((duration / (1000 * 60)) % 60);
   return `${minutes} minuto(s) y ${seconds} segundo(s)`;
 }
+
+export default handler;
