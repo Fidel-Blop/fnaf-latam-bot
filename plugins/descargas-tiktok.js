@@ -2,27 +2,33 @@ import fetch from 'node-fetch';
 
 var handler = async (m, { conn, args, usedPrefix, command }) => {
     if (!args[0]) {
-        return conn.reply(m.chat, `${emoji} Por favor, ingresa un enlace de TikTok.`, m);
+        return conn.reply(m.chat, `🎥 *Unidad de Vigilancia FNaF LATAM*\n\n⚠️ Por favor, ingresa un enlace de TikTok para proceder con la extracción del video.`, m);
     }
 
     try {
-        await conn.reply(m.chat, `${emoji} Espere un momento, estoy descargando su video...`, m);
+        await conn.reply(m.chat, `📡 *Procesando solicitud...*\n\n⏳ Descargando desde TikTok... Espere unos segundos mientras se accede al servidor.`, m);
 
         const tiktokData = await tiktokdl(args[0]);
 
         if (!tiktokData || !tiktokData.data || !tiktokData.data.play) {
-            return conn.reply(m.chat, "Error: No se pudo obtener el video.", m);
+            return conn.reply(m.chat, "❌ Error: No se pudo obtener el video desde el servidor de TikTok.", m);
         }
 
         const videoURL = tiktokData.data.play;
 
         if (videoURL) {
-            await conn.sendFile(m.chat, videoURL, "tiktok.mp4", `${emoji} Aquí tienes ฅ^•ﻌ•^ฅ`, m);
+            await conn.sendFile(
+                m.chat,
+                videoURL,
+                "tiktok.mp4",
+                `✅ *Transmisión recibida*\n\n🎬 Aquí tienes tu video extraído directamente desde los sistemas de TikTok LATAM 📥`,
+                m
+            );
         } else {
-            return conn.reply(m.chat, "No se pudo descargar.", m);
+            return conn.reply(m.chat, "⛔ Error: El video no se pudo descargar correctamente.", m);
         }
     } catch (error1) {
-        return conn.reply(m.chat, `Error: ${error1.message}`, m);
+        return conn.reply(m.chat, `🚨 *Error crítico:*\n\n${error1.message}`, m);
     }
 };
 
