@@ -1,5 +1,6 @@
 /*
-• @David-Chian
+• Adaptado para FNaF LATAM
+• Basado en el trabajo original de @David-Chian
 - https://github.com/David-Chian
 */
 
@@ -41,15 +42,25 @@ async function sendAlbumMessage(jid, medias, options = {}) {
 }
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) return conn.reply(m.chat, `*❀ Por favor, ingrese un texto para buscar una Imagen.`, m);
+    const emoji = '🖼️';
+    const emoji2 = '📷';
+    const firma = '\n\n🌙 *Respaldado por FNAF LATAM* 🌙';
 
-    await m.react('🕒');
-    conn.reply(m.chat, '✧ *Descargando su imagen...*', m, {
-contextInfo: { externalAdReply :{ mediaUrl: null, mediaType: 1, showAdAttribution: true,
-title: packname,
-body: dev,
-previewType: 0, thumbnail: icono,
-sourceUrl: redes }}})
+    if (!text) return conn.reply(m.chat, `🎮 *ERROR - BÚSQUEDA FALLIDA*\n\n${emoji} Debes escribir lo que deseas buscar.\n\n📌 _Ejemplo:_ *${usedPrefix}${command} Animatronics*${firma}`, m);
+
+    await m.react('🔎');
+    conn.reply(m.chat, `🎬 *Buscando entre las cámaras del archivo...*${firma}`, m, {
+        contextInfo: { externalAdReply: {
+            mediaUrl: null,
+            mediaType: 1,
+            showAdAttribution: true,
+            title: 'FNaF LATAM Bot',
+            body: 'Sistema de Imágenes en Línea',
+            previewType: 0,
+            thumbnail: icono,
+            sourceUrl: redes
+        }}
+    });
 
     try {
         const res = await googleImage(text);
@@ -60,19 +71,19 @@ sourceUrl: redes }}})
             if (image) images.push({ type: "image", data: { url: image } });
         }
 
-        if (images.length < 2) return conn.reply(m.chat, '✧ No se encontraron suficientes imágenes para un álbum.', m);
+        if (images.length < 2) return conn.reply(m.chat, `🚫 *Error:* No se encontraron suficientes imágenes para crear un álbum.${firma}`, m);
 
-        const caption = `❀ *Resultados de búsqueda para:* ${text}`;
+        const caption = `📸 *Álbum generado para:* _${text}_ 🔍${firma}`;
         await sendAlbumMessage(m.chat, images, { caption, quoted: m });
 
         await m.react('✅');
     } catch (error) {
         await m.react('❌');
-        conn.reply(m.chat, '⚠︎ Hubo un error al obtener las imágenes.', m);
+        conn.reply(m.chat, `⚠️ *ERROR - Falló la conexión con los servidores de imagen.*${firma}`, m);
     }
 };
 
-handler.help = ['imagen <query>'];
+handler.help = ['imagen <término>'];
 handler.tags = ['buscador', 'tools', 'descargas'];
 handler.command = ['imagen', 'image', 'img'];
 handler.register = true;
