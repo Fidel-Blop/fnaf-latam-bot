@@ -2,7 +2,7 @@ import axios from 'axios';
 let enviando = false;
 
 const handler = async (m, { conn, text, usedPrefix, command, args }) => {
-    if (!args || !args[0]) return conn.reply(m.chat, `${emoji} Te faltó el link de una imagen/video de twitter.`, m);
+    if (!args || !args[0]) return conn.reply(m.chat, `🦊 *¡Error de protocolo!* Ingresa el enlace de una imagen o video de Twitter.`, m);
     if (enviando) return; 
     enviando = true;
 
@@ -10,7 +10,7 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
         const apiResponse = await axios.get(`https://delirius-apiofc.vercel.app/download/twitterdl?url=${args[0]}`);
         const res = apiResponse.data;
 
-        const caption = res.caption ? res.caption : `${emoji} Aqui tienes ฅ^•ﻌ•^ฅ.`;
+        const caption = res.caption ? res.caption : `📦 *Contenido extraído directamente de Twitter.*`;
 
         if (res?.type === 'video') {
             await conn.sendMessage(m.chat, { video: { url: res.media[0].url }, caption: caption }, { quoted: m });
@@ -24,7 +24,7 @@ const handler = async (m, { conn, text, usedPrefix, command, args }) => {
     } catch (error) {
         enviando = false;
         console.error(error);         
-        conn.reply(m.chat, `${msm} Error al descargar su archivo`, m);
+        conn.reply(m.chat, `⚠️ *No se pudo obtener el archivo.* Intenta nuevamente o revisa el enlace.`, m);
     }
 };
 
