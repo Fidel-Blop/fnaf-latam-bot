@@ -1,25 +1,32 @@
-const { generateWAMessageFromContent, proto } = (await import('@whiskeysockets/baileys')).default
+const handler = async (m, { conn }) => {
+  conn.reply(m.chat, `🤖🎪 *FNaF LATAM Bot* 🎪🤖\n\n⏳ Buscando un chiste macabro... espera un momento...`, m);
 
-var handler = async (m, { conn, text}) => {
-
-conn.reply(m.chat, `${emoji2} Buscando un chiste, espere un momento...`, m)
-
-conn.reply(m.chat, `*┏━_͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡_͜͡━┓*\n\n❥ *"${pickRandom(global.chiste)}"*\n\n*┗━_͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡⚘-͜͡-͜͡-͜͡-͜͡-͜͡-͜͡_͜͡━┛*`, m)
-
+  conn.reply(m.chat, `*┏━━━━━━━━━━━━━━━┓*\n\n🎭 *Aquí tienes un chiste para sobrevivir la noche:* 🎭\n\n*»* _${pickRandom(global.chiste)}_\n\n*┗━━━━━━━━━━━━━━━┛*\n\n👻 *Sigue jugando... si te atreves...* 👻`, m);
 }
-handler.help = ['chiste']
-handler.tags = ['fun']
-handler.command = ['chiste']
-handler.fail = null
-handler.exp = 0
-handler.group = true;
-handler.register = true
 
-export default handler
-
-let hasil = Math.floor(Math.random() * 5000)
 function pickRandom(list) {
-return list[Math.floor(list.length * Math.random())]
+  return list[Math.floor(Math.random() * list.length)];
 }
 
-global.chiste = ["¿Cuál es el último animal que subió al arca de Noé? El del-fin..", "¿Cómo se dice pañuelo en japonés? Saka-moko", "¿Cómo se dice disparo en árabe? Ahí-va-la-bala..", "¿Qué le dice un gusano a otro gusano? Voy a dar una vuelta a la manzana.", "Un gato empieza a ladrar en el tejado de una casa. Otro gato, sorprendido, le dice: Estás loco gato, ¿por qué ladras en vez de maullar? El gatito le responde: ¿A caso no puedo aprender otro idioma?", "El doctor le dice al paciente: respire profundo que lo voy a auscultar. El paciente le responde: doctor, ¿de quién me va a ocultar si no le debo a nadie?\nSale el doctor después de un parto y el padre de la criatura le pregunta: ¿Doctor cómo salió todo? El doctor le dice: todo salió bien, pero tuvimos que colocarle oxígeno al bebé. El padre, horrorizado, le dice: pero doctor, nosotros queríamos ponerle Gabriel..", "Un pez le pregunta a otro pez: ¿qué hace tu mamá? Este le contesta: Nada, ¿y la tuya qué hace? Nada también.", "¿Cuál es el colmo de Aladdín? Tener mal genio", "El profesor le dice al estudiante después de haberle corregido la tarea: Tu trabajo me ha conmovido. El estudiante, sorprendido, le pregunta: ¿Y eso por qué profesor? El profesor con cara de burla le dice: Porque me dio mucha pena.", "Le dice el niño a la madre: Mamá, no quiero jugar más con Pedrito. La madre le pregunta al niño: ¿Por qué no quieres jugar más con él? Porque cuando jugamos a los tacos de madera y le pego con uno en la cabeza, de repente se pone a llorar.", "A Juanito le dice la maestra: Juanito, ¿qué harías si te estuvieses ahogando en la piscina? Juanito le responde: Me pondría a llorar mucho para desahogarme.", "Hijo, me veo gorda, fea y vieja. ¿Qué tengo hijo, qué tengo? Mamá, tienes toda la razón.", "¿Cómo se dice pelo sucio en chino? Chin cham pu.", "Había una vez un niño tan, tan, tan despistado que... ¡da igual, me he olvidado del chiste!", "Una amiga le dice a otra amiga: ¿Qué tal va la vida de casada? Pues no me puedo quejar, dice ella. ¿O sea que va muy bien, no? No, no me puedo quejar porque mi marido está aquí al lado.", "¿Por qué las focas miran siempre hacia arriba? ¡Porque ahí están los focos!", "Camarero, ese filete tiene muchos nervios. Pues normal, es la primera vez que se lo comen.", "¿Cómo se llama el primo de Bruce Lee? Broco Lee.", "Una madre le dice a su hijo: Jaimito, me ha dicho un pajarito que te drogas. La que te drogas eres tú, que hablas con pajaritos."]
+global.chiste = [
+  "¿Cuál es el último animal que subió al arca de Noé? El del-fin...",
+  "¿Cómo se dice pañuelo en japonés? Saka-moko...",
+  "¿Cómo se dice disparo en árabe? Ahí-va-la-bala...",
+  "¿Qué le dice un gusano a otro gusano? Voy a dar una vuelta a la manzana.",
+  "Un gato empieza a ladrar en el tejado. Otro gato le dice: ¿Por qué ladras? Y responde: ¿No puedo aprender otro idioma?",
+  "El doctor dice: respira profundo, te voy a auscultar. El paciente responde: ¿De quién me va a ocultar si no debo a nadie?",
+  "Después de un parto, el doctor dice: todo salió bien, pero tuvimos que ponerle oxígeno. El padre responde: ¡Pero queríamos ponerle Gabriel!",
+  "Un pez le pregunta a otro: ¿Qué hace tu mamá? Nada. ¿Y la tuya? Nada también.",
+  "¿Cuál es el colmo de Aladdín? Tener mal genio.",
+  "El profesor dice: tu trabajo me ha conmovido. El estudiante pregunta: ¿Por qué? Profesor: porque me dio mucha pena.",
+  "Le dice un niño a su madre: No quiero jugar con Pedrito. ¿Por qué? Porque le pego y se pone a llorar.",
+  "La maestra pregunta: ¿Qué harías si te ahogas? Juanito responde: llorar mucho para desahogarme.",
+  "Hijo, me veo gorda, fea y vieja. ¿Qué tienes? Mamá, tienes toda la razón.",
+  "¿Cómo se dice pelo sucio en chino? Chin cham pu.",
+  "Había un niño tan despistado que... ¡da igual, olvidé el chiste!",
+  "Una amiga dice: No me puedo quejar. Otra responde: ¿Va bien? No, porque mi marido está aquí.",
+  "¿Por qué las focas miran hacia arriba? ¡Porque ahí están los focos!",
+  "Camarero, este filete tiene muchos nervios. Es la primera vez que se lo comen.",
+  "¿Cómo se llama el primo de Bruce Lee? Broco Lee.",
+  "Una madre dice: Jaimito, me dijo un pajarito que te drogas. Jaimito responde: ¡Tú hablas con pajaritos!"
+];
