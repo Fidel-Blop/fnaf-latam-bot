@@ -1,25 +1,31 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text }) => {
-if (!text) return m.reply(`${emoji} Ingresa el nombre de una pelicula\n> *Ejemplo: /cuevana Deadpool*.`)
+const emoji = '🎬👁️‍🗨️'
+const msm = '⚠️'
+
+if (!text) return m.reply(`${emoji} *¡Se te olvidó escribir el nombre de la película!*\n\n🔍 *Ejemplo:* */cuevana Deadpool*\n\n🌙 *Respaldado por FNAF LATAM* 🌙`)
 
 try {
-let api = await fetch(`https://delirius-apiofc.vercel.app/search/cuevana?q=${encodeURIComponent(text)}`)
-let json = await api.json()
+  let api = await fetch(`https://delirius-apiofc.vercel.app/search/cuevana?q=${encodeURIComponent(text)}`)
+  let json = await api.json()
 
-let JT = '📽️ Cuevana  -  Search 📽️';
-json.data.forEach((app, index) => {
-      JT += `\n\n═══════════════════════`;
-      JT += `\n☁️ *Nro :* ${index + 1}`
-      JT += `\n🖼️ *Imagen:* ${app.image}`
-      JT += `\n⚜️ *Titulo:* ${app.title}`
-      JT += `\n📚 *Descripcion:* ${app.description}`
-      JT += `\n🔗 *Link:* ${app.link}`
-}) 
+  let JT = `🎞️ *BÚSQUEDA DE PELÍCULA EN CUEVANA* 🎞️\n📼 _Resultados para:_ *"${text}"*\n───────────────────────`
 
-m.reply(JT)
+  json.data.forEach((app, index) => {
+    JT += `\n\n🔸 *${index + 1}.* 🎬 *${app.title}*`
+    JT += `\n🖼️ *Imagen:* ${app.image}`
+    JT += `\n📝 *Descripción:* ${app.description}`
+    JT += `\n🔗 *Ver ahora:* ${app.link}`
+    JT += `\n━━━━━━━━━━━━━━━━━━━━━`
+  }) 
+
+  JT += `\n\n🌙 *Respaldado por FNAF LATAM* 🌙`
+  m.reply(JT)
+
 } catch (error) {
-console.error(error)
+  console.error(error)
+  m.reply(`${msm} Algo salió mal mientras se buscaba tu película. Intenta más tarde.`)
 }}
 
 handler.command = ['cuevanasearch', 'cuevana']
