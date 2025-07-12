@@ -1,29 +1,40 @@
 import axios from 'axios'
 
-const query = ['story%20wa','story%20sad','video%20fun','story%20wa%20galau','story%20wa%20sindiran','story%20wa%20bahagia','story%20wa%20lirik%20lagu%20overlay','story%20wa%20lirik%20lagu','video%20viral']
+const query = [
+  'story%20wa',
+  'story%20sad',
+  'video%20fun',
+  'story%20wa%20galau',
+  'story%20wa%20sindiran',
+  'story%20wa%20bahagia',
+  'story%20wa%20lirik%20lagu%20overlay',
+  'story%20wa%20lirik%20lagu',
+  'video%20viral'
+]
 
-let handler = async (m, {
-    conn,
-    args,
-    text,
-    usedPrefix,
-    command
-}) => {
- m.reply(wait)
-tiktoks(`${query.getRandom()}`).then(a => {
-let cap = a.title
-conn.sendMessage(m.chat, {video: {url: a.no_watermark}, caption: cap}, {quoted: m})
-}).catch(err => {
-m.reply(eror)
-})
+let handler = async (m, { conn, args, text, usedPrefix, command }) => {
+  m.reply(`${emoji} *Obteniendo secuencia multimedia aleatoria...*  
+Por favor espera, iniciando extracción desde la base de TikTok.`)
+
+  tiktoks(`${query.getRandom()}`).then(a => {
+    let cap = `📂 *FNaF LATAM - Contenido Detectado*\n\n🖹 *Descripción:* ${a.title || 'Sin descripción'}\n🎥 *Origen:* TikTok\n📎 *Estado:* Transmisión establecida`
+
+    conn.sendMessage(m.chat, {
+      video: { url: a.no_watermark },
+      caption: cap
+    }, { quoted: m })
+  }).catch(err => {
+    m.reply(`${emoji2} ⚠️ Error al procesar la solicitud.\nIntenta más tarde o revisa tu conexión.`)
+  })
 }
+
 handler.help = ['tiktokrandom']
 handler.tags = ['descargas']
 handler.command = ['ttrandom', 'tiktokrandom']
-handler.limit = true 
-handler.group = true;
-handler.register = true;
-handler.coin = 2;
+handler.limit = true
+handler.group = true
+handler.register = true
+handler.coin = 2
 
 export default handler
 
@@ -44,13 +55,14 @@ async function tiktoks(query) {
           cursor: 0,
           HD: 1
         }
-      });
-      const videos = response.data.data.videos;
+      })
+
+      const videos = response.data.data.videos
       if (videos.length === 0) {
-        reject("Tidak ada video ditemukan.");
+        reject("⚠ No se encontraron resultados.")
       } else {
-        const gywee = Math.floor(Math.random() * videos.length);
-        const videorndm = videos[gywee]; 
+        const gywee = Math.floor(Math.random() * videos.length)
+        const videorndm = videos[gywee]
 
         const result = {
           title: videorndm.title,
@@ -59,11 +71,11 @@ async function tiktoks(query) {
           no_watermark: videorndm.play,
           watermark: videorndm.wmplay,
           music: videorndm.music
-        };
-        resolve(result);
+        }
+        resolve(result)
       }
     } catch (error) {
-      reject(error);
+      reject(error)
     }
-  });
+  })
 }
