@@ -8,8 +8,10 @@ const {
 } = (await import("@whiskeysockets/baileys")).default;
 
 let handler = async (message, { conn, text, usedPrefix, command }) => {
+  const firma = '🎭 *Respaldado por FNAF LATAM* 🎭';
+
   if (!text) {
-    return conn.reply(message.chat, "❀ Por favor, ingrese un texto para realizar una búsqueda en tiktok.", message, rcanal);
+    return conn.reply(message.chat, `🔍 *Debes ingresar un término para buscar en TikTok.*\n\n📌 _Ejemplo:_ ${usedPrefix + command} animatronics\n\n${firma}`, message, rcanal);
   }
 
   async function createVideoMessage(url) {
@@ -29,13 +31,13 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
   }
 
   try {
-    conn.reply(message.chat, '✧ *ENVIANDO SUS RESULTADOS..*', message, {
+    await conn.reply(message.chat, '🕒 *Buscando videos de TikTok...*, por favor espera unos segundos.', message, {
       contextInfo: { 
         externalAdReply: { 
           mediaUrl: null, 
           mediaType: 1, 
           showAdAttribution: true,
-          title: '♡  ͜ ۬︵࣪᷼⏜݊᷼𝘿𝙚𝙨𝙘𝙖𝙧𝙜𝙖𝙨⏜࣪᷼︵۬ ͜ ',
+          title: '🎬 Explorando TikToks...',
           body: dev,
           previewType: 0, 
           thumbnail: avatar,
@@ -55,7 +57,7 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
         body: proto.Message.InteractiveMessage.Body.fromObject({ text: null }),
         footer: proto.Message.InteractiveMessage.Footer.fromObject({ text: dev }),
         header: proto.Message.InteractiveMessage.Header.fromObject({
-          title: '' + result.title,
+          title: `🎵 ${result.title}`,
           hasMediaAttachment: true,
           videoMessage: await createVideoMessage(result.nowm)
         }),
@@ -72,10 +74,10 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
           },
           interactiveMessage: proto.Message.InteractiveMessage.fromObject({
             body: proto.Message.InteractiveMessage.Body.create({
-              text: "✧ RESULTADO DE: " + text
+              text: `✨ *Resultados para:* "${text}"`
             }),
             footer: proto.Message.InteractiveMessage.Footer.create({
-              text: dev
+              text: firma
             }),
             header: proto.Message.InteractiveMessage.Header.create({
               hasMediaAttachment: false
@@ -93,14 +95,15 @@ let handler = async (message, { conn, text, usedPrefix, command }) => {
     await conn.relayMessage(message.chat, messageContent.message, {
       messageId: messageContent.key.id
     });
+
   } catch (error) {
-    conn.reply(message.chat, `⚠︎ *OCURRIÓ UN ERROR:* ${error.message}`, message);
+    conn.reply(message.chat, `❌ *Ha ocurrido un error inesperado:* ${error.message}\n\n${firma}`, message);
   }
 };
 
 handler.help = ["tiktoksearch <txt>"];
-handler.register = true
-handler.group = true
+handler.register = true;
+handler.group = true;
 handler.tags = ["buscador"];
 handler.command = ["tiktoksearch", "ttss", "tiktoks"];
 
