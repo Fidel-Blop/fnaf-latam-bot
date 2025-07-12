@@ -3,43 +3,56 @@ import fetch from 'node-fetch'
 
 let handler = async (m, { conn, text, usedPrefix, command }) => {
 
-    if (!text) return conn.reply(m.chat, `❀ Por favor, proporciona el nombre de una canción o artista.`, m)
+    if (!text) return conn.reply(m.chat, `📡 *Sistema de Búsqueda - FNaF LATAM*\n\n⚠️ Por favor, proporciona el nombre de una canción o artista para iniciar la búsqueda.`, m)
 
     try {
         let songInfo = await spotifyxv(text)
-        if (!songInfo.length) throw `✧ No se encontró la canción.`
+        if (!songInfo.length) throw `📛 No se encontró la pista en la base de datos.`
         let song = songInfo[0]
         const res = await fetch(`https://api.sylphy.xyz/download/spotify?url=${song.url}&apikey=sylph-96ccb836bc`)
 
-        if (!res.ok) throw `Error al obtener datos de la API, código de estado: ${res.status}`
+        if (!res.ok) throw `⛔ Error al contactar la API. Código: ${res.status}`
 
         const data = await res.json().catch((e) => { 
             console.error('Error parsing JSON:', e)
-            throw "Error al analizar la respuesta JSON."
+            throw "🚨 Fallo al procesar la respuesta de la API."
         })
 
-        if (!data.data.dl_url) throw "No se pudo obtener el enlace de descarga."
-        const info = `「✦」Descargando *<${data.data.title}>*\n\n> ✧ Artista » *${data.data.artist}*\n> ✰ Album » *${data.data.album}*\n> ⴵ Duracion » *${data.data.duration}*\n> 🜸 Link » ${song.url}`
+        if (!data.data.dl_url) throw "❌ No se pudo obtener el enlace de descarga."
 
-        await conn.sendMessage(m.chat, { text: info, contextInfo: { forwardingScore: 9999999, isForwarded: false, 
-        externalAdReply: {
-            showAdAttribution: true,
-            containsAutoReply: true,
-            renderLargerThumbnail: true,
-            title: botname,
-            body: dev,
-            mediaType: 1,
-            thumbnailUrl: data.data.img,
-            mediaUrl: song.url,
-            sourceUrl: song.url
-        }}}, { quoted: m })
+        const info = `🔊 *FNaF LATAM - Reproductor Central*\n\n🎵 *Título:* ${data.data.title}\n🎤 *Artista:* ${data.data.artist}\n💽 *Álbum:* ${data.data.album}\n⏱️ *Duración:* ${data.data.duration}\n🔗 *Origen:* ${song.url}`
 
-        conn.sendMessage(m.chat, { audio: { url: data.data.dl_url }, fileName: `${data.data.title}.mp3`, mimetype: 'audio/mp4', ptt: true }, { quoted: m })
+        await conn.sendMessage(m.chat, {
+          text: info,
+          contextInfo: {
+            forwardingScore: 9999999,
+            isForwarded: false,
+            externalAdReply: {
+              showAdAttribution: true,
+              containsAutoReply: true,
+              renderLargerThumbnail: true,
+              title: 'FNaF LATAM - Streaming Autorizado',
+              body: 'Freddy Fazbear Music Division',
+              mediaType: 1,
+              thumbnailUrl: data.data.img,
+              mediaUrl: song.url,
+              sourceUrl: song.url
+            }
+          }
+        }, { quoted: m })
+
+        conn.sendMessage(m.chat, {
+          audio: { url: data.data.dl_url },
+          fileName: `${data.data.title}.mp3`,
+          mimetype: 'audio/mp4',
+          ptt: true
+        }, { quoted: m })
 
     } catch (e1) {
-        m.reply(`${e1.message || e1}`)
+        m.reply(`⚠️ Error: ${e1.message || e1}`)
     }
 }
+
 handler.help = ['spotify', 'music']
 handler.tags = ['downloader']
 handler.command = ['spotify', 'splay']
