@@ -25,7 +25,7 @@ let handler = async (m, { conn, text }) => {
         text = m.quoted.text
     } else if (!text) {
         return conn.sendMessage(m.chat, {
-            text: `❀ Por favor, responde a un mensaje o ingresa un texto para crear el Sticker.`,
+            text: `🔧 *Sistema de Stickers de Freddy Fazbear*\n\n🎭 Escribe un mensaje o responde a uno para generar un sticker al estilo *Brat*.`,
         }, { quoted: m })
     }
 
@@ -41,11 +41,11 @@ let handler = async (m, { conn, text }) => {
         if (stiker) {
             return conn.sendFile(m.chat, stiker, 'sticker.webp', '', m)
         } else {
-            throw new Error("✧ No se pudo generar el sticker.")
+            throw new Error("⚠️ El sistema falló en crear el sticker. Reintenta bajo tu propio riesgo...")
         }
     } catch (error) {
         return conn.sendMessage(m.chat, {
-            text: `⚠︎ Ocurrió un error: ${error.message}`,
+            text: `🛑 *ERROR EN EL SISTEMA DE STICKERS*\n\n💬 Detalles: ${error.message}`,
         }, { quoted: m })
     }
 }
