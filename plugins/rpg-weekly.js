@@ -7,7 +7,7 @@ let handler = async (m, { conn }) => {
     const cooldown = 604800000; // 1 semana
 
     if (new Date - user.weekly < cooldown) {
-        return m.reply(`${emoji3} ¡Ya reclamaste tu regalo semanal! Vuelve en:\n *${msToTime((user.weekly + cooldown) - new Date())}*`);
+        return m.reply(`${emoji3} 🕰️ Ya has recolectado tu recompensa semanal de la oscuridad.\nVuelve en:\n *${msToTime((user.weekly + cooldown) - new Date())}* para la próxima ronda en Freddy's...`);
     }
 
     let coinReward = pickRandom([1, 2, 3]);
@@ -17,10 +17,15 @@ let handler = async (m, { conn }) => {
     user.exp = (user.exp || 0) + expReward;
 
     m.reply(`
-🎁 ¡Ha pasado una semana! ¡Disfruta de tu regalo semanal!.
+🎁 *Regalo Semanal de Freddy's*
+
+Ha llegado la noche y con ella tu recompensa...  
 
 💸 *${moneda}* : +${coinReward}
-✨ *Experiencia* : +${expReward}`);
+✨ *Experiencia* : +${expReward}
+
+⚠️ No bajes la guardia, la noche acecha...  
+`);
 
     user.weekly = new Date * 1;
 }
