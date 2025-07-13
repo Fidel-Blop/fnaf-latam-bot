@@ -32,7 +32,6 @@ let handler = async (m, { conn, args }) => {
 ━━━━━━━━━━━━━━━━━━━━━━
 🔍 *MÓDULO DE DIAGNÓSTICO - FNaF LATAM*
 ━━━━━━━━━━━━━━━━━━━━━━
-
 🎛️ Comandos de análisis y control del sistema:
 
 ▸ `#help` | `#menu`
@@ -58,7 +57,6 @@ let handler = async (m, { conn, args }) => {
 ━━━━━━━━━━━━━━━━━━━━━━
 🔎 *MÓDULO DE BUSCADORES - FNaF LATAM*
 ━━━━━━━━━━━━━━━━━━━━━━
-
 🌐 Comandos para realizar búsquedas en diversas plataformas:
 
 ▸ `#tiktoksearch` | `#tiktoks`
@@ -81,7 +79,6 @@ FNaF LATAM - Buscadores activos listos para tí.
 ━━━━━━━━━━━━━━━━━━━━━━  
 ⬇️ *『 DESCARGAS - FNaF LATAM 』* ⬇️  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
 🎬 Comandos para descargar archivos multimedia y más:  
 
 ▸ `#tiktok` | `#tt`  
@@ -115,7 +112,6 @@ FNaF LATAM - Tu mejor aliado en descargas.
 ━━━━━━━━━━━━━━━━━━━━━━  
 💰 *『 ECONOMÍA - FNaF LATAM 』* 💰  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
 🎲 Comandos para ganar ${moneda} y recursos RPG:  
 
 ▸ `#w` | `#work` | `#trabajar`  
@@ -179,7 +175,6 @@ FNaF LATAM - Tu camino al éxito económico.
 ━━━━━━━━━━━━━━━━━━━━━━  
 🧩 *『 STICKERS - FNaF LATAM 』* 🧩  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
 🔰 Comandos para creación y edición de stickers personalizados.
 
 🧩 `#sticker` | `#s`
@@ -207,7 +202,6 @@ FNaF LATAM - Crea, diseña y comparte tu estilo en stickers.
 ━━━━━━━━━━━━━━━━━━━━━━  
 🛠️ *『 HERRAMIENTAS - FNaF LATAM 』* 🛠️  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
 ♻️ Comandos de utilidades con múltiples funciones para mejorar tu experiencia.
 
 🛠️ `#calcular` | `#cal`
@@ -243,7 +237,6 @@ FNaF LATAM - Las herramientas que necesitas, al alcance de un comando.
 ━━━━━━━━━━━━━━━━━━━━━━  
 👤 *『 PERFIL - FNaF LATAM 』* 👤  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
 🚺🚹 Comandos de perfil para ver, editar y gestionar tu identidad dentro del bot.
 
 👤 `#reg` | `#verificar` | `#register`
@@ -283,8 +276,7 @@ FNaF LATAM - Tu perfil, tu historia dentro del universo animatrónico.
 ━━━━━━━━━━━━━━━━━━━━━━  
 🛠️ *『 GRUPOS - FNaF LATAM 』* 🛠️  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
-❍ Comandos de administración y gestión grupal para mantener el orden y la actividad.
+🍕 Comandos de administración y gestión grupal para mantener el orden y la actividad.
 
 🛠️ `#hidetag`
 > Menciona a todos los miembros del grupo.
@@ -351,112 +343,10 @@ FNaF LATAM - Tu perfil, tu historia dentro del universo animatrónico.
 
 FNaF LATAM - Herramientas de poder para nuestros grupos.
 
-• :･ﾟ⊹˚• \`『 Anime 』\` ━━━━━━━━━━━━━━━━━━━━━━  
-🛠️ *『 GRUPOS - FNaF LATAM 』* 🛠️  
-━━━━━━━━━━━━━━━━━━━━━━  
-
-❍ Comandos de administración y gestión grupal para mantener el orden y la actividad.
-
-🛠️ `#hidetag`
-> Menciona a todos los miembros del grupo.
-
-🛠️ `#gp` | `#infogrupo`
-> Muestra la información actual del grupo.
-
-🛠️ `#linea` | `#listonline`
-> Lista los usuarios conectados.
-
-🛠️ `#setwelcome`
-> Define un mensaje de bienvenida personalizado.
-
-🛠️ `#setbye`
-> Define un mensaje de despedida para salidas.
-
-🛠️ `#link`
-> Envía el enlace de invitación del grupo.
-
-🛠️ `#admins` | `#admin`
-> Menciona a todos los administradores.
-
-🛠️ `#restablecer` | `#revoke`
-> Restaura el enlace del grupo.
-
-🛠️ `#grupo` | `#group` [open / abrir]
-> Abre el grupo para que todos puedan escribir.
-
-🛠️ `#grupo` | `#group` [close / cerrar]
-> Cierra el grupo, solo admins pueden escribir.
-
-🛠️ `#kick` [@usuario / número]
-> Expulsa a un miembro del grupo.
-
-🛠️ `#add` | `#añadir` | `#agregar` [número]
-> Agrega un usuario por número.
-
-🛠️ `#promote` [@usuario]
-> Asciende a administrador al mencionado.
-
-🛠️ `#demote` [@usuario]
-> Quita privilegios de administrador.
-
-🛠️ `#gpbanner` | `#groupimg`
-> Cambia la imagen del grupo.
-
-🛠️ `#gpname` | `#groupname`
-> Cambia el nombre del grupo.
-
-🛠️ `#gpdesc` | `#groupdesc`
-> Edita la descripción del grupo.
-
-🛠️ `#advertir` | `#warn` | `#warning`
-> Asigna una advertencia a un usuario.
-
-🛠️ `#unwarn` | `#delwarn`
-> Elimina advertencias de un usuario.
-
-🛠️ `#advlist` | `#listadv`
-> Muestra la lista de advertidos.
-
-🛠️ `#bot on`
-> Activa el bot en el grupo.
-
-🛠️ `#bot off`
-> Desactiva el bot en el grupo.
-
-🛠️ `#mute` [@usuario]
-> Silencia a un usuario (el bot elimina sus mensajes).
-
-🛠️ `#unmute` [@usuario]
-> Reactiva a un usuario silenciado.
-
-🛠️ `#encuesta` | `#poll`
-> Crea una encuesta personalizada.
-
-🛠️ `#delete` | `#del`
-> Elimina un mensaje (requiere reply).
-
-🛠️ `#fantasmas`
-> Lista a los usuarios inactivos del grupo.
-
-🛠️ `#kickfantasmas`
-> Expulsa a los inactivos automáticamente.
-
-🛠️ `#invocar` | `#tagall` | `#todos`
-> Menciona a todos los miembros del grupo.
-
-🛠️ `#setemoji` | `#setemo`
-> Cambia el emoji de invitación del grupo.
-
-🛠️ `#listnum` | `#kicknum`
-> Expulsa por prefijo de número (ej: +92, +212).
-
-FNaF LATAM - Herramientas de poder para tus grupos.˚⊹:･ﾟ•
-
 
 ━━━━━━━━━━━━━━━━━━━━━━  
 🎮 *『 JUEGOS - FNaF LATAM 』* 🎮  
 ━━━━━━━━━━━━━━━━━━━━━━  
-
 💥 Comandos de juegos y diversión para pasar el rato con amigos o solo.
 
 🎮 `#amistad` | `#amigorandom`
