@@ -2,14 +2,14 @@ import { canLevelUp, xpRange } from '../lib/levelling.js';
 import db from '../lib/database.js';
 
 let handler = async (m, { conn }) => {
-    let mentionedUser = m.mentionedJid[0];
+    let mentionedUser = m.mentionedJid ? m.mentionedJid[0] : null;
     let citedMessage = m.quoted ? m.quoted.sender : null;
     let who = mentionedUser || citedMessage || m.sender; 
-    let name = conn.getName(who) || 'Usuario';
+    let name = conn.getName(who) || 'Animatrónico';
     let user = global.db.data.users[who];
 
     if (!user) {
-        await conn.sendMessage(m.chat, "No se encontraron datos del usuario.", { quoted: m });
+        await conn.sendMessage(m.chat, "⚠️ *Error*: No se encontraron datos del animatrónico solicitado.", { quoted: m });
         return;
     }
 
@@ -19,12 +19,15 @@ let handler = async (m, { conn }) => {
     while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++;
 
     if (before !== user.level) {
-        let txt = `ᥫ᭡ Felicidades Has subido de nivel ❀\n\n`; 
-        txt += `*${before}* ➔ *${user.level}* [ ${user.role} ]\n\n`;
-        txt += `• ✰ *Nivel anterior* : ${before}\n`;
-        txt += `• ✦ *Nuevos niveles* : ${user.level}\n`;
-        txt += `• ❖ *Fecha* : ${new Date().toLocaleString('id-ID')}\n\n`;
-        txt += `> ➨ Nota: *Cuanto más interactúes con el Bot, mayor será tu nivel.*`;
+        let txt = `👾 *¡Alerta de subida de nivel!* 👾\n\n`; 
+        txt += `🎉 *¡Felicidades!* Has ascendido en la jerarquía FNaF LATAM.\n\n`;
+        txt += `⬆️ Nivel: *${before}* ➔ *${user.level}*  |  🦾 Rango: *${user.role}*\n\n`;
+        txt += `───────────────────────────────\n`;
+        txt += `• 🔰 Nivel anterior: *${before}*\n`;
+        txt += `• ✨ Nuevo nivel: *${user.level}*\n`;
+        txt += `• 📅 Fecha y hora: *${new Date().toLocaleString('es-ES')}*\n`;
+        txt += `───────────────────────────────\n\n`;
+        txt += `💡 _Sigue interactuando para dominar el universo FNaF LATAM._`;
         await conn.sendMessage(m.chat, { text: txt }, { quoted: m });
     } else {
         let users = Object.entries(global.db.data.users).map(([key, value]) => {
@@ -34,22 +37,23 @@ let handler = async (m, { conn }) => {
         let sortedLevel = users.sort((a, b) => (b.level || 0) - (a.level || 0));
         let rank = sortedLevel.findIndex(u => u.jid === who) + 1;
 
-        let txt = `*「✿」Usuario* ◢ ${name} ◤\n\n`;
-        txt += `✦ Nivel » *${user.level}*\n`;
-        txt += `✰ Experiencia » *${user.exp}*\n`;
-        txt += `❖ Rango » ${user.role}\n`;
-        txt += `➨ Progreso » *${user.exp - min} => ${xp}* _(${Math.floor(((user.exp - min) / xp) * 100)}%)_\n`;
-        txt += `# Puesto » *${rank}* de *${sortedLevel.length}*\n`;
-        txt += `❒ Comandos totales » *${user.commands || 0}*`;
+        let txt = `🎭 *Perfil Animatrónico* ◢ ${name} ◤\n\n`;
+        txt += `🔹 Nivel actual: *${user.level}*\n`;
+        txt += `🔹 Experiencia acumulada: *${user.exp}*\n`;
+        txt += `🔹 Rango dentro de FNaF LATAM: *${user.role}*\n`;
+        txt += `🔹 Progreso hacia próximo nivel: *${user.exp - min} / ${xp}*  _(${Math.floor(((user.exp - min) / xp) * 100)}%)_\n`;
+        txt += `🔹 Puesto en el escalafón: *#${rank}* de *${sortedLevel.length}*\n`;
+        txt += `🔹 Comandos utilizados: *${user.commands || 0}*\n\n`;
+        txt += `👻 ¡Sigue interactuando para convertirte en leyenda!`;
 
         await conn.sendMessage(m.chat, { text: txt }, { quoted: m });
     }
 }
 
-handler.help = ['levelup', 'lvl @user']
-handler.tags = ['rpg']
-handler.command = ['nivel', 'lvl', 'level', 'levelup']
-handler.register = true
-handler.group = true
+handler.help = ['levelup', 'lvl @user'];
+handler.tags = ['rpg'];
+handler.command = ['nivel', 'lvl', 'level', 'levelup'];
+handler.register = true;
+handler.group = true;
 
-export default handler
+export default handler;
