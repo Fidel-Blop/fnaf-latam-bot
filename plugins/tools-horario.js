@@ -21,33 +21,42 @@ const handler = async (m, {conn}) => {
   const fechaasi = moment().tz('Asia/Jakarta').format('DD/MM HH:mm');
   const fechabra = moment().tz('America/Sao_Paulo').format('DD/MM HH:mm');
   const fechaafri = moment().tz('Africa/Malabo').format('DD/MM HH:mm');
-  await conn.sendMessage(m.chat, {text: `「 ZONA-HORARIA ⏰ 」
-⏱️Peru       : ${fechaper}
-⏱️Mexico     : ${fechamex}
-⏱️Bolivia    : ${fechabol}
-⏱️Chile      : ${fechachi}
-⏱️Argentina  : ${fechaarg}
-⏱️Colombia   : ${fechacol}
-⏱️Ecuador    : ${fechaecu}
-⏱️Costa_Rica : ${fechacosr}
-⏱️Cuba       : ${fechacub}
-⏱️Guatemala  : ${fechagua}
-⏱️Honduras   : ${fechahon}
-⏱️Nicaragua  : ${fechanic}
-⏱️Panama     : ${fechapan}
-⏱️Uruguay    : ${fechauru}
-⏱️Venezuela  : ${fechaven}
-⏱️Paraguay   : ${fechapar}
-⏱️New York   : ${fechanew}
-⏱️Asia       : ${fechaasi}
-⏱️Brasil     : ${fechabra}
-⏱️G.N.Q      : ${fechaafri}
-${String.fromCharCode(8206).repeat(850)}
-Zona horaria del servidor actual:\n[ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ] ${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}`}, {quoted: m});
+
+  const header = '🌒 『 Reloj de Freddy\'s 』🌒\n*Horarios actuales según zona* ⏰\n─────────────────────────────\n'
+  const footer = `─────────────────────────────\n⌚ Servidor: [ ${Intl.DateTimeFormat().resolvedOptions().timeZone} ]\n` +
+                 `⏳ Fecha y hora: ${moment().tz(Intl.DateTimeFormat().resolvedOptions().timeZone).format('DD/MM/YY HH:mm:ss')}\n` +
+                 `\n*¡No pierdas la noción del tiempo, guardián de Freddy's!* 👁️‍🗨️`
+
+  let body = `
+🕰️ Perú       : ${fechaper}
+🕰️ México     : ${fechamex}
+🕰️ Bolivia    : ${fechabol}
+🕰️ Chile      : ${fechachi}
+🕰️ Argentina  : ${fechaarg}
+🕰️ Colombia   : ${fechacol}
+🕰️ Ecuador    : ${fechaecu}
+🕰️ Costa Rica : ${fechacosr}
+🕰️ Cuba       : ${fechacub}
+🕰️ Guatemala  : ${fechagua}
+🕰️ Honduras   : ${fechahon}
+🕰️ Nicaragua  : ${fechanic}
+🕰️ Panamá     : ${fechapan}
+🕰️ Uruguay    : ${fechauru}
+🕰️ Venezuela  : ${fechaven}
+🕰️ Paraguay   : ${fechapar}
+🕰️ New York   : ${fechanew}
+🕰️ Asia       : ${fechaasi}
+🕰️ Brasil     : ${fechabra}
+🕰️ Guinea Eq. : ${fechaafri}
+`
+
+  await conn.sendMessage(m.chat, {
+    text: header + body.trim() + '\n' + footer,
+  }, { quoted: m })
 };
 
 handler.help = ['horario'];
 handler.tags = ['info'];
-handler.command = ['horario']
+handler.command = ['horario'];
 
 export default handler;
