@@ -1,13 +1,19 @@
-let handler = async (m, { conn, args }) => {
-    let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
-    let user = global.db.data.users[userId]
-    let name = conn.getName(userId)
-    let _uptime = process.uptime() * 1000
-    let uptime = clockString(_uptime)
-    let totalreg = Object.keys(global.db.data.users).length
-    let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
-    
-    let txt = `
+// Si usas variables globales o las tienes en otro lado, acá las defines o importas:
+const botname = 'FNaF LATAM';
+const textbot = 'Bot oficial de FNaF LATAM';
+const banner = 'https://i.pinimg.com/736x/4d/cb/50/4dcb504b4becb8eeea2931117bbeee4f.jpg';
+const redes = ''; // pon aquí tu URL real
+const channelRD = { id: 'https://youtube.com/@dlhfox?si=HrJY9IYe4jp5eMoq', name: 'Canal Oficial' };
+
+let handler = async (m, { conn }) => {
+  let userId = (m.mentionedJid && m.mentionedJid[0]) ? m.mentionedJid[0] : m.sender;
+  let name = await conn.getName(userId);
+  let _uptime = process.uptime() * 1000;
+  let uptime = clockString(_uptime);
+  let totalreg = Object.keys(global.db.data.users).length;
+  let totalCommands = Object.values(global.plugins).filter(v => v.help && v.tags).length;
+
+  let txt = `
 ╭─〔 🎮 *FNaF LATAM SYSTEM* 🎮 〕─╮
 │ 🤖 *Unidad:* ${botname}
 │ 🎭 *Usuario:* @${userId.split('@')[0]}
@@ -398,43 +404,42 @@ FNaF LATAM - Diversión garantizada en cada comando.
 
 
 ¡Próximamente el 5 de diciembre de 2025! 🍕
-  `.trim()
+`.trim();
 
-  await conn.sendMessage(m.chat, { 
-      image: { url: 'https://i.pinimg.com/736x/4d/cb/50/4dcb504b4becb8eeea2931117bbeee4f.jpg' }, 
-      text: txt,
-      contextInfo: {
-          mentionedJid: [m.sender, userId],
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-              newsletterJid: channelRD.id,
-              newsletterName: channelRD.name,
-              serverMessageId: -1,
-          },
-          forwardingScore: 999,
-          externalAdReply: {
-              title: botname,
-              body: textbot,
-              thumbnailUrl: banner,
-              sourceUrl: redes,
-              mediaType: 1,
-              showAdAttribution: true,
-              renderLargerThumbnail: true,
-          },
+  await conn.sendMessage(m.chat, {
+    image: { url: banner },
+    text: txt,
+    contextInfo: {
+      mentionedJid: [m.sender, userId],
+      isForwarded: true,
+      forwardedNewsletterMessageInfo: {
+        newsletterJid: channelRD.id,
+        newsletterName: channelRD.name,
+        serverMessageId: -1,
       },
-  }, { quoted: m })
+      forwardingScore: 999,
+      externalAdReply: {
+        title: botname,
+        body: textbot,
+        thumbnailUrl: banner,
+        sourceUrl: redes,
+        mediaType: 1,
+        showAdAttribution: true,
+        renderLargerThumbnail: true,
+      },
+    },
+  }, { quoted: m });
+};
 
-}
+handler.help = ['menu'];
+handler.tags = ['main'];
+handler.command = ['menu', 'menú', 'help'];
 
-handler.help = ['menu']
-handler.tags = ['main']
-handler.command = ['menu', 'menú', 'help']
-
-export default handler
+export default handler;
 
 function clockString(ms) {
-    let seconds = Math.floor((ms / 1000) % 60)
-    let minutes = Math.floor((ms / (1000 * 60)) % 60)
-    let hours = Math.floor((ms / (1000 * 60 * 60)) % 24)
-    return `${hours}h ${minutes}m ${seconds}s`
+  let s = Math.floor((ms / 1000) % 60);
+  let m = Math.floor((ms / 60000) % 60);
+  let h = Math.floor(ms / 3600000);
+  return `${h}h ${m}m ${s}s`;
 }
