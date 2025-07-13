@@ -10,15 +10,17 @@ let handler = async (m, { conn, args, participants }) => {
     let endIndex = startIndex + pageSize;
     
     let totalPages = Math.ceil(sortedLevel.length / pageSize);
-    let text = `◢✨ Top de usuarios con más experiencia ✨◤\n\n`;
+    let text = `🔱 *FNaF LATAM - Ranking de Leyendas* 🔱\n\n`;
 
     text += sortedLevel.slice(startIndex, endIndex).map(({ jid, exp, level }, i) => {
-        return `✰ ${startIndex + i + 1} » *${participants.some(p => jid === p.jid) ? `(${conn.getName(jid)}) wa.me/` : '@'}${jid.split`@`[0]}*` +
-               `\n\t\t ❖ XP » *${exp}*  ❖ LVL » *${level}*`;
-    }).join('\n');
+        return `🎮 *#${startIndex + i + 1}* - *${participants.some(p => jid === p.jid) ? `${conn.getName(jid)}` : `wa.me/${jid.split`@`[0]}`}*` +
+               `\n   🦴 XP acumulada: *${exp}*  |  🕹️ Nivel: *${level}*`;
+    }).join('\n\n');
 
-    text += `\n\n> • Página *${page}* de *${totalPages}*`;
-    if (page < totalPages) text += `\n> Para ver la siguiente página » *#lb ${page + 1}*`;
+    text += `\n\n📜 Página *${page}* de *${totalPages}*`;
+    if (page < totalPages) text += `\n➡️ Para continuar, usa el comando » *#lb ${page + 1}*`;
+
+    text += `\n\n👻 ¡Gracias por formar parte del universo FNaF LATAM!`;
 
     await conn.reply(m.chat, text.trim(), m, { mentions: conn.parseMention(text) });
 }
