@@ -13,42 +13,53 @@ let handler = async (m, { conn, args }) => {
     let user = global.db.data.users[userId];
 
     let name = conn.getName(userId);
-    let cumpleanos = user.birth || 'No especificado';
-    let genero = user.genre || 'No especificado';
-    let pareja = user.marry || 'Nadie';
-    let description = user.description || 'Sin Descripción';
+    let cumpleanos = user.birth || '🔪 No registrado';
+    let genero = user.genre || '❓ Indefinido';
+    let pareja = user.marry || '👻 Solitario';
+    let description = user.description || '⚙️ Sin descripción del animatrónico';
     let exp = user.exp || 0;
     let nivel = user.level || 0;
-    let role = user.role || 'Sin Rango';
+    let role = user.role || '🦾 Sin rango asignado';
     let coins = user.coin || 0;
     let bankCoins = user.bank || 0;
 
     let perfil = await conn.profilePictureUrl(userId, 'image').catch(_ => 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745522645448.jpeg');
 
     let profileText = `
-「✿」 *Perfil* ◢@${userId.split('@')[0]}◤
-${description}
+╔════════════════════╗
+    🎭 𝐅𝐍𝐀𝐅 𝐋𝐀𝐓𝐀𝐌 🎭
+╚════════════════════╝
 
-✦ Edad » ${user.age || 'Desconocida'}
-♛ *Cumpleaños* » ${cumpleanos}
-⚥ *Género* » ${genero}
-♡ *Casado con* » ${pareja}
+👤 *Perfil del Animatrónico:* ◢ @${userId.split('@')[0]} ◤
 
-☆ *Experiencia* » ${exp.toLocaleString()}
-❖ *Nivel* » ${nivel}
-✎ Rango » ${role}
+💬 _${description}_
 
-⛁ *Coins Cartera* » ${coins.toLocaleString()} ${moneda}
-⛃ *Coins Banco* » ${bankCoins.toLocaleString()} ${moneda}
-❁ *Premium* » ${user.premium ? '✅' : '❌'}
-  `.trim();
+───────────────────────────────
+🎂 Cumpleaños: *${cumpleanos}*
+⚥ Género: *${genero}*
+❤️ Estado: *${pareja}*
+
+───────────────────────────────
+⭐ Experiencia: *${exp.toLocaleString()}*
+⚔ Nivel: *${nivel}*
+🏷 Rango: *${role}*
+
+───────────────────────────────
+💰 Monedas (Cartera): *${coins.toLocaleString()} ${moneda}*
+🏦 Monedas (Banco): *${bankCoins.toLocaleString()} ${moneda}*
+
+───────────────────────────────
+✨ Premium: ${user.premium ? '✅ Activado' : '❌ Inactivo'}
+
+*Interactúa para subir de nivel y descubrir más secretos...* 👻
+`.trim();
 
     await conn.sendMessage(m.chat, { 
         text: profileText,
         contextInfo: {
             mentionedJid: [userId],
             externalAdReply: {
-                title: '✧ Perfil de Usuario ✧',
+                title: '🎮 Perfil FNaF LATAM',
                 body: dev,
                 thumbnailUrl: perfil,
                 mediaType: 1,
