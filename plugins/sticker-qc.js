@@ -8,10 +8,10 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
     } else if (m.quoted && m.quoted.text) {
         text = m.quoted.text
     } else {
-        return conn.reply(m.chat, `❀ Por favor, ingresa un texto para crear el sticker.`, m)
+        return conn.reply(m.chat, `📝 *Se requiere texto para generar tu ficha de seguridad animatrónica.*`, m)
     }
 
-    if (!text) return conn.reply(m.chat, `❀ Por favor, ingresa un texto para crear el sticker.`, m)
+    if (!text) return conn.reply(m.chat, `⚠️ *Ingresa un texto válido para generar el sticker.*`, m)
 
     const mentionedUser = m.quoted ? m.quoted.sender : m.sender
     const pp = await conn.profilePictureUrl(mentionedUser).catch((_) => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
@@ -20,12 +20,12 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
     const mentionRegex = new RegExp(`@${mentionedUser.split('@')[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*`, 'g')
     const mishi = text.replace(mentionRegex, '')
 
-    if (mishi.length > 30) return conn.reply(m.chat, `✧ El texto no puede tener más de 30 caracteres.`, m)
+    if (mishi.length > 30) return conn.reply(m.chat, `🚫 *Límite excedido: máximo 30 caracteres por mensaje.*`, m)
 
     const obj = {
         "type": "quote",
         "format": "png",
-        "backgroundColor": "#000000",
+        "backgroundColor": "#0b0c10", // oscuro tipo oficina de seguridad
         "width": 512,
         "height": 768,
         "scale": 2,
@@ -34,7 +34,7 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
             "avatar": true,
             "from": {
                 "id": 1,
-                "name": `${nombre}`,
+                "name": `🎙 ${nombre}`,
                 "photo": { url: `${pp}` }
             },
             "text": mishi,
