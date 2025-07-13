@@ -8,553 +8,510 @@ let handler = async (m, { conn, args }) => {
     let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
     
     let txt = `
-Hola! Soy *${botname}* (｡•̀ᴗ-)✧
-Aquí tienes la lista de comandos
-╭┈ ↷
-│ᰔᩚ Cliente » @${userId.split('@')[0]}
-│❀ Modo » Publico
-│✦ Bot » ${(conn.user.jid == global.conn.user.jid ? 'Principal 🅥' : 'Prem Bot 🅑')}
-│ⴵ Activada » ${uptime}
-│✰ Usuarios » ${totalreg}
-│✧ Comandos » ${totalCommands}
-│🜸 Baileys » Multi Device
-╰─────────────────
-Crea un *Sub-Bot* con tu número utilizando *#qr* o *#code*
+╭─〔 🎮 *FNaF LATAM SYSTEM* 🎮 〕─╮
+│ 🤖 *Unidad:* ${botname}
+│ 🎭 *Usuario:* @${userId.split('@')[0]}
+│ 🔧 *Modo:* Público
+│ 🔌 *Tipo:* ${(conn.user.jid == global.conn.user.jid ? 'Principal 🅥' : 'Unidad Secundaria 🅑')}
+│ 🕐 *Activo desde:* ${uptime}
+│ 📂 *Usuarios Registrados:* ${totalreg}
+│ ⚙️ *Módulos Cargados:* ${totalCommands}
+│ 🧠 *Sistema:* Multi Device (Baileys)
+╰──────────────────────────────╯
 
-• :･ﾟ⊹˚• \`『 Info-Bot 』\` •˚⊹:･ﾟ•
+*Si alguno de los comandos del sistema presenta errores, por favor informa el incidente siguiendo este formato:*
 
-❍ Comandos para ver estado e información de la Bot.
-ᰔᩚ *#help • #menu*
-> ✦ Ver la lista de comandos de la Bot.
-ᰔᩚ *#uptime • #runtime*
-> ✦ Ver tiempo activo o en linea de la Bot.
-ᰔᩚ *#sc • #script*
-> ✦ Link del repositorio oficial de la Bot
-ᰔᩚ *#staff • #colaboradores*
-> ✦ Ver la lista de desarrolladores de la Bot.
-ᰔᩚ *#serbot • #serbot code*
-> ✦ Crea una sesión de Sub-Bot.
-ᰔᩚ *#bots • #sockets*
-> ✦ Ver la lista de Sub-Bots activos.
-ᰔᩚ *#creador*
-> ✦ Contacto del creador de la Bot.
-ᰔᩚ *#status • #estado*
-> ✦ Ver el estado actual de la Bot.
-ᰔᩚ *#links • #grupos*
-> ✦ Ver los enlaces oficiales de la Bot.
-ᰔᩚ *#infobot • #infobot*
-> ✦ Ver la información completa de la Bot.
-ᰔᩚ *#sug • #newcommand*
-> ✦ Sugiere un nuevo comando.
-ᰔᩚ *#p • #ping*
-> ✦ Ver la velocidad de respuesta del Bot.
-ᰔᩚ *#reporte • #reportar*
-> ✦ Reporta alguna falla o problema de la Bot.
-ᰔᩚ *#sistema • #system*
-> ✦ Ver estado del sistema de alojamiento.
-ᰔᩚ *#speed • #speedtest*
-> ✦ Ver las estadísticas de velocidad de la Bot.
-ᰔᩚ *#views • #usuarios*
-> ✦ Ver la cantidad de usuarios registrados en el sistema.
-ᰔᩚ *#funciones • #totalfunciones*
-> ✦ Ver todas las funciones de la Bot.
-ᰔᩚ *#ds • #fixmsgespera*
-> ✦ Eliminar archivos de sesión innecesarios.
-ᰔᩚ *#editautoresponder*
-> ✦ Configurar un Prompt personalizado de la Bot.
+🔧 Comando con error: #comando  
+⚠️ Problema: Describe brevemente qué ocurrió.  
+📌 Etiquetame a mí para que reciba el aviso directamente.
 
-• :･ﾟ⊹˚• \`『 Buscadores 』\` •˚⊹:･ﾟ•
+🎮 Tu reporte ayuda a mantener al Bot FNaF LATAM en un estado óptimo y funcional para todos.
+*Gracias por colaborar con el sistema.*
 
-❍ Comandos para realizar búsquedas en distintas plataformas.
-ᰔᩚ *#tiktoksearch • #tiktoks*
-> ✦ Buscador de videos de tiktok.
-ᰔᩚ *#tweetposts*
-> ✦ Buscador de posts de Twitter/X.
-ᰔᩚ *#ytsearch • #yts*
-> ✦ Realiza búsquedas de Youtube.
-ᰔᩚ *#githubsearch*
-> ✦ Buscador de usuarios de GitHub.
-ᰔᩚ *#cuevana • #cuevanasearch*
-> ✦ Buscador de películas/series por Cuevana.
-ᰔᩚ *#google*
-> ✦ Realiza búsquedas por Google.
-ᰔᩚ *#pin • #pinterest*
-> ✦ Buscador de imagenes de Pinterest.
-ᰔᩚ *#imagen • #image*
-> ✦ buscador de imagenes de Google.
-ᰔᩚ *#infoanime*
-> ✦ Buscador de información de anime/manga.
-ᰔᩚ *#hentaisearch • #searchhentai*
-> ✦ Buscador de capítulos hentai.
-ᰔᩚ #xnxxsearch • #xnxxs*
-> ✦ Buscador de vídeos de Xnxx.
-ᰔᩚ *#xvsearch • #xvideossearch*
-> ✦ Buscador de vídeos de Xvideos.
-ᰔᩚ *#pornhubsearch • #phsearch*
-> ✦ Buscador de videos de Pornhub.
-ᰔᩚ *#npmjs*
-> ✦ Buscandor de npmjs.
 
-• :･ﾟ⊹˚• \`『 Descargas 』\` •˚⊹:･ﾟ•
+━━━━━━━━━━━━━━━━━━━━━━
+🔍 *MÓDULO DE DIAGNÓSTICO - FNaF LATAM*
+━━━━━━━━━━━━━━━━━━━━━━
 
-❍ Comandos de descargas para varios archivos.
-ᰔᩚ *#tiktok • #tt*
-> ✦ Descarga videos de TikTok.
-ᰔᩚ *#mediafire • #mf*
-> ✦ Descargar un archivo de MediaFire.
-ᰔᩚ *#pinvid • #pinvideo* + [enlacé]
-> ✦ Descargar vídeos de Pinterest. 
-ᰔᩚ *#mega • #mg* + [enlacé]
-> ✦ Descargar un archivo de MEGA.
-ᰔᩚ *#play • #play2*
-> ✦ Descarga música/video de YouTube.
-ᰔᩚ *#ytmp3 • #ytmp4*
-> ✦ Descarga música/video de YouTube mediante url.
-ᰔᩚ *#fb • #facebook*
-> ✦ Descarga videos de Facebook.
-ᰔᩚ *#twitter • #x* + [Link]
-> ✦ Descargar un video de Twitter/X
-ᰔᩚ *#ig • #instagram*
-> ✦ Descarga contenido de Instagram.
-ᰔᩚ *#tts • #tiktoks* + [busqueda]
-> ✦ Buscar videos de tiktok 
-ᰔᩚ *#terabox • #tb* + [enlace]
-> ✦ Descargar archivos por Terabox.
-ᰔᩚ *#ttimg • #ttmp3* + <url>
-> ✦ Descarga fotos/audios de tiktok. 
-ᰔᩚ *#gitclone* + <url> 
-> ✦ Descarga un repositorio de github.
-ᰔᩚ *#xvideosdl*
-> ✦ Descarga videos porno de (Xvideos). 
-ᰔᩚ *#xnxxdl*
-> ✦ Descarga videos porno de (xnxx).
-ᰔᩚ *#apk • #modapk*
-> ✦ Descarga un apk de Aptoide.
-ᰔᩚ *#tiktokrandom • #ttrandom*
-> ✦ Descarga un video aleatorio de tiktok.
-ᰔᩚ *#npmdl • #npmdownloader*
-> ✦ Descarga paquetes de NPMJs.
+🎛️ Comandos de análisis y control del sistema:
 
-• :･ﾟ⊹˚• \`『 Economia 』\` •˚⊹:･ﾟ•
+▸ `#help` | `#menu`
+> 📋 Visualiza el panel completo de comandos.
+▸ `#uptime` | `#runtime`
+> ⏱️ Tiempo de operación del bot.
+▸ `#status` | `#estado`
+> 📶 Estado general del sistema.
+▸ `#infobot` | `#infobot`
+> 🧠 Información interna y técnica del bot.
+▸ `#p` | `#ping`
+> 📡 Latencia y tiempo de respuesta.
+▸ `#sistema` | `#system`
+> 🖥️ Verifica el estado de alojamiento actual.
+▸ `#speed` | `#speedtest`
+> 🚀 Analiza el rendimiento del entorno.
+▸ `#views` | `#usuarios`
+> 🗂️ Muestra usuarios activos en el sistema.
+▸ `#funciones` | `#totalfunciones`
+> ⚙️ Despliega el total de funcionalidades activas.
 
-❍ Comandos de economía y rpg para ganar dinero y otros recursos.
-ᰔᩚ *#w • #work • #trabajar*
-> ✦ Trabaja para ganar ${moneda}.
-ᰔᩚ *#slut • #protituirse*
-> ✦ Trabaja como prostituta y gana ${moneda}.
-ᰔᩚ *#cf • #suerte*
-> ✦ Apuesta tus ${moneda} a cara o cruz.
-ᰔᩚ *#crime • #crimen
-> ✦ Trabaja como ladrón para ganar ${moneda}.
-ᰔᩚ *#ruleta • #roulette • #rt*
-> ✦ Apuesta ${moneda} al color rojo o negro.
-ᰔᩚ *#casino • #apostar*
-> ✦ Apuesta tus ${moneda} en el casino.
-ᰔᩚ *#slot*
-> ✦ Apuesta tus ${moneda} en la ruleta y prueba tu suerte.
-ᰔᩚ *#cartera • #wallet*
-> ✦ Ver tus ${moneda} en la cartera.
-ᰔᩚ *#banco • #bank*
-> ✦ Ver tus ${moneda} en el banco.
-ᰔᩚ *#deposit • #depositar • #d*
-> ✦ Deposita tus ${moneda} al banco.
-ᰔᩚ *#with • #retirar • #withdraw*
-> ✦ Retira tus ${moneda} del banco.
-ᰔᩚ *#transfer • #pay*
-> ✦ Transfiere ${moneda} o XP a otros usuarios.
-ᰔᩚ *#miming • #minar • #mine*
-> ✦ Trabaja como minero y recolecta recursos.
-ᰔᩚ *#buyall • #buy*
-> ✦ Compra ${moneda} con tu XP.
-ᰔᩚ *#daily • #diario*
-> ✦ Reclama tu recompensa diaria.
-ᰔᩚ *#cofre*
-> ✦ Reclama un cofre diario lleno de recursos.
-ᰔᩚ *#weekly • #semanal*
-> ✦ Reclama tu regalo semanal.
-ᰔᩚ *#monthly • #mensual*
-> ✦ Reclama tu recompensa mensual.
-ᰔᩚ *#steal • #robar • #rob*
-> ✦ Intenta robarle ${moneda} a alguien.
-ᰔᩚ *#robarxp • #robxp*
-> ✦ Intenta robar XP a un usuario.
-ᰔᩚ *#eboard • #baltop*
-> ✦ Ver el ranking de usuarios con más ${moneda}.
-ᰔᩚ *#aventura • #adventure*
-> ✦ Aventúrate en un nuevo reino y recolecta recursos.
-ᰔᩚ *#curar • #heal*
-> ✦ Cura tu salud para volverte aventurar.
-ᰔᩚ *#cazar • #hunt • #berburu*
-> ✦ Aventúrate en una caza de animales.
-ᰔᩚ *#inv • #inventario*
-> ✦ Ver tu inventario con todos tus ítems.
-ᰔᩚ *#mazmorra • #explorar*
-> ✦ Explorar mazmorras para ganar ${moneda}.
-ᰔᩚ *#halloween*
-> ✦ Reclama tu dulce o truco (Solo en Halloween).
-ᰔᩚ *#christmas • #navidad*
-> ✦ Reclama tu regalo navideño (Solo en Navidad).
 
-• :･ﾟ⊹˚• \`『 Gacha 』\` •˚⊹:･ﾟ•
+━━━━━━━━━━━━━━━━━━━━━━
+🔎 *MÓDULO DE BUSCADORES - FNaF LATAM*
+━━━━━━━━━━━━━━━━━━━━━━
 
-❍ Comandos de gacha para reclamar y colecciónar personajes.
-ᰔᩚ *#rollwaifu • #rw • #roll*
-> ✦ Waifu o husbando aleatorio.
-ᰔᩚ  *#claim • #c • #reclamar*
-> ✦ Reclamar un personaje.
-ᰔᩚ *#harem • #waifus • #claims*
-> ✦ Ver tus personajes reclamados.
-ᰔᩚ *#charimage • #waifuimage • #wimage* 
-> ✦ Ver una imagen aleatoria de un personaje.
-ᰔᩚ *#charinfo • #winfo • #waifuinfo*
-> ✦ Ver información de un personaje.
-ᰔᩚ *#givechar • #givewaifu • #regalar*
-> ✦ Regalar un personaje a otro usuario.
-ᰔᩚ *#vote • #votar*
-> ✦ Votar por un personaje para subir su valor.
-ᰔᩚ *#waifusboard • #waifustop • #topwaifus*
-> ✦ Ver el top de personajes con mayor valor.
+🌐 Comandos para realizar búsquedas en diversas plataformas:
 
-• :･ﾟ⊹˚• \`『 Stickers 』\` •˚⊹:･ﾟ•
+▸ `#tiktoksearch` | `#tiktoks`
+> ▶️ Busca videos en TikTok.
+▸ `#tweetposts`
+> ▶️ Busca publicaciones en Twitter/X.
+▸ `#ytsearch` | `#yts`
+> ▶️ Busca videos en YouTube.
+▸ `#cuevana` | `#cuevanasearch`
+> ▶️ Busca películas y series en Cuevana.
+▸ `#google`
+> ▶️ Realiza búsquedas generales en Google.
+▸ `#pin` | `#pinterest`
+> ▶️ Busca imágenes en Pinterest.
+▸ `#infoanime`
+> ▶️ Busca información sobre anime y manga.
 
-❍ Comandos para creaciones de stickers etc.
-ᰔᩚ *#sticker • #s*
-> ✦ Crea stickers de (imagen/video)
-ᰔᩚ *#setmeta*
-> ✦ Estable un pack y autor para los stickers.
-ᰔᩚ *#delmeta*
-> ✦ Elimina tu pack de stickers.
-ᰔᩚ *#pfp • #getpic*
-> ✦ Obtén la foto de perfil de un usuario.
-ᰔᩚ *#qc*
-> ✦ Crea stickers con texto o de un usuario.
-ᰔᩚ *#toimg • #img*
-> ✦ Convierte stickers en imagen.
-ᰔᩚ *#brat • #ttp • #attp*︎ 
-> ✦ Crea stickers con texto.
-ᰔᩚ *#emojimix*
-> ✦ Fuciona 2 emojis para crear un sticker.
-ᰔᩚ *#wm*
-> ✦ Cambia el nombre de los stickers.
+FNaF LATAM - Buscadores activos listos para tí. 
 
-•:･ﾟ⊹˚• \`『 Herramientas 』\` •˚⊹:･ﾟ•
+━━━━━━━━━━━━━━━━━━━━━━  
+⬇️ *『 DESCARGAS - FNaF LATAM 』* ⬇️  
+━━━━━━━━━━━━━━━━━━━━━━  
 
-❍ Comandos de herramientas con muchas funciones.
-ᰔᩚ *#calcular • #calcular • #cal*
-> ✦ Calcular todo tipo de ecuaciones.
-ᰔᩚ *#tiempo • #clima*
-> ✦ Ver el clima de un pais.
-ᰔᩚ *#horario*
-> ✦ Ver el horario global de los países.
-ᰔᩚ *#fake • #fakereply*
-> ✦ Crea un mensaje falso de un usuario.
-ᰔᩚ *#enhance • #remini • #hd*
-> ✦ Mejora la calidad de una imagen.
-ᰔᩚ *#letra*
-> ✦ Cambia la fuente de las letras.
-ᰔᩚ *#read • #readviewonce • #ver*
-> ✦ Ver imágenes de una sola vista.
-ᰔᩚ *#whatmusic • #shazam*
-> ✦ Descubre el nombre de canciones o vídeos.
-ᰔᩚ *#ss • #ssweb*
-> ✦ Ver el estado de una página web.
-ᰔᩚ *#length • #tamaño*
-> ✦ Cambia el tamaño de imágenes y vídeos.
-ᰔᩚ *#say • #decir* + [texto]
-> ✦ Repetir un mensaje.
-ᰔᩚ *#todoc • #toducument*
-> ✦ Crea documentos de (audio, imágenes y vídeos).
-ᰔᩚ *#translate • #traducir • #trad*
-> ✦ Traduce palabras en otros idiomas.
+🎬 Comandos para descargar archivos multimedia y más:  
 
-• :･ﾟ⊹˚• \`『 Perfil 』\` •˚⊹:･ﾟ•
+▸ `#tiktok` | `#tt`  
+> ⬇🔄 Descarga videos completos de TikTok.  
+▸ `#mediafire` | `#mf`  
+> ⬇🔄 Descarga archivos desde MediaFire.  
+▸ `#pinvid` | `#pinvideo` + [enlace]  
+> ⬇🔄 Descarga videos desde Pinterest.  
+▸ `#play` | `#play2`  
+> ⬇🔄 Descarga música o video desde YouTube.  
+▸ `#ytmp3` | `#ytmp4`  
+> ⬇🔄 Descarga audio o video de YouTube vía URL.  
+▸ `#fb` | `#facebook`  
+> ⬇🔄 Descarga videos desde Facebook.  
+▸ `#twitter` | `#x` + [link]  
+> ⬇🔄 Descarga videos desde Twitter/X.  
+▸ `#ig` | `#instagram`  
+> ⬇🔄 Descarga contenido multimedia de Instagram.  
+▸ `#tts` | `#tiktoks` + [búsqueda]  
+> ⬇🔄 Busca y descarga videos de TikTok.  
+▸ `#ttimg` | `#ttmp3` + <url>  
+> ⬇🔄 Descarga fotos y audios de TikTok.  
+▸ `#apk` | `#modapk`  
+> ⬇🔄 Descarga APKs desde Aptoide.  
+▸ `#tiktokrandom` | `#ttrandom`  
+> ⬇🔄 Descarga videos aleatorios de TikTok.  
 
-❍ Comandos de perfil para ver, configurar y comprobar estados de tu perfil.
-ᰔᩚ *#reg • #verificar • #register*
-> ✦ Registra tu nombre y edad en el bot.
-ᰔᩚ *#unreg*
-> ✦ Elimina tu registro del bot.
-ᰔᩚ *#profile*
-> ✦ Muestra tu perfil de usuario.
-ᰔᩚ *#marry* [mension / etiquetar]
-> ✦ Propón matrimonio a otro usuario.
-ᰔᩚ *#divorce*
-> ✦ Divorciarte de tu pareja.
-ᰔᩚ *#setgenre • #setgenero*
-> ✦ Establece tu género en el perfil del bot.
-ᰔᩚ *#delgenre • #delgenero*
-> ✦ Elimina tu género del perfil del bot.
-ᰔᩚ *#setbirth • #setnacimiento*
-> ✦ Establece tu fecha de nacimiento en el perfil del bot.
-ᰔᩚ *#delbirth • #delnacimiento*
-> ✦ Elimina tu fecha de nacimiento del perfil del bot.
-ᰔᩚ *#setdescription • #setdesc*
-> ✦ Establece una descripción en tu perfil del bot.
-ᰔᩚ *#deldescription • #deldesc*
-> ✦ Elimina la descripción de tu perfil del bot.
-ᰔᩚ *#lb • #lboard* + <Paginá>
-> ✦ Top de usuarios con más (experiencia y nivel).
-ᰔᩚ *#level • #lvl* + <@Mencion>
-> ✦ Ver tu nivel y experiencia actual.
-ᰔᩚ *#comprarpremium • #premium*
-> ✦ Compra un pase premium para usar el bot sin límites.
-ᰔᩚ *#confesiones • #confesar*
-> ✦ Confiesa tus sentimientos a alguien de manera anonima.
+FNaF LATAM - Tu mejor aliado en descargas.  
 
-• :･ﾟ⊹˚• \`『 Grupos 』\` •˚⊹:･ﾟ•
 
-❍ Comandos de grupos para una mejor gestión de ellos.
-ᰔᩚ *#hidetag*
-> ✦ Envia un mensaje mencionando a todos los usuarios
-ᰔᩚ *#gp • #infogrupo*
-> ✦  Ver la Informacion del grupo.
-ᰔᩚ *#linea • #listonline*
-> ✦ Ver la lista de los usuarios en linea.
-ᰔᩚ *#setwelcome*
-> ✦ Establecer un mensaje de bienvenida personalizado.
-ᰔᩚ *#setbye*
-> ✦ Establecer un mensaje de despedida personalizado.
-ᰔᩚ *#link*
-> ✦ El bot envia el link del grupo.
-ᰔᩚ *admins • admin*
-> ✦ Mencionar a los admins para solicitar ayuda.
-ᰔᩚ *#restablecer • #revoke*
-> ✦ Restablecer el enlace del grupo.
-ᰔᩚ *#grupo • #group* [open / abrir]
-> ✦ Cambia ajustes del grupo para que todos los usuarios envien mensaje.
-ᰔᩚ *#grupo • #gruop* [close / cerrar]
-> ✦ Cambia ajustes del grupo para que solo los administradores envien mensaje.
-ᰔᩚ *#kick* [número / mension]
-> ✦ Elimina un usuario de un grupo.
-ᰔᩚ *#add • #añadir • #agregar* [número]
-> ✦ Invita a un usuario a tu grupo.
-ᰔᩚ *#promote* [mension / etiquetar]
-> ✦ El bot dara administrador al usuario mencionando.
-ᰔᩚ *#demote* [mension / etiquetar]
-> ✦ El bot quitara administrador al usuario mencionando.
-ᰔᩚ *#gpbanner • #groupimg*
-> ✦ Cambiar la imagen del grupo.
-ᰔᩚ *#gpname • #groupname*
-> ✦ Cambiar el nombre del grupo.
-ᰔᩚ *#gpdesc • #groupdesc*
-> ✦ Cambiar la descripción del grupo.
-ᰔᩚ *#advertir • #warn • #warning*
-> ✦ Darle una advertencia aún usuario.
-ᰔᩚ ︎*#unwarn • #delwarn*
-> ✦ Quitar advertencias.
-ᰔᩚ *#advlist • #listadv*
-> ✦ Ver lista de usuarios advertidos.
-ᰔᩚ *#bot on*
-> ✦ Enciende el bot en un grupo.
-ᰔᩚ *#bot off*
-> ✦ Apaga el bot en un grupo.
-ᰔᩚ *#mute* [mension / etiquetar]
-> ✦ El bot elimina los mensajes del usuario.
-ᰔᩚ *#unmute* [mension / etiquetar]
-> ✦ El bot deja de eliminar los mensajes del usuario.
-ᰔᩚ *#encuesta • #poll*
-> ✦ Crea una encuesta.
-ᰔᩚ *#delete • #del*
-> ✦ Elimina mensaje de otros usuarios.
-ᰔᩚ *#fantasmas*
-> ✦ Ver lista de inactivos del grupo.
-ᰔᩚ *#kickfantasmas*
-> ✦ Elimina a los inactivos del grupo.
-ᰔᩚ *#invocar • #tagall • #todos*
-> ✦ Invoca a todos los usuarios de un grupo.
-ᰔᩚ *#setemoji • #setemo*
-> ✦ Cambia el emoji que se usa en la invitación de usuarios.
-ᰔᩚ *#listnum • #kicknum*
-> ✦ Elimine a usuario por el prefijo de país.
+━━━━━━━━━━━━━━━━━━━━━━  
+💰 *『 ECONOMÍA - FNaF LATAM 』* 💰  
+━━━━━━━━━━━━━━━━━━━━━━  
 
-• :･ﾟ⊹˚• \`『 Anime 』\` •˚⊹:･ﾟ•
+🎲 Comandos para ganar ${moneda} y recursos RPG:  
 
-❍ Comandos de reacciones de anime.
-ᰔᩚ *#angry • #enojado* + <mencion>
-> ✦ Estar enojado
-ᰔᩚ *#bite* + <mencion>
-> ✦ Muerde a alguien
-ᰔᩚ *#bleh* + <mencion>
-> ✦ Sacar la lengua
-ᰔᩚ *#blush* + <mencion>
-> ✦ Sonrojarte
-ᰔᩚ *#bored • #aburrido* + <mencion>
-> ✦ Estar aburrido
-ᰔᩚ *#cry* + <mencion>
-> ✦ Llorar por algo o alguien
-ᰔᩚ *#cuddle* + <mencion>
-> ✦ Acurrucarse
-ᰔᩚ *#dance* + <mencion>
-> ✦ Sacate los pasitos prohíbidos
-ᰔᩚ *#drunk* + <mencion>
-> ✦ Estar borracho
-ᰔᩚ *#eat • #comer* + <mencion>
-> ✦ Comer algo delicioso
-ᰔᩚ *#facepalm* + <mencion>
-> ✦ Darte una palmada en la cara
-ᰔᩚ *#happy • #feliz* + <mencion>
-> ✦ Salta de felicidad
-ᰔᩚ *#hug* + <mencion>
-> ✦ Dar un abrazo
-ᰔᩚ *#impregnate • #preg* + <mencion>
-> ✦ Embarazar a alguien
-ᰔᩚ *#kill* + <mencion>
-> ✦ Toma tu arma y mata a alguien
-ᰔᩚ *#kiss • #besar* • #kiss2 + <mencion>
-> ✦ Dar un beso
-ᰔᩚ *#laugh* + <mencion>
-> ✦ Reírte de algo o alguien
-ᰔᩚ *#lick* + <mencion>
-> ✦ Lamer a alguien
-ᰔᩚ *#love • #amor* + <mencion>
-> ✦ Sentirse enamorado
-ᰔᩚ *#pat* + <mencion>
-> ✦ Acaricia a alguien
-ᰔᩚ *#poke* + <mencion>
-> ✦ Picar a alguien
-ᰔᩚ *#pout* + <mencion>
-> ✦ Hacer pucheros
-ᰔᩚ *#punch* + <mencion>
-> ✦ Dar un puñetazo
-ᰔᩚ *#run* + <mencion>
-> ✦ Correr
-ᰔᩚ *#sad • #triste* + <mencion>
-> ✦ Expresar tristeza
-ᰔᩚ *#scared* + <mencion>
-> ✦ Estar asustado
-ᰔᩚ *#seduce* + <mencion>
-> ✦ Seducir a alguien
-ᰔᩚ *#shy • #timido* + <mencion>
-> ✦ Sentir timidez
-ᰔᩚ *#slap* + <mencion>
-> ✦ Dar una bofetada
-ᰔᩚ *#dias • #days*
-> ✦ Darle los buenos días a alguien 
-ᰔᩚ *#noches • #nights*
-> ✦ Darle las buenas noches a alguien 
-ᰔᩚ *#sleep* + <mencion>
-> ✦ Tumbarte a dormir
-ᰔᩚ *#smoke* + <mencion>
-> ✦ Fumar
-ᰔᩚ *#think* + <mencion>
-> ✦ Pensar en algo
+▸ `#w` | `#work` | `#trabajar`  
+> 💵 Trabaja para ganar ${moneda}.  
+▸ `#cf` | `#suerte`  
+> 💵 Apuesta tus ${moneda} a cara o cruz.  
+▸ `#crime` | `#crimen`  
+> 💵 Trabaja como ladrón para ganar ${moneda}.  
+▸ `#ruleta` | `#roulette` | `#rt`  
+> 💵 Apuesta ${moneda} al color rojo o negro.  
+▸ `#casino` | `#apostar`  
+> 💵 Apuesta tus ${moneda} en el casino.  
+▸ `#slot`  
+> 💵 Prueba tu suerte apostando tus ${moneda} en la ruleta.  
+▸ `#cartera` | `#wallet`  
+> 💵 Consulta tu saldo de ${moneda} en la cartera.  
+▸ `#banco` | `#bank`  
+> 💵 Consulta tu saldo de ${moneda} en el banco.  
+▸ `#deposit` | `#depositar` | `#d`  
+> 💵 Deposita tus ${moneda} en el banco.  
+▸ `#with` | `#retirar` | `#withdraw`  
+> 💵 Retira tus ${moneda} del banco.  
+▸ `#transfer` | `#pay`  
+> 💵 Transfiere ${moneda} o XP a otros usuarios.  
+▸ `#miming` | `#minar` | `#mine`  
+> 💵 Trabaja como minero y recolecta recursos.  
+▸ `#buyall` | `#buy`  
+> 💵 Compra ${moneda} usando XP.  
+▸ `#daily` | `#diario`  
+> 💵 Reclama tu recompensa diaria.  
+▸ `#cofre`  
+> 💵 Reclama un cofre diario lleno de recursos.  
+▸ `#weekly` | `#semanal`  
+> 💵 Reclama tu recompensa semanal.  
+▸ `#monthly` | `#mensual`  
+> 💵 Reclama tu recompensa mensual.  
+▸ `#steal` | `#robar` | `#rob`  
+> 💵 Intenta robar ${moneda} a otro usuario.  
+▸ `#robarxp` | `#robxp`  
+> 💵 Intenta robar XP a un usuario.  
+▸ `#eboard` | `#baltop`  
+> 💵 Consulta el ranking de usuarios con más ${moneda}.  
+▸ `#aventura` | `#adventure`  
+> 💵 Aventúrate en un reino y recolecta recursos.  
+▸ `#curar` | `#heal`  
+> 💵 Restaura tu salud para seguir aventurándote.  
+▸ `#cazar` | `#hunt` | `#berburu`  
+> 💵 Participa en una cacería para conseguir recursos.  
+▸ `#inv` | `#inventario`  
+> 💵 Consulta tu inventario con todos tus ítems.  
+▸ `#mazmorra` | `#explorar`  
+> 💵 Explora mazmorras para ganar ${moneda}.  
+▸ `#halloween`  
+> 💵 Reclama dulce o truco (Solo en Halloween).  
+▸ `#christmas` | `#navidad`  
+> 💵 Reclama tu regalo navideño (Solo en Navidad).  
 
-• :･ﾟ⊹˚• \`『 NSFW 』\` •˚⊹:･ﾟ•
+FNaF LATAM - Tu camino al éxito económico.  
 
-❍ Comandos NSFW (Contenido para adultos)
-ᰔᩚ *#anal* + <mencion>
-> ✦ Hacer un anal
-ᰔᩚ *#waifu*
-> ✦ Buscá una waifu aleatorio.
-ᰔᩚ *#bath* + <mencion>
-> ✦ Bañarse
-ᰔᩚ *#blowjob • #mamada • #bj* + <mencion>
-> ✦ Dar una mamada
-ᰔᩚ *#boobjob* + <mencion>
-> ✦ Hacer una rusa
-ᰔᩚ *#cum* + <mencion>
-> ✦ Venirse en alguien.
-ᰔᩚ *#fap* + <mencion>
-> ✦ Hacerse una paja
-ᰔᩚ *#ppcouple • #ppcp*
-> ✦ Genera imagenes para amistades o parejas.
-ᰔᩚ *#footjob* + <mencion>
-> ✦ Hacer una paja con los pies
-ᰔᩚ *#fuck • #coger • #fuck2* + <mencion>
-> ✦ Follarte a alguien
-ᰔᩚ *#cafe • #coffe*
-> ✦ Tomate un cafecito con alguien
-ᰔᩚ *#violar • #perra + <mencion>
-> ✦ Viola a alguien
-ᰔᩚ *#grabboobs* + <mencion>
-> ✦ Agarrrar tetas
-ᰔᩚ *#grop* + <mencion>
-> ✦ Manosear a alguien
-ᰔᩚ *#lickpussy* + <mencion>
-> ✦ Lamer un coño
-ᰔᩚ *#rule34 • #r34* + [Tags]
-> ✦ Buscar imagenes en Rule34
-ᰔᩚ *#sixnine • #69* + <mencion>
-> ✦ Haz un 69 con alguien
-ᰔᩚ *#spank • #nalgada* + <mencion>
-> ✦ Dar una nalgada
-ᰔᩚ *#suckboobs* + <mencion>
-> ✦ Chupar tetas
-ᰔᩚ *#undress • #encuerar* + <mencion>
-> ✦ Desnudar a alguien
-ᰔᩚ *#yuri • #tijeras* + <mencion>
-> ✦ Hacer tijeras.
 
-• :･ﾟ⊹˚• \`『 Juegos 』\` •˚⊹:･ﾟ•
+━━━━━━━━━━━━━━━━━━━━━━  
+🧩 *『 STICKERS - FNaF LATAM 』* 🧩  
+━━━━━━━━━━━━━━━━━━━━━━  
 
-❍ Comandos de juegos para jugar con tus amigos.
-ᰔᩚ *#amistad • #amigorandom* 
-> ✦ hacer amigos con un juego. 
-ᰔᩚ *#chaqueta • #jalamela*
-> ✦ Hacerte una chaqueta.
-ᰔᩚ *#chiste*
-> ✦ La bot te cuenta un chiste.
-ᰔᩚ *#consejo* 
-> ✦ La bot te da un consejo. 
-ᰔᩚ *#doxeo • #doxear* + <mencion>
-> ✦ Simular un doxeo falso.
-ᰔᩚ *#facto*
-> ✦ La bot te lanza un facto. 
-ᰔᩚ *#formarpareja*
-> ✦ Forma una pareja. 
-ᰔᩚ *#formarpareja5*
-> ✦ Forma 5 parejas diferentes.
-ᰔᩚ *#frase*
-> ✦ La bot te da una frase.
-ᰔᩚ *#huevo*
-> ✦ Agarrale el huevo a alguien.
-ᰔᩚ *#chupalo* + <mencion>
-> ✦ Hacer que un usuario te la chupe.
-ᰔᩚ *#aplauso* + <mencion>
-> ✦ Aplaudirle a alguien.
-ᰔᩚ *#marron* + <mencion>
-> ✦ Burlarte del color de piel de un usuario. 
-ᰔᩚ *#suicidar*
-> ✦ Suicidate. 
-ᰔᩚ *#iq • #iqtest* + <mencion>
-> ✦ Calcular el iq de alguna persona. 
-ᰔᩚ *#meme*
-> ✦ La bot te envía un meme aleatorio. 
-ᰔᩚ *#morse*
-> ✦ Convierte un texto a codigo morse. 
-ᰔᩚ *#nombreninja*
-> ✦ Busca un nombre ninja aleatorio. 
-ᰔᩚ *#paja • #pajeame* 
-> ✦ La bot te hace una paja.
-ᰔᩚ *#personalidad* + <mencion>
-> ✦ La bot busca tu personalidad. 
-ᰔᩚ *#piropo*
-> ✦ Lanza un piropo.
-ᰔᩚ *#pregunta*
-> ✦ Hazle una pregunta a la bot.
-ᰔᩚ *#ship • #pareja*
-> ✦ La bot te da la probabilidad de enamorarte de una persona. 
-ᰔᩚ *#sorteo*
-> ✦ Empieza un sorteo. 
-ᰔᩚ *#top*
-> ✦ Empieza un top de personas.
-ᰔᩚ *#formartrio* + <mencion>
-> ✦ Forma un trio.
-ᰔᩚ *#ahorcado*
-> ✦ Diviertete con la bot jugando el juego ahorcado.
-ᰔᩚ *#mates • #matematicas*
-> ✦ Responde las preguntas de matemáticas para ganar recompensas.
-ᰔᩚ *#ppt*
-> ✦ Juega piedra papel o tijeras con la bot.
-ᰔᩚ *#sopa • #buscarpalabra*
-> ✦ Juega el famoso juego de sopa de letras.
-ᰔᩚ *#pvp • #suit* + <mencion>
-> ✦ Juega un pvp contra otro usuario.
-ᰔᩚ *#ttt*
-> ✦ Crea una sala de juego. 
+🔰 Comandos para creación y edición de stickers personalizados.
+
+🧩 `#sticker` | `#s`
+> Crea stickers a partir de una imagen o video.
+🧩 `#setmeta`
+> Establece pack y autor para tus stickers.
+🧩 `#delmeta`
+> Elimina tu pack de stickers actual.
+🧩 `#pfp` | `#getpic`
+> Obtiene la foto de perfil de un usuario.
+🧩 `#qc`
+> Genera un sticker con texto o avatar.
+🧩 `#toimg` | `#img`
+> Convierte un sticker en imagen.
+🧩 `#brat` | `#ttp` | `#attp`
+> Crea stickers con texto animado o simple.
+🧩 `#emojimix`
+> Fusiona 2 emojis para formar un nuevo sticker.
+🧩 `#wm`
+> Cambia nombre o autor de los stickers generados.
+
+FNaF LATAM - Crea, diseña y comparte tu estilo en stickers.
+
+
+━━━━━━━━━━━━━━━━━━━━━━  
+🛠️ *『 HERRAMIENTAS - FNaF LATAM 』* 🛠️  
+━━━━━━━━━━━━━━━━━━━━━━  
+
+♻️ Comandos de utilidades con múltiples funciones para mejorar tu experiencia.
+
+🛠️ `#calcular` | `#cal`
+> Resuelve ecuaciones matemáticas rápidamente.
+🛠️ `#tiempo` | `#clima`
+> Consulta el clima actual de cualquier país.
+🛠️ `#horario`
+> Visualiza el horario global por regiones.
+🛠️ `#fake` | `#fakereply`
+> Genera mensajes falsos personalizados.
+🛠️ `#enhance` | `#remini` | `#hd`
+> Mejora automáticamente la calidad de una imagen.
+🛠️ `#letra`
+> Transforma el estilo tipográfico de tus textos.
+🛠️ `#read` | `#readviewonce` | `#ver`
+> Visualiza imágenes de "una sola vista".
+🛠️ `#whatmusic` | `#shazam`
+> Identifica canciones o audios por sonido.
+🛠️ `#ss` | `#ssweb`
+> Toma capturas de páginas web.
+🛠️ `#length` | `#tamaño`
+> Modifica dimensiones de imágenes o videos.
+🛠️ `#say` | `#decir`
+> El bot repite el mensaje que escribas.
+🛠️ `#todoc` | `#toducument`
+> Crea archivos desde audios, fotos o videos.
+🛠️ `#translate` | `#traducir` | `#trad`
+> Traduce palabras o frases a otros idiomas.
+
+FNaF LATAM - Las herramientas que necesitas, al alcance de un comando.
+
+
+━━━━━━━━━━━━━━━━━━━━━━  
+👤 *『 PERFIL - FNaF LATAM 』* 👤  
+━━━━━━━━━━━━━━━━━━━━━━  
+
+🚺🚹 Comandos de perfil para ver, editar y gestionar tu identidad dentro del bot.
+
+👤 `#reg` | `#verificar` | `#register`
+> Registra tu nombre y edad en el sistema.
+👤 `#unreg`
+> Elimina tu cuenta registrada en el bot.
+👤 `#profile`
+> Muestra tu perfil de usuario detallado.
+👤 `#marry` [@mención]
+> Propón matrimonio a otro usuario.
+👤 `#divorce`
+> Finaliza tu relación con tu pareja.
+👤 `#setgenre` | `#setgenero`
+> Establece tu género en el perfil.
+👤 `#delgenre` | `#delgenero`
+> Elimina tu género del perfil.
+👤 `#setbirth` | `#setnacimiento`
+> Asigna tu fecha de nacimiento.
+👤 `#delbirth` | `#delnacimiento`
+> Elimina tu fecha de nacimiento registrada.
+👤 `#setdescription` | `#setdesc`
+> Agrega una descripción personal a tu perfil.
+👤 `#deldescription` | `#deldesc`
+> Elimina tu descripción actual.
+👤 `#lb` | `#lboard` + <página>
+> Ranking de niveles y experiencia por usuarios.
+👤 `#level` | `#lvl` + [@mención]
+> Consulta tu nivel y puntos de experiencia.
+👤 `#comprarpremium` | `#premium`
+> Accede al pase premium y elimina los límites.
+👤 `#confesiones` | `#confesar`
+> Confiesa tus sentimientos de forma anónima.
+
+FNaF LATAM - Tu perfil, tu historia dentro del universo animatrónico. 
+
+
+━━━━━━━━━━━━━━━━━━━━━━  
+🛠️ *『 GRUPOS - FNaF LATAM 』* 🛠️  
+━━━━━━━━━━━━━━━━━━━━━━  
+
+❍ Comandos de administración y gestión grupal para mantener el orden y la actividad.
+
+🛠️ `#hidetag`
+> Menciona a todos los miembros del grupo.
+🛠️ `#gp` | `#infogrupo`
+> Muestra la información actual del grupo.
+🛠️ `#linea` | `#listonline`
+> Lista los usuarios conectados.
+🛠️ `#setwelcome`
+> Define un mensaje de bienvenida personalizado.
+🛠️ `#setbye`
+> Define un mensaje de despedida para salidas.
+🛠️ `#link`
+> Envía el enlace de invitación del grupo.
+🛠️ `#admins` | `#admin`
+> Menciona a todos los administradores.
+🛠️ `#restablecer` | `#revoke`
+> Restaura el enlace del grupo.
+🛠️ `#grupo` | `#group` [open / abrir]
+> Abre el grupo para que todos puedan escribir.
+🛠️ `#grupo` | `#group` [close / cerrar]
+> Cierra el grupo, solo admins pueden escribir.
+🛠️ `#kick` [@usuario / número]
+> Expulsa a un miembro del grupo.
+🛠️ `#add` | `#añadir` | `#agregar` [número]
+> Agrega un usuario por número.
+🛠️ `#promote` [@usuario]
+> Asciende a administrador al mencionado.
+🛠️ `#demote` [@usuario]
+> Quita privilegios de administrador.
+🛠️ `#gpbanner` | `#groupimg`
+> Cambia la imagen del grupo.
+🛠️ `#gpname` | `#groupname`
+> Cambia el nombre del grupo.
+🛠️ `#gpdesc` | `#groupdesc`
+> Edita la descripción del grupo.
+🛠️ `#advertir` | `#warn` | `#warning`
+> Asigna una advertencia a un usuario.
+🛠️ `#unwarn` | `#delwarn`
+> Elimina advertencias de un usuario.
+🛠️ `#advlist` | `#listadv`
+> Muestra la lista de advertidos.
+🛠️ `#bot on`
+> Activa el bot en el grupo.
+🛠️ `#bot off`
+> Desactiva el bot en el grupo.
+🛠️ `#mute` [@usuario]
+> Silencia a un usuario (el bot elimina sus mensajes).
+🛠️ `#unmute` [@usuario]
+> Reactiva a un usuario silenciado.
+🛠️ `#encuesta` | `#poll`
+> Crea una encuesta personalizada.
+🛠️ `#delete` | `#del`
+> Elimina un mensaje (requiere reply).
+🛠️ `#fantasmas`
+> Lista a los usuarios inactivos del grupo.
+🛠️ `#kickfantasmas`
+> Expulsa a los inactivos automáticamente.
+🛠️ `#invocar` | `#tagall` | `#todos`
+> Menciona a todos los miembros del grupo.
+🛠️ `#setemoji` | `#setemo`
+> Cambia el emoji de invitación del grupo.
+🛠️ `#listnum` | `#kicknum`
+> Expulsa por prefijo de número (ej: +92, +212).
+
+FNaF LATAM - Herramientas de poder para nuestros grupos.
+
+• :･ﾟ⊹˚• \`『 Anime 』\` ━━━━━━━━━━━━━━━━━━━━━━  
+🛠️ *『 GRUPOS - FNaF LATAM 』* 🛠️  
+━━━━━━━━━━━━━━━━━━━━━━  
+
+❍ Comandos de administración y gestión grupal para mantener el orden y la actividad.
+
+🛠️ `#hidetag`
+> Menciona a todos los miembros del grupo.
+
+🛠️ `#gp` | `#infogrupo`
+> Muestra la información actual del grupo.
+
+🛠️ `#linea` | `#listonline`
+> Lista los usuarios conectados.
+
+🛠️ `#setwelcome`
+> Define un mensaje de bienvenida personalizado.
+
+🛠️ `#setbye`
+> Define un mensaje de despedida para salidas.
+
+🛠️ `#link`
+> Envía el enlace de invitación del grupo.
+
+🛠️ `#admins` | `#admin`
+> Menciona a todos los administradores.
+
+🛠️ `#restablecer` | `#revoke`
+> Restaura el enlace del grupo.
+
+🛠️ `#grupo` | `#group` [open / abrir]
+> Abre el grupo para que todos puedan escribir.
+
+🛠️ `#grupo` | `#group` [close / cerrar]
+> Cierra el grupo, solo admins pueden escribir.
+
+🛠️ `#kick` [@usuario / número]
+> Expulsa a un miembro del grupo.
+
+🛠️ `#add` | `#añadir` | `#agregar` [número]
+> Agrega un usuario por número.
+
+🛠️ `#promote` [@usuario]
+> Asciende a administrador al mencionado.
+
+🛠️ `#demote` [@usuario]
+> Quita privilegios de administrador.
+
+🛠️ `#gpbanner` | `#groupimg`
+> Cambia la imagen del grupo.
+
+🛠️ `#gpname` | `#groupname`
+> Cambia el nombre del grupo.
+
+🛠️ `#gpdesc` | `#groupdesc`
+> Edita la descripción del grupo.
+
+🛠️ `#advertir` | `#warn` | `#warning`
+> Asigna una advertencia a un usuario.
+
+🛠️ `#unwarn` | `#delwarn`
+> Elimina advertencias de un usuario.
+
+🛠️ `#advlist` | `#listadv`
+> Muestra la lista de advertidos.
+
+🛠️ `#bot on`
+> Activa el bot en el grupo.
+
+🛠️ `#bot off`
+> Desactiva el bot en el grupo.
+
+🛠️ `#mute` [@usuario]
+> Silencia a un usuario (el bot elimina sus mensajes).
+
+🛠️ `#unmute` [@usuario]
+> Reactiva a un usuario silenciado.
+
+🛠️ `#encuesta` | `#poll`
+> Crea una encuesta personalizada.
+
+🛠️ `#delete` | `#del`
+> Elimina un mensaje (requiere reply).
+
+🛠️ `#fantasmas`
+> Lista a los usuarios inactivos del grupo.
+
+🛠️ `#kickfantasmas`
+> Expulsa a los inactivos automáticamente.
+
+🛠️ `#invocar` | `#tagall` | `#todos`
+> Menciona a todos los miembros del grupo.
+
+🛠️ `#setemoji` | `#setemo`
+> Cambia el emoji de invitación del grupo.
+
+🛠️ `#listnum` | `#kicknum`
+> Expulsa por prefijo de número (ej: +92, +212).
+
+FNaF LATAM - Herramientas de poder para tus grupos.˚⊹:･ﾟ•
+
+
+━━━━━━━━━━━━━━━━━━━━━━  
+🎮 *『 JUEGOS - FNaF LATAM 』* 🎮  
+━━━━━━━━━━━━━━━━━━━━━━  
+
+💥 Comandos de juegos y diversión para pasar el rato con amigos o solo.
+
+🎮 `#amistad` | `#amigorandom`
+> Haz nuevos amigos al azar.
+🎮 `#chiste`
+> Recibí un chiste aleatorio.
+🎮 `#consejo`
+> La bot te da un consejo sabio... o no.
+🎮 `#doxeo` | `#doxear` + <@usuario>
+> Simula un doxeo.
+🎮 `#facto`
+> Recibí un dato curioso o "facto".
+🎮 `#formarpareja`
+> La bot forma una pareja aleatoria.
+🎮 `#formarpareja5`
+> Forma cinco parejas distintas.
+🎮 `#frase`
+> Frases motivadoras o reflexivas.
+🎮 `#iq` | `#iqtest` + <@usuario>
+> Calcula el IQ de alguien (no te lo tomes personal).
+🎮 `#meme`
+> Recibí un meme aleatorio.
+🎮 `#personalidad` + <@usuario>
+> La bot analiza tu personalidad.
+🎮 `#piropo`
+> Lanza un piropo al azar.
+🎮 `#pregunta`
+> Hacés una pregunta y la bot responde.
+🎮 `#ship` | `#pareja`
+> Calcula la compatibilidad entre dos.
+🎮 `#sorteo`
+> Realiza un sorteo entre usuarios.
+🎮 `#top`
+> Crea un ranking personalizado.
+🎮 `#ahorcado`
+> Juega el clásico juego del ahorcado.
+🎮 `#mates` | `#matematicas`
+> Resolvé operaciones para ganar premios.
+🎮 `#ppt`
+> Jugá piedra, papel o tijera con la bot.
+🎮 `#sopa` | `#buscarpalabra`
+> Juega una sopa de letras interactiva.
+🎮 `#pvp` | `#suit` + <@usuario>
+> Retá a un usuario a un PvP.
+🎮 `#ttt`
+> Crea una sala de juego para Tic Tac Toe.
+
+FNaF LATAM - Diversión garantizada en cada comando.
+
+
+¡Próximamente el 5 de diciembre de 2025! 🍕
   `.trim()
 
   await conn.sendMessage(m.chat, { 
+      image: { url: 'https://i.pinimg.com/736x/4d/cb/50/4dcb504b4becb8eeea2931117bbeee4f.jpg' }, 
       text: txt,
       contextInfo: {
           mentionedJid: [m.sender, userId],
