@@ -6,7 +6,7 @@ const fetchStickerVideo = async (text) => {
         params: { text },
         responseType: 'arraybuffer'
     })
-    if (!response.data) throw new Error('Error al obtener el video de la API.')
+    if (!response.data) throw new Error('❌ No se pudo obtener el video desde la base de datos de Fazbear Entertainment.')
     return response.data
 }
 
@@ -15,7 +15,7 @@ let handler = async (m, { conn, text }) => {
         text = m.quoted.text
     } else if (!text) {
         return conn.sendMessage(m.chat, {
-            text: '❀ Por favor, responde a un mensaje o ingresa un texto para crear el Sticker.'
+            text: `🎬 *Generador de Stickers Animados - Sistema de Freddy Fazbear*\n\n🔧 Por favor, responde a un mensaje o escribe el texto para crear tu sticker animado estilo *Brat*.`,
         }, { quoted: m })
     }
 
@@ -32,7 +32,7 @@ let handler = async (m, { conn, text }) => {
         }, { quoted: m })
     } catch (e) {
         await conn.sendMessage(m.chat, {
-            text: `⚠︎ Ocurrió un error: ${e.message}`
+            text: `🛑 *Error del Subsistema Animatrónico*\n\n🔌 Código de error: ${e.message}`,
         }, { quoted: m })
     }
 }
