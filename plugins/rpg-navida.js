@@ -20,20 +20,25 @@ var handler = async (m, { conn }) => {
         return m.reply(`${emoji3} ¡Ya reclamaste tu regalo navideño este año! Vuelve en:\n *${msToTime(timeRemaining)}*`);
     }
 
-    let coinReward = pickRandom([5, 10, 15, 20]);
-    let expReward = pickRandom([2000, 3000, 4000, 5000]);
-    let giftReward = pickRandom([2, 3, 4, 5]);
+    // Recompensas fijas y exclusivas, +1000 cada una
+    let coinReward = 1000;
+    let expReward = 1000;
+    let giftReward = 1000;
 
-    user.coin = (user.coin || 0) + coinReward;;
+    user.coin = (user.coin || 0) + coinReward;
     user.exp = (user.exp || 0) + expReward;
     user.gifts = (user.gifts || 0) + giftReward;
 
     m.reply(`
-\`\`\`🎄 ¡Feliz Navidad! ¡Disfruta de tu regalo navideño! 🎁\`\`\`
+\`\`\`🎄✨ ¡Feliz Navidad de parte de FNaF LATAM! 🎁✨\`\`\`
 
-💸 *${moneda}* : +${coinReward}
-✨ *Experiencia* : +${expReward}
-🎁 *Regalos Navideños* : +${giftReward}`);
+🎅 *Regalo Exclusivo:*
+
+💸 *${moneda}*: +${coinReward}
+✨ *Experiencia*: +${expReward}
+🎁 *Regalos Navideños*: +${giftReward}
+
+_Disfruta esta recompensa única y que Freddy te cuide esta temporada navideña._`);
 
     user.christmas = new Date().getTime();
 }
