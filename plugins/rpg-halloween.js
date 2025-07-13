@@ -9,21 +9,22 @@ var handler = async (m, { conn }) => {
     const currentYear = currentDate.getFullYear();
     const isOctober = currentDate.getMonth() === 9;
 
-    const cooldown = 365 * 24 * 60 * 60 * 1000; // 1 año en milisegundos
+    const cooldown = 365 * 24 * 60 * 60 * 1000; // 1 año
     let timeRemaining = user.halloween + cooldown - currentDate.getTime();
 
     if (!isOctober) {
-        return m.reply(`🎃 ¡Solo puedes reclamar tu regalo de Halloween en octubre! Vuelve en octubre de ${currentYear}.`);
+        return m.reply(`🎃 *Acceso Denegado al Evento de Halloween Fazbear*\n\n🔒 Solo está disponible en el mes de octubre.\n📅 Vuelve en: *Octubre de ${currentYear}* para obtener tu recompensa.`);
     }
 
     if (timeRemaining > 0) {
-        return m.reply(`${emoji3} ¡Ya reclamaste tu regalo de Halloween este año! Vuelve en:\n *${msToTime(timeRemaining)}*`);
+        return m.reply(`🔐 *Ya reclamaste tu 🎃 REGALO ANUAL DE HALLOWEEN*\n\n⏱️ Podrás volver a activarlo en:\n*${msToTime(timeRemaining)}*`);
     }
 
-    let coinReward = pickRandom([5, 10, 15, 20]);
-    let candyReward = pickRandom([5, 10, 15, 20]);
-    let expReward = pickRandom([2000, 3000, 4000, 5000]);
-    let giftReward = pickRandom([2, 3, 4, 5]);
+    // Cambié las recompensas para que sean todas +500 fijas
+    let coinReward = 500;
+    let candyReward = 500;
+    let expReward = 500;
+    let giftReward = 500;
 
     user.coin = (user.coin || 0) + coinReward;
     user.candies = (user.candies || 0) + candyReward;
@@ -31,12 +32,17 @@ var handler = async (m, { conn }) => {
     user.gifts = (user.gifts || 0) + giftReward;
 
     m.reply(`
-\`\`\`🎃 ¡Feliz Halloween! ¡Disfruta de tu regalo de Halloween! 👻\`\`\`
+╭─🎃 〔 *HALLOWEEN EN FREDDY FAZBEAR’S* 〕
+│👻 El sistema de seguridad te otorgó tu recompensa anual...
+│🎁 ¡Recompensa de Halloween Activada!
+│
+│💸 *${moneda.toUpperCase()}* : +${coinReward}
+│🍬 *Dulces* : +${candyReward}
+│✨ *Experiencia* : +${expReward}
+│🎃 *Regalos Especiales* : +${giftReward}
+╰───────────────────────
 
-💸 *${moneda}* : +${coinReward}
-🍬 *Dulces* : +${candyReward}
-✨ *Experiencia* : +${expReward}
-🎃 *Regalos de Halloween* : +${giftReward}`);
+🕯️ *"¡Disfruta mientras las cámaras están apagadas... y Freddy aún duerme!"*`);
 
     user.halloween = new Date().getTime();
 }
