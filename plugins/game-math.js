@@ -1,37 +1,62 @@
-global.math = global.math ? global.math : {};
-const handler = async (m, {conn, args, usedPrefix, command}) => {
-  const mat =`${emoji} Por favor, ingresa la dificulta con la que desea jugar.
+global.math = global.math || {};
 
-*Dificultades Disponibles: ${Object.keys(modes).join(' | ')}*
-*Ejemplo de uso: ${usedPrefix}mates medium*
-`.trim();
-  if (args.length < 1) return await conn.reply(m.chat, mat, m);
+const handler = async (m, { conn, args, usedPrefix, command }) => {
+  const mat = `${emoji} Por favor, ingresa la dificultad con la que deseas jugar.
+
+*Dificultades Disponibles:* ${Object.keys(modes).join(' | ')}
+*Ejemplo de uso:* ${usedPrefix}${command} medium`.trim();
+
+  if (!args[0] || !(args[0].toLowerCase() in modes))
+    return await conn.reply(m.chat, mat, m);
 
   const mode = args[0].toLowerCase();
-  if (!(mode in modes)) return await conn.reply(m.chat, mat, m);
-
   const id = m.chat;
-  if (id in global.math) return conn.reply(m.chat, `${emoji2} Todavía hay un juego en proceso en este chat.`, global.math[id][0]);
+
+  if (id in global.math)
+    return conn.reply(m.chat, `${emoji2} Todavía hay un juego en proceso en este chat.`, global.math[id][0]);
+
   const math = genMath(mode);
+
+  const msg = await conn.sendMessage(m.chat, {
+    text: `${emoji} ¿Cuánto es el resultado de *${math.str}*?\n\n🕒 Tiempo: ${(math.time / 1000).toFixed(2)} segundos\n🎁 Premio: ${math.bonus} XP`,
+    footer: 'Toca "Rendirse" si no sabes la respuesta.',
+    buttons: [
+      { buttonId: `${usedPrefix}surrendermath`, buttonText: { displayText: '✋ Rendirse' }, type: 1 },
+    ],
+    headerType: 1,
+  }, { quoted: m });
+
   global.math[id] = [
-    await conn.reply(m.chat, `${emoji} Cuanto es el resultado de ${math.str}?\n\n🕒 Tiempo: ${(math.time / 1000).toFixed(2)} segundos\n*${emoji2} Premio: ${math.bonus} XP*`, m),
-    math, 4,
+    msg,
+    math,
+    4,
     setTimeout(() => {
       if (global.math[id]) {
-        conn.reply(m.chat, `${emoji} Se a finalizado el tiempo para responder.\n\n> ${emoji2} La respuesta es ${math.result}`, m),
-
+        conn.reply(m.chat, `⌛ Se acabó el tiempo.\nLa respuesta correcta era: *${math.result}*`, m);
         delete global.math[id];
       }
     }, math.time),
   ];
 };
-handler.help = ['math <mode>'];
+
+handler.help = ['math <modo>'];
 handler.tags = ['game'];
-handler.command = ['matemáticas', 'mates', 'math']
-handler.group = true
-handler.register = true
+handler.command = ['matemáticas', 'mates', 'math'];
+handler.group = true;
+handler.register = true;
 
 export default handler;
+
+const surrenderHandler = async (m, { conn }) => {
+  const id = m.chat;
+  if (!(id in global.math)) return conn.reply(m.chat, `🚫 No hay ningún juego activo.`, m);
+  const [msg, math] = global.math[id];
+  delete global.math[id];
+  return conn.reply(m.chat, `❌ Te has rendido.\n> La respuesta era: *${math.result}*`, m);
+};
+
+surrenderHandler.command = /^surrendermath$/i;
+export { surrenderHandler };
 
 const modes = {
   noob: [-3, 3, -3, 3, '+-', 15000, 10],
@@ -43,19 +68,14 @@ const modes = {
   impossible2: [-999999999999999, 999999999999999, -999, 999, '/', 30000, 50000],
 };
 
-const operators = {
-  '+': '+',
-  '-': '-',
-  '*': '×',
-  '/': '÷',
-};
+const operators = { '+': '+', '-': '-', '*': '×', '/': '÷' };
 
 function genMath(mode) {
   const [a1, a2, b1, b2, ops, time, bonus] = modes[mode];
   let a = randomInt(a1, a2);
   const b = randomInt(b1, b2);
   const op = pickRandom([...ops]);
-  let result = (new Function(`return ${a} ${op.replace('/', '*')} ${b < 0 ? `(${b})` : b}`))();
+  let result = Function(`return ${a} ${op.replace('/', '*')} ${b < 0 ? `(${b})` : b}`)();
   if (op == '/') [a, result] = [result, a];
   return {
     str: `${a} ${operators[op]} ${b}`,
@@ -68,8 +88,6 @@ function genMath(mode) {
 
 function randomInt(from, to) {
   if (from > to) [from, to] = [to, from];
-  from = Math.floor(from);
-  to = Math.floor(to);
   return Math.floor((to - from) * Math.random() + from);
 }
 
