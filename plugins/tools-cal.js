@@ -4,8 +4,9 @@ let handler = async (m, { conn, text }) => {
   if (id in conn.math) {
     clearTimeout(conn.math[id][3])
     delete conn.math[id]
-    m.reply('.... ')
+    m.reply('📎 Reiniciando módulo de cálculo del sistema...')
   }
+
   let val = text
     .replace(/[^0-9\-\/+*×÷πEe()piPI/]/g, '')
     .replace(/×/g, '*')
@@ -15,25 +16,30 @@ let handler = async (m, { conn, text }) => {
     .replace(/\/+/g, '/')
     .replace(/\++/g, '+')
     .replace(/-+/g, '-')
+
   let format = val
     .replace(/Math\.PI/g, 'π')
     .replace(/Math\.E/g, 'e')
     .replace(/\//g, '÷')
-    .replace(/\*×/g, '×')
+    .replace(/\*/g, '×')
+
   try {
-    console.log(val)
     let result = (new Function('return ' + val))()
     if (!result) throw result
-    m.reply(`*${format}* = _${result}_`)
+
+    m.reply(`🎮 *Cálculo activado desde la oficina de vigilancia...*\n\n🧮 *${format}* = _${result}_\n\n✅ Ecuación resuelta con éxito. ¡Mantente alerta, guardia!`)
   } catch (e) {
-    if (e == undefined) return m.reply(`${emoji} Ingresa la ecuación.\nsímbolos compatibles -, +, *, /, ×, ÷, π, e, (, )`)
-    return m.reply(`${emoji2} Formato incorrecto, solo 0-9 y símbolo -, +, *, /, ×, ÷, π, e, (, ) que puedes usar`)
+    if (e == undefined) {
+      return m.reply(`⚠️ *Error de entrada* \n\nIngresa una ecuación válida.\n\n📘 Símbolos permitidos:\n➤ \`+\`, \`-\`, \`×\`, \`÷\`, \`π\`, \`e\`, \`(\`, \`)\``)
+    }
+    return m.reply(`⛔ *Sistema no pudo procesar tu fórmula*\n\nSolo puedes usar:\n➤ \`0-9\` y los símbolos \`+\`, \`-\`, \`×\`, \`÷\`, \`π\`, \`e\`, \`(\`, \`)\``)
   }
 }
-handler.help = ['cal *<ecuacion>*']
+
+handler.help = ['cal *<ecuación>*']
 handler.tags = ['tools']
-handler.command = ['cal', 'calc', 'calcular', 'calculadora'] 
+handler.command = ['cal', 'calc', 'calcular', 'calculadora']
 handler.exp = 5
-handler.register = true 
+handler.register = true
 
 export default handler
