@@ -1,6 +1,6 @@
 const handler = async (m, { isPrems, conn }) => {
   if (!global.db.data.users[m.sender]) {
-    throw `${emoji4} Usuario no encontrado.`;
+    throw `${emoji4} Usuario desconocido en la base de datos de FNaF LATAM.`;
   }
 
   const lastCofreTime = global.db.data.users[m.sender].lastcofre;
@@ -8,40 +8,42 @@ const handler = async (m, { isPrems, conn }) => {
 
   if (Date.now() < timeToNextCofre) {
     const tiempoRestante = timeToNextCofre - Date.now();
-    const mensajeEspera = `${emoji3} Ya reclamaste tu cofre\n⏰️ Regresa en: *${msToTime(tiempoRestante)}* para volver a reclamar.`;
+    const mensajeEspera = `${emoji3} Ya has reclamado tu cofre diario.\n⏰ Regresa en: *${msToTime(tiempoRestante)}* para desafiar a los animatrónicos otra vez.`;
     await conn.sendMessage(m.chat, { text: mensajeEspera }, { quoted: m });
     return;
   }
 
   const img = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745557947304.jpeg';
-  const dia = Math.floor(Math.random() * 100);
-  const tok = Math.floor(Math.random() * 10);
-  const ai = Math.floor(Math.random() * 40);
-  const expp = Math.floor(Math.random() * 5000);
+  const monedas = Math.floor(Math.random() * 100);
+  const tokens = Math.floor(Math.random() * 10);
+  const diamantes = Math.floor(Math.random() * 40);
+  const exp = Math.floor(Math.random() * 5000);
 
-  global.db.data.users[m.sender].coin += dia;
-  global.db.data.users[m.sender].diamonds += ai;
-  global.db.data.users[m.sender].joincount += tok;
-  global.db.data.users[m.sender].exp += expp;
+  global.db.data.users[m.sender].coin += monedas;
+  global.db.data.users[m.sender].diamonds += diamantes;
+  global.db.data.users[m.sender].joincount += tokens;
+  global.db.data.users[m.sender].exp += exp;
   global.db.data.users[m.sender].lastcofre = Date.now();
 
   const texto = `
-╭━〔 Cσϝɾҽ Aʅҽαƚσɾισ 〕⬣
-┃📦 *Obtienes Un Cofre*
-┃ ¡Felicidades!
-╰━━━━━━━━━━━━⬣
+╭━━━〔 🎁 Cofre Misterioso FNaF LATAM 〕━━⬣
+┃ 📦 ¡Has abierto un cofre... ¿qué secretos esconde?
+┃ 🔥 ¡Felicidades, sobreviviente!
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━⬣
 
-╭━〔 Nυҽʋσʂ Rҽƈυɾʂσʂ 〕⬣
-┃ *${dia} ${moneda}* 💸
-┃ *${tok} Tokens* ⚜️
-┃ *${ai} Diamantes* 💎
-┃ *${expp} Exp* ✨
-╰━━━━━━━━━━━━⬣`;
+╭━━━〔 Recompensas obtenidas 〕━━━━━━━━⬣
+┃ 💸 Monedas: *${monedas} ${moneda}*
+┃ ⚜️ Tokens: *${tokens}*
+┃ 💎 Diamantes: *${diamantes}*
+┃ ✨ Experiencia: *${exp}*
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━⬣
+
+⚠️ Recuerda, cada día te espera un nuevo desafío en la oscuridad...`;
 
   try {
-    await conn.sendFile(m.chat, img, 'yuki.jpg', texto, fkontak);
+    await conn.sendFile(m.chat, img, 'cofre_fnaf.jpg', texto, fkontak);
   } catch (error) {
-    throw `${msm} Ocurrió un error al enviar el cofre.`;
+    throw `⚠️ Ocurrió un error al enviar tu cofre misterioso. Intenta nuevamente.`;
   }
 };
 
