@@ -10,7 +10,8 @@ var handler = async (m, { conn }) => {
     let timeRemaining = user.monthly + cooldown - new Date();
 
     if (timeRemaining > 0) {
-        return m.reply(`${emoji3} ¡Ya reclamaste tu regalo mensual! Vuelve en:\n *${msToTime(timeRemaining)}*`);
+        return m.reply(`${emoji3} 🎃 ¡Ya reclamaste tu regalo mensual de FNaF LATAM! 🎁\n` +
+                       `⏳ Regresa en: *${msToTime(timeRemaining)}* para más sorpresas...`);
     }
 
     let coinReward = pickRandom([1, 2, 3, 4, 5]);
@@ -22,13 +23,19 @@ var handler = async (m, { conn }) => {
     user.diamonds = (user.diamonds || 0) + diamondReward;
 
     m.reply(`
-\`\`\`🎁 ¡Ha pasado un mes! ¡Disfruta de tu regalo mensual!. \`\`\`
+╭─🎃 〔 *RECOMPENSA MENSUAL FNaF LATAM* 〕
+│👻 ¡Ha pasado un mes desde tu última visita!
+│🎉 Aquí está tu regalo exclusivo para sobrevivientes:
+│
+│💸 *${moneda}*: +${coinReward}
+│✨ *Experiencia*: +${expReward}
+│💎 *Diamantes*: +${diamondReward}
+╰───────────────────────
 
-💸 *${moneda}* : +${coinReward}
-✨ *Experiencia* : +${expReward}
-💎 *Diamantes* : +${diamondReward}`);
+_🕹️ ¡No olvides volver por más sustos y premios!_
+    `);
 
-    user.monthly = new Date * 1;
+    user.monthly = Date.now();
 }
 
 handler.help = ['monthly'];
