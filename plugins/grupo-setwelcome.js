@@ -1,9 +1,9 @@
 let handler = async (m, { conn, text, isRowner }) => {
-  if (!text) return m.reply(`${emoji} Por favor, proporciona una bienvenida para el bot.\n> Ejemplo: #setwelcome Hola user`);
+  if (!text) return m.reply(`🎉 *Configuración de Bienvenida | FNaF LATAM*\n\n📌 Por favor, escribe el mensaje que se mostrará cuando alguien entre al grupo.\n\n🎭 *Ejemplo:* #setwelcome Bienvenido {user}... La oscuridad te esperaba.`);
 
   global.welcom1 = text.trim();
-  
-  m.reply(`${emoji} La bienvenida del bot ha sido cambiado a: ${global.welcom1}`);
+
+  m.reply(`✅ *Mensaje de bienvenida actualizado*\n\n📥 El nuevo mensaje de entrada es:\n\n🗂️ *${global.welcom1}*`);
 };
 
 handler.help = ['setwelcome'];
