@@ -1,26 +1,42 @@
-var handler = async (m, { conn }) => {
+let handler = async (m, { conn }) => {
+    let user = global.db.data.users[m.sender];
+    user.diamond = user.diamond || 0;
+    user.coin = user.coin || 0;
+    user.exp = user.exp || 0;
+    user.lastclaim = user.lastclaim || 0;
+
+    let cooldown = 24 * 60 * 60 * 1000; // 24 horas
+    let tiempoRestante = cooldown - (Date.now() - user.lastclaim);
+
+    if (tiempoRestante > 0) {
+        return conn.reply(m.chat, `🧃 *Panel de Recompensas de Freddy Fazbear's*\n\n📅 Ya reclamaste tu turno hoy.\n⏱️ Próxima ronda disponible en: *${msToTime(tiempoRestante)}*\n\n_El sistema se reinicia a medianoche. No olvides regresar..._`, m);
+    }
+
+    // Recompensas aleatorias
     let coin = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
     let exp = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
     let d = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
 
-    global.db.data.users[m.sender].diamond += d;
-    global.db.data.users[m.sender].coin += coin;
+    // Sumar recompensas
+    user.coin += coin;
+    user.diamond += d;
+    user.exp += exp;
+    user.lastclaim = Date.now();
 
-    let time = global.db.data.users[m.sender].lastclaim + 86400000;
-    if (new Date() - global.db.data.users[m.sender].lastclaim < 7200000) {
-        return conn.reply(m.chat, `${emoji4} *Vuelve en ${msToTime(time - new Date())}*`, m);
-    }
+    // Mensaje de recompensa adaptado al estilo FNaF
+    conn.reply(m.chat, `
+╭─🎁 〔 *RECOMPENSA NOCTURNA FNaF LATAM* 〕
+│📦 *Has abierto tu caja diaria...*
+│🎮 Seguridad: Sistema activado ✅
+│
+│✨ *EXP GANADA:* +${exp}
+│💎 *DIAMANTES:* +${d}
+│💸 *${moneda.toUpperCase()}:* +${coin}
+╰───────────────────────
 
-    global.db.data.users[m.sender].exp += exp;
-    conn.reply(m.chat, `${emoji} *Recompensa Diaria*
-
-Recursos:
-✨ Xp : *+${exp}*
-💎 Diamantes : *+${d}*
-💸 ${moneda} : *+${coin}*`, m);
-
-    global.db.data.users[m.sender].lastclaim = Date.now();
-}
+_🎉 ¡No olvides volver mañana antes de que te atrape Freddy!_
+`, m);
+};
 
 handler.help = ['daily', 'claim'];
 handler.tags = ['rpg'];
@@ -31,14 +47,8 @@ handler.register = true;
 export default handler;
 
 function msToTime(duration) {
-    var milliseconds = parseInt((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
+    let seconds = Math.floor((duration / 1000) % 60),
         minutes = Math.floor((duration / (1000 * 60)) % 60),
         hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? '0' + hours : hours;
-    minutes = (minutes < 10) ? '0' + minutes : minutes;
-    seconds = (seconds < 10) ? '0' + seconds : seconds;
-
-    return hours + ' Horas ' + minutes + ' Minutos';
+    return `${hours} Horas ${minutes} Minutos ${seconds} Segundos`;
 }
