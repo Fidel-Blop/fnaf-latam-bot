@@ -26,8 +26,11 @@ if (global.db.data == null)
 await global.loadDatabase()       
 try {
 m = smsg(this, m) || m
-if (!m)
-return
+if (!m) return
+
+// 🛑 Silenciar el bot si fue desactivado con #bot off en este grupo
+if (m.isGroup && global.db.data.chats[m.chat]?.botBaneado) return;
+
 m.exp = 0
 m.coin = false
 try {
