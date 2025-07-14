@@ -10,7 +10,8 @@ let handler = async (m, { conn }) => {
   let gold = pickRandom([20, 5, 7, 8, 88, 40, 50]);
   let coal = pickRandom([20, 5, 7, 8, 88, 40, 50, 80, 70, 60, 100, 120, 600, 700, 64]);
   let stone = pickRandom([200, 500, 700, 800, 900, 4000, 300]);
-
+  let diamond = pickRandom([1, 2, 3, 4])
+  
   let img = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745557957843.jpeg';
   let time = user.lastmiming + 600000;
 
@@ -45,6 +46,7 @@ let handler = async (m, { conn }) => {
   user.coal += coal;
   user.stone += stone;
   user.lastmiming = new Date() * 1;
+  user.diamond += diamond 
 }
 
 handler.help = ['minar'];
