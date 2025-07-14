@@ -46,7 +46,7 @@ let handler = async (m, { conn }) => {
   user.gold += gold
   user.coal += coal
   user.stone += stone
-  user.diamonds += diamonds
+  user.diamond += diamonds 
   user.exp += exp
   user.health -= 50
   user.lastAdventure = new Date()
