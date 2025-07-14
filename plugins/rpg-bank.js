@@ -22,11 +22,11 @@ let handler = async (m, { conn, usedPrefix }) => {
 ╭───〔🎭  ECONOMÍA - FNaF LATAM 〕───⬣
 │
 │ 🎮 Usuario » *${name}*
-│ ⛁ Cartera » ¥*${user.coin.toLocaleString()}* ${moneda}
-│ 🏦 Banco » ¥*${user.bank.toLocaleString()}* ${moneda}
-│ 📊 Total » ¥*${total.toLocaleString()}* ${moneda}
+│ ⛁ Cartera » ¥ *${user.coin.toLocaleString()}* ${moneda}
+│ 🏦 Banco » ¥ *${user.bank.toLocaleString()}* ${moneda}
+│ 📊 Total » ¥ *${total.toLocaleString()}* ${moneda}
 │
-╰─🔒 Consejo del buen Rockstar Freddy: Usa *#deposit* para proteger tus ¥Monedas en el banco.
+╰─🔒 Consejo del buen Rockstar Freddy: Usa *#deposit* para proteger tus ${moneda} en el banco.
 `.trim()
 
     await conn.reply(m.chat, texto, m)
