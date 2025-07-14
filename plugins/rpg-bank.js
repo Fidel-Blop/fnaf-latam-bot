@@ -3,10 +3,6 @@ import db from '../lib/database.js'
 let handler = async (m, { conn, usedPrefix }) => {
     const who = m.mentionedJid?.[0] || m.quoted?.sender || m.sender
 
-    if (who === conn.user.jid) {
-        await m.react('✖️')
-        return
-    }
 
     if (!(who in global.db.data.users)) {
         return m.reply(`⚠️ El animatrónico no está registrado en la base de datos.`)
