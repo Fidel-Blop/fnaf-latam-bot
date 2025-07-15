@@ -2,11 +2,11 @@ let handler = async (m, { conn, usedPrefix, command }) => {
   let uptime = await process.uptime()
   let runtime = `${global.botname}
 
-✰ Estado del sistema: Operando sin interrupciones.
-⏳ Tiempo activo continuo desde el último reinicio:
+*⚙️ Estado del sistema:* Operando sin interrupciones.
+*⏳ Tiempo activo continuo desde el último reinicio:*
 ${rTime(uptime)}
 
-Gracias por usar FNaF LATAM, el bot que te acompaña en todas tus aventuras.`
+Gracias por usar *The Mimic Bot*, el bot que te acompaña en todas tus aventuras.`
   
   await conn.sendMessage(m.chat, {
     text: runtime,
