@@ -14,7 +14,7 @@ let handler = async (m, { conn }) => {
   let totalCommands = Object.values(global.plugins).filter(v => v.help && v.tags).length;
 
   let txt = `
-╭─〔 🎮 *FNaF LATAM SYSTEM* 🎮 〕─╮
+╭─〔 🎮 *THE MIMIC BOT* 🎮 〕─╮
 │ 🤖 *Unidad:* ${botname}
 │ 🎭 *Usuario:* @${userId.split('@')[0]}
 │ 🔧 *Modo:* Público
