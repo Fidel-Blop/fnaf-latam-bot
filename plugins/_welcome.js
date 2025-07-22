@@ -22,7 +22,7 @@ export async function before(m, { conn, participants, groupMetadata }) {
   let chat = global.db.data.chats[m.chat]
   
   // Títulos con estilo FNaF (colores en consola no afectan WA, pero aquí solo texto)
-  let txt = '👻 👾 ¡NUEVO MIEMBRO EN FNaF LATAM! 👾 👻'
+  let txt = '👻 👾 ¡NUEVO MIEMBRO EN EL GRUPO! 👾 👻'
   let txt1 = '💀 👋 MIEMBRO HA SALIDO 👋 💀'
 
   let groupSize = participants.length
@@ -33,12 +33,12 @@ export async function before(m, { conn, participants, groupMetadata }) {
   }
 
   if (chat.welcome && m.messageStubType == 27) {
-    let bienvenida = `🎉 *Bienvenido a FNaF LATAM* 🎉\n\n@${m.messageStubParameters[0].split`@`[0]} ¡Nos alegra que estés aquí!\n\n👥 Ahora somos *${groupSize}* miembros en el grupo.\n\n🦇 Explora, comparte y disfruta de la comunidad más terrorífica y divertida.\n\n💡 Usa *#help* para conocer todos los comandos disponibles.`
+    let bienvenida = `🎉 *Bienvenido al Grupo* 🎉\n\n@${m.messageStubParameters[0].split`@`[0]} ¡Nos alegra que estés aquí!\n\n👥 Ahora somos *${groupSize}* miembros en el grupo.`
     await conn.sendMini(m.chat, txt, dev, bienvenida, img, img, redes, fkontak)
   }
   
   if (chat.welcome && (m.messageStubType == 28 || m.messageStubType == 32)) {
-    let bye = `⚰️ *Un miembro ha abandonado FNaF LATAM* ⚰️\n\n@${m.messageStubParameters[0].split`@`[0]} te extrañaremos.\n\n👥 Quedan *${groupSize}* miembros activos.\n\n🕯️ Esperamos verte pronto de nuevo en esta comunidad de miedo y diversión.\n\n💡 Recuerda usar *#help* para consultar comandos disponibles.`
+    let bye = `⚰️ *Un miembro ha abandonado el Grupo* ⚰️\n\n@${m.messageStubParameters[0].split`@`[0]} te extrañaremos.\n\n👥 Quedan *${groupSize}* miembros activos.\n\n🕯️ Esperamos verte pronto de nuevo en este grupo.`
     await conn.sendMini(m.chat, txt1, dev, bye, img, img, redes, fkontak)
   }
 }
