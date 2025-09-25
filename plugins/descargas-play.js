@@ -64,14 +64,14 @@ Por favor, ingresa el nombre del audio o video que deseas buscar.`, m)
 
     if (command === 'play' || command === 'yta' || command === 'ytmp3' || command === 'playaudio') {
       try {
-        const api = await (await fetch(`https://api.stellarwa.xyz/dow/ytmp3?url=${url}`)).json()
-        const resulta = api.data
-        const result = resulta.dl
+        const api = await (await fetch(`https://api.akuari.my.id/downloader/youtube?link=${url}`)).json()
+        const resulta = api
+        const result = resulta.mp3 || resulta.result?.mp3 || null
         if (!result) throw new Error('⚠ El archivo de audio no pudo generarse correctamente.')
 
         await conn.sendMessage(m.chat, {
           audio: { url: result },
-          fileName: `${resulta.title}.mp3`,
+          fileName: `${resulta.title || 'audio'}.mp3`,
           mimetype: 'audio/mpeg'
         }, { quoted: m })
       } catch (e) {
@@ -79,14 +79,13 @@ Por favor, ingresa el nombre del audio o video que deseas buscar.`, m)
       }
     } else if (command === 'play2' || command === 'ytv' || command === 'ytmp4' || command === 'mp4') {
       try {
-        const response = await fetch(`https://api.stellarwa.xyz/dow/ytmp4?url=${url}`)
+        const response = await fetch(`https://api.akuari.my.id/downloader/ytmp4?link=${url}`)
         const json = await response.json()
 
-        // Verificación más robusta del enlace
-        const videoUrl = json?.data?.dl || json?.data?.url || null
+        const videoUrl = json?.url || json?.result?.url || null
         if (!videoUrl) throw new Error('No se pudo obtener el enlace de descarga.')
 
-        await conn.sendFile(m.chat, videoUrl, (json.data.title || 'video') + '.mp4', `🎬 *Transferencia de video completada*`, m)
+        await conn.sendFile(m.chat, videoUrl, (json.title || 'video') + '.mp4', `🎬 *Transferencia de video completada*`, m)
       } catch (e) {
         return conn.reply(m.chat, '⚠️ *Error al enviar el video.*\nArchivo muy pesado o problema en el enlace. Intenta nuevamente.', m)
       }
@@ -110,4 +109,4 @@ function formatViews(views) {
   else if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M (${views.toLocaleString()})`
   else if (views >= 1_000) return `${(views / 1_000).toFixed(1)}k (${views.toLocaleString()})`
   return views.toString()
-          }
+}
