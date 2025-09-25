@@ -14,7 +14,7 @@ let handler = async (m, { conn }) => {
   let totalCommands = Object.values(global.plugins).filter(v => v.help && v.tags).length;
 
   let txt = `
-╭─〔 🎮 *THE MIMIC BOT* 🎮 〕─╮
+╭─〔 🎮 *FNAF LATAM BOT* 🎮 〕─╮
 │ 🤖 *Unidad:* ${botname}
 │ 🎭 *Usuario:* @${userId.split('@')[0]}
 │ 🔧 *Modo:* Público
@@ -408,30 +408,22 @@ FNaF LATAM - Diversión garantizada en cada comando.
 `.trim();
 
   await conn.sendMessage(m.chat, {
-    image: { url: banner },
-    text: txt,
-    contextInfo: {
-      mentionedJid: [m.sender, userId],
-      isForwarded: true,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: channelRD.id,
-        newsletterName: channelRD.name,
-        serverMessageId: -1,
-      },
-      forwardingScore: 999,
-      externalAdReply: {
-        title: botname,
-        body: textbot,
-        thumbnailUrl: banner,
-        sourceUrl: redes,
-        mediaType: 1,
-        showAdAttribution: true,
-        renderLargerThumbnail: true,
-      },
+  image: { url: banner },
+  caption: txt,
+  contextInfo: {
+    mentionedJid: [m.sender, userId],
+    externalAdReply: {
+      title: botname,
+      body: textbot,
+      thumbnailUrl: banner,
+      sourceUrl: redes,
+      mediaType: 1,
+      showAdAttribution: true,
+      renderLargerThumbnail: true,
     },
-  }, { quoted: m });
-};
-
+  },
+}, { quoted: m });
+  
 handler.help = ['menu'];
 handler.tags = ['main'];
 handler.command = ['menu', 'menú', 'help'];
