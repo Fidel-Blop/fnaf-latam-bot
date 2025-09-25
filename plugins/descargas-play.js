@@ -95,10 +95,10 @@ Archivo muy pesado o problema en el enlace. Intenta nuevamente.', m)
   }
 }
 
-handler.command = handler.help = ['play', 'yta', 'ytmp3', 'play2', 'ytv', 'ytmp4', 'playaudio', 'mp4']
+handler.command = ['play', 'yta', 'ytmp3', 'play2', 'ytv', 'ytmp4', 'playaudio', 'mp4']
+handler.help = ['play', 'play2']
 handler.tags = ['descargas']
 handler.group = true
-
 export default handler
 
 function formatViews(views) {
