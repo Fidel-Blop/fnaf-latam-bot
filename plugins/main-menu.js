@@ -409,9 +409,16 @@ FNaF LATAM - Diversión garantizada en cada comando.
 
   await conn.sendMessage(m.chat, {
   image: { url: banner },
-  caption: txt,
+  text: txt,
   contextInfo: {
     mentionedJid: [m.sender, userId],
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: channelRD.id,
+      newsletterName: channelRD.name,
+      serverMessageId: -1,
+    },
+    forwardingScore: 999,
     externalAdReply: {
       title: botname,
       body: textbot,
