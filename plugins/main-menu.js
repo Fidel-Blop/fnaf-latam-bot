@@ -4,6 +4,7 @@ const textbot = 'Bot oficial de FNaF LATAM';
 const banner = 'https://i.pinimg.com/736x/4d/cb/50/4dcb504b4becb8eeea2931117bbeee4f.jpg';
 const redes = ''; // pon aquí tu URL real
 const channelRD = { id: 'https://youtube.com/@dlhfox?si=HrJY9IYe4jp5eMoq', name: 'Canal Oficial' };
+const moneda = global?.moneda || 'FNAF';
 
 let handler = async (m, { conn }) => {
   let userId = (m.mentionedJid && m.mentionedJid[0]) ? m.mentionedJid[0] : m.sender;
